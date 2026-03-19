@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armator.PRO — Planer Zapasów</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a1628;
+  --navy-mid: #112240;
+  --navy-light: #1a3358;
+  --cyan: #00d4ff;
+  --cyan-dim: #0099bb;
+  --amber: #f0a500;
+  --green: #00c896;
+  --red: #ff4757;
+  --white: #f0f4f8;
+  --muted: #8899aa;
+  --border: rgba(0,212,255,0.15);
+  --card: rgba(17,34,64,0.8);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── BG ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(0,212,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(0,153,187,0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── LAYOUT ─── */
+#app { position: relative; z-index: 1; }
+
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ─── HEADER ─── */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,22,40,0.9);
+  backdrop-filter: blur(10px);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  display: flex; align-items: center; gap: 8px;
+}
+.logo span { color: var(--cyan); }
+
+.top-meta {
+  font-size: 11px; color: var(--muted);
+  text-align: right; line-height: 1.4;
+}
+
+.btn-back {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: 20px; padding: 4px;
+  transition: color .2s;
+}
+.btn-back:hover { color: var(--cyan); }
+
+.top-actions { display: flex; gap: 8px; }
+
+.btn-tab {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent; color: var(--muted);
+  cursor: pointer; transition: all .2s;
+}
+.btn-tab.active, .btn-tab:hover {
+  background: var(--cyan); color: var(--navy);
+  border-color: var(--cyan);
+}
+
+/* ─── SPLASH ─── */
+#screen-splash {
+  align-items: center; justify-content: center;
+  padding: 40px 24px; text-align: center;
+}
+
+.splash-anchor {
+  font-size: 48px; margin-bottom: 24px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.splash-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 10vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.splash-title span { color: var(--cyan); }
+
+.splash-sub {
+  font-size: 11px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--cyan-dim);
+  margin-bottom: 32px;
+}
+
+.splash-tagline {
+  font-size: 17px; color: var(--muted);
+  line-height: 1.6; max-width: 320px;
+  margin: 0 auto 48px;
+}
+
+.btn-primary {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  padding: 18px 48px; border-radius: 50px;
+  border: none; cursor: pointer;
+  background: var(--cyan);
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  transition: all .2s;
+  box-shadow: 0 0 30px rgba(0,212,255,0.3);
+  display: inline-block;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(0,212,255,0.5);
+}
+
+.splash-stats {
+  display: flex; gap: 40px; justify-content: center;
+  margin-top: 56px;
+}
+.stat-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 800;
+}
+.stat-val.cyan { color: var(--cyan); }
+.stat-val.amber { color: var(--amber); }
+.stat-val.green { color: var(--green); }
+.stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.splash-credit {
+  margin-top: 48px; font-size: 11px; color: rgba(136,153,170,0.4);
+}
+
+/* ─── CONFIG ─── */
+#screen-config { padding-bottom: 100px; }
+
+.config-body { padding: 24px 20px; flex: 1; }
+
+.config-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 700;
+  margin-bottom: 4px;
+}
+.config-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+.section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(8px);
+}
+
+.section-title {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan-dim); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* stepper */
+.stepper-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.stepper-row:last-child { margin-bottom: 0; }
+
+.stepper-label { font-size: 14px; }
+.stepper-sub { font-size: 11px; color: var(--muted); }
+
+.stepper {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.stepper-btn {
+  background: none; border: none; color: var(--cyan);
+  width: 40px; height: 40px; font-size: 20px;
+  cursor: pointer; transition: background .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.stepper-btn:hover { background: rgba(0,212,255,0.1); }
+.stepper-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 700;
+  min-width: 44px; text-align: center;
+}
+
+/* chip groups */
+.chip-group {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.chip {
+  font-size: 13px; padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  color: var(--muted);
+  cursor: pointer; transition: all .15s;
+  text-align: center;
+}
+.chip.selected {
+  background: rgba(0,212,255,0.15);
+  border-color: var(--cyan);
+  color: var(--white);
+}
+.chip-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.chip.selected .chip-sub { color: var(--cyan-dim); }
+
+/* suwaki napojow */
+.drink-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.drink-row:last-child { margin-bottom: 0; }
+.drink-label { font-size: 14px; }
+.drink-chips { display: flex; gap: 6px; }
+.drink-chip {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  color: var(--muted); font-size: 13px;
+  cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.drink-chip.selected {
+  background: rgba(0,212,255,0.15);
+  border-color: var(--cyan); color: var(--white);
+}
+
+/* toggles */
+.toggle-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label { font-size: 14px; }
+.toggle-sub { font-size: 11px; color: var(--muted); }
+
+.toggle {
+  position: relative; width: 44px; height: 24px;
+  cursor: pointer;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all .2s;
+}
+.toggle input:checked + .toggle-track {
+  background: rgba(0,212,255,0.3);
+  border-color: var(--cyan);
+}
+.toggle-thumb {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 16px; height: 16px;
+  background: var(--muted);
+  border-radius: 50%;
+  transition: all .2s;
+}
+.toggle input:checked ~ .toggle-thumb {
+  transform: translateX(20px);
+  background: var(--cyan);
+}
+
+/* dieta stepper */
+.diet-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.diet-row:last-child { border-bottom: none; }
+
+/* fixed bottom bar */
+.bottom-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  padding: 16px 20px;
+  background: rgba(10,22,40,0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+}
+
+/* ─── LISTA ─── */
+#screen-lista { padding-bottom: 20px; }
+.lista-body { flex: 1; }
+
+.category-header {
+  display: flex; align-items: center; gap-8px;
+  padding: 20px 20px 8px;
+  font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.cat-icon { font-size: 16px; }
+.cat-count {
+  margin-left: auto;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 2px 8px; font-size: 11px;
+}
+
+.product-row {
+  display: flex; align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+.product-row.bought {
+  background: rgba(0,200,150,0.06);
+}
+.product-row.skip {
+  opacity: 0.3;
+}
+.product-row.bought .prod-name {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.prod-name { font-size: 15px; flex: 1; }
+.prod-qty {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--cyan); margin-right: 12px;
+  white-space: nowrap;
+}
+.prod-check {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  cursor: pointer; transition: all .15s;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: transparent;
+}
+.product-row.bought .prod-check {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+
+.swipe-hint {
+  background: rgba(0,212,255,0.08);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 12px 20px;
+  font-size: 12px; color: var(--muted);
+  text-align: center;
+}
+
+.progress-bar-wrap {
+  background: rgba(255,255,255,0.06);
+  height: 3px; margin: 0 20px 4px;
+}
+.progress-bar-fill {
+  height: 100%; background: var(--cyan);
+  transition: width .3s;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  padding: 0 20px 16px;
+  font-size: 12px; color: var(--muted);
+}
+.progress-label span:last-child { color: var(--cyan); }
+
+/* ─── ZAPASY ─── */
+#screen-zapasy { padding-bottom: 20px; }
+.zapasy-body { flex: 1; }
+
+.day-selector {
+  display: flex; gap: 8px;
+  padding: 16px 20px 8px;
+  overflow-x: auto;
+}
+.day-btn {
+  min-width: 44px; height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  color: var(--muted); font-size: 13px;
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  cursor: pointer; transition: all .15s;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.day-btn.active {
+  background: rgba(0,212,255,0.15);
+  border-color: var(--cyan); color: var(--cyan);
+}
+.day-label { font-size: 9px; font-weight: 400; color: var(--muted); }
+.day-btn.active .day-label { color: var(--cyan-dim); }
+
+.zapas-row {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.zapas-top {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.zapas-name { font-size: 14px; }
+.zapas-status {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 8px; border-radius: 20px;
+}
+.zapas-status.ok { background: rgba(0,200,150,0.15); color: var(--green); }
+.zapas-status.low { background: rgba(240,165,0,0.15); color: var(--amber); }
+.zapas-status.empty { background: rgba(255,71,87,0.15); color: var(--red); }
+.zapas-status.none { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+.zapas-bottom {
+  display: flex; align-items: center; gap: 12px;
+}
+.zapas-plan { font-size: 11px; color: var(--muted); flex: 1; }
+.zapas-input {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--white); font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  padding: 6px 10px; width: 80px;
+  text-align: center;
+  transition: border-color .2s;
+}
+.zapas-input:focus {
+  outline: none; border-color: var(--cyan);
+}
+.zapas-unit { font-size: 12px; color: var(--muted); min-width: 32px; }
+
+/* ─── RESPONSIVE ─── */
+@media (min-width: 600px) {
+  .config-body, .lista-body, .zapasy-body {
+    max-width: 480px; margin: 0 auto; width: 100%;
+  }
+  .bottom-bar { max-width: 480px; left: 50%; transform: translateX(-50%); }
+  .top-bar { max-width: 480px; margin: 0 auto; }
+}
+
+/* ─── UTILS ─── */
+.hidden { display: none !important; }
+.mt8 { margin-top: 8px; }
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ══════════ SPLASH ══════════ -->
+<div id="screen-splash" class="screen active">
+  <div class="splash-anchor">⚓</div>
+  <div class="splash-title">ARMA<span>TOR</span></div>
+  <div class="splash-sub">Planer Zapasów · PRO</div>
+  <div class="splash-tagline">Koniec z kupowaniem na oko. Podaj parametry rejsu — dostaniesz dokładną listę zakupów.</div>
+  <button class="btn-primary" onclick="showScreen('config')">Zaplanuj rejs</button>
+  <div class="splash-stats">
+    <div>
+      <div class="stat-val cyan">70+</div>
+      <div class="stat-label">produktów</div>
+    </div>
+    <div>
+      <div class="stat-val amber">60s</div>
+      <div class="stat-label">do listy</div>
+    </div>
+    <div>
+      <div class="stat-val green">0</div>
+      <div class="stat-label">marnowania</div>
+    </div>
+  </div>
+  <div class="splash-credit">by LESNO — żeglowanie z głową</div>
+</div>
+
+<!-- ══════════ CONFIG ══════════ -->
+<div id="screen-config" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('splash')">←</button>
+    <div class="logo">⚓ <span>ARMATOR</span>.PRO</div>
+    <div style="width:32px"></div>
+  </div>
+  <div class="config-body">
+    <div class="config-title">Opowiedz o rejsie</div>
+    <div class="config-subtitle">Na tej podstawie policzę ile czego potrzebujesz.</div>
+
+    <!-- Załoga -->
+    <div class="section">
+      <div class="section-title">👥 Załoga</div>
+      <div class="stepper-row">
+        <div>
+          <div class="stepper-label">Dorośli</div>
+        </div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="change('adults',-1)">−</button>
+          <div class="stepper-val" id="val-adults">4</div>
+          <button class="stepper-btn" onclick="change('adults',1)">+</button>
+        </div>
+      </div>
+      <div class="stepper-row">
+        <div>
+          <div class="stepper-label">Dzieci</div>
+          <div class="stepper-sub">liczone jako 0,7 dorosłego</div>
+        </div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="change('children',-1)">−</button>
+          <div class="stepper-val" id="val-children">0</div>
+          <button class="stepper-btn" onclick="change('children',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rejs -->
+    <div class="section">
+      <div class="section-title">🧭 Rejs</div>
+      <div class="stepper-row">
+        <div><div class="stepper-label">Liczba dni</div></div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="change('days',-1)">−</button>
+          <div class="stepper-val" id="val-days">5</div>
+          <button class="stepper-btn" onclick="change('days',1)">+</button>
+        </div>
+      </div>
+      <div class="section-title mt8">Dostęp do sklepów</div>
+      <div class="chip-group" id="chips-sklep">
+        <div class="chip" data-val="Mariny codziennie" onclick="selectChip('sklep',this)">
+          Mariny codziennie<div class="chip-sub">sklep prawie codziennie</div>
+        </div>
+        <div class="chip selected" data-val="Port co 2 dni" onclick="selectChip('sklep',this)">
+          Port co 2 dni<div class="chip-sub">normalne żeglowanie</div>
+        </div>
+        <div class="chip" data-val="Sklepy rzadko" onclick="selectChip('sklep',this)">
+          Sklepy rzadko<div class="chip-sub">dłuższe przeloty</div>
+        </div>
+        <div class="chip" data-val="Dzicz" onclick="selectChip('sklep',this)">
+          Dzicz<div class="chip-sub">brak sklepów</div>
+        </div>
+      </div>
+      <div class="section-title mt8">Rejon żeglarski</div>
+      <div class="chip-group" id="chips-rejon">
+        <div class="chip selected" data-val="Bałtyk" onclick="selectChip('rejon',this)">
+          Bałtyk<div class="chip-sub">wody umiarkowane</div>
+        </div>
+        <div class="chip" data-val="Śródziemnomorze" onclick="selectChip('rejon',this)">
+          Śródziemnomorze<div class="chip-sub">ciepło, dużo słońca</div>
+        </div>
+        <div class="chip" data-val="Atlantyk" onclick="selectChip('rejon',this)">
+          Atlantyk<div class="chip-sub">chłodniej, wietrznie</div>
+        </div>
+        <div class="chip" data-val="Tropiki" onclick="selectChip('rejon',this)">
+          Tropiki<div class="chip-sub">Karaiby, Tajlandia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Styl -->
+    <div class="section">
+      <div class="section-title">🍳 Gotowanie na jachcie</div>
+      <div class="chip-group" id="chips-styl">
+        <div class="chip" data-val="Głównie restauracje" onclick="selectChip('styl',this)">Głównie restauracje</div>
+        <div class="chip" data-val="Pół na pół" onclick="selectChip('styl',this)">Pół na pół</div>
+        <div class="chip selected" data-val="Raczej jemy na jachcie" onclick="selectChip('styl',this)">Raczej jemy na jachcie</div>
+        <div class="chip" data-val="Gotujemy wszystko" onclick="selectChip('styl',this)">Gotujemy wszystko</div>
+      </div>
+      <div class="section-title mt8">Apetyt załogi</div>
+      <div class="chip-group" id="chips-apetyt">
+        <div class="chip" data-val="Lekko" onclick="selectChip('apetyt',this)">
+          Lekko<div class="chip-sub">małe porcje</div>
+        </div>
+        <div class="chip selected" data-val="Normalnie" onclick="selectChip('apetyt',this)">
+          Normalnie<div class="chip-sub">standardowa załoga</div>
+        </div>
+        <div class="chip" data-val="Głodni żeglarze" onclick="selectChip('apetyt',this)">
+          Głodni żeglarze<div class="chip-sub">dużo ruchu</div>
+        </div>
+        <div class="chip" data-val="Bardzo obficie" onclick="selectChip('apetyt',this)">
+          Bardzo obficie<div class="chip-sub">duże porcje</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Napoje -->
+    <div class="section">
+      <div class="section-title">🥤 Napoje (oprócz wody)</div>
+      <div class="drink-row">
+        <div class="drink-label">Woda gazowana</div>
+        <div class="drink-chips" id="drink-gazowana">
+          <div class="drink-chip" data-v="1" onclick="selectDrink('gazowana',this)">1</div>
+          <div class="drink-chip selected" data-v="2" onclick="selectDrink('gazowana',this)">2</div>
+          <div class="drink-chip" data-v="3" onclick="selectDrink('gazowana',this)">3</div>
+          <div class="drink-chip" data-v="4" onclick="selectDrink('gazowana',this)">4</div>
+        </div>
+      </div>
+      <div class="drink-row">
+        <div class="drink-label">Soki</div>
+        <div class="drink-chips" id="drink-soki">
+          <div class="drink-chip" data-v="1" onclick="selectDrink('soki',this)">1</div>
+          <div class="drink-chip selected" data-v="2" onclick="selectDrink('soki',this)">2</div>
+          <div class="drink-chip" data-v="3" onclick="selectDrink('soki',this)">3</div>
+          <div class="drink-chip" data-v="4" onclick="selectDrink('soki',this)">4</div>
+        </div>
+      </div>
+      <div class="drink-row">
+        <div class="drink-label">Cola / napoje</div>
+        <div class="drink-chips" id="drink-cola">
+          <div class="drink-chip" data-v="1" onclick="selectDrink('cola',this)">1</div>
+          <div class="drink-chip selected" data-v="2" onclick="selectDrink('cola',this)">2</div>
+          <div class="drink-chip" data-v="3" onclick="selectDrink('cola',this)">3</div>
+          <div class="drink-chip" data-v="4" onclick="selectDrink('cola',this)">4</div>
+        </div>
+      </div>
+      <div class="drink-row">
+        <div class="drink-label">Syrop do wody</div>
+        <div class="drink-chips" id="drink-syrop">
+          <div class="drink-chip" data-v="1" onclick="selectDrink('syrop',this)">1</div>
+          <div class="drink-chip selected" data-v="2" onclick="selectDrink('syrop',this)">2</div>
+          <div class="drink-chip" data-v="3" onclick="selectDrink('syrop',this)">3</div>
+          <div class="drink-chip" data-v="4" onclick="selectDrink('syrop',this)">4</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diety -->
+    <div class="section">
+      <div class="section-title">🌱 Diety i ograniczenia</div>
+      <div class="diet-row">
+        <div>
+          <div class="toggle-label">Wegetarianie w załodze</div>
+          <div class="toggle-sub">ile osób?</div>
+        </div>
+        <div class="stepper" style="transform:scale(0.85);transform-origin:right">
+          <button class="stepper-btn" onclick="change('wege',-1)">−</button>
+          <div class="stepper-val" id="val-wege">0</div>
+          <button class="stepper-btn" onclick="change('wege',1)">+</button>
+        </div>
+      </div>
+      <div class="diet-row">
+        <div>
+          <div class="toggle-label">Bez laktozy</div>
+          <div class="toggle-sub">ile osób?</div>
+        </div>
+        <div class="stepper" style="transform:scale(0.85);transform-origin:right">
+          <button class="stepper-btn" onclick="change('laktoza',-1)">−</button>
+          <div class="stepper-val" id="val-laktoza">0</div>
+          <button class="stepper-btn" onclick="change('laktoza',1)">+</button>
+        </div>
+      </div>
+      <div class="diet-row">
+        <div>
+          <div class="toggle-label">Bez glutenu</div>
+          <div class="toggle-sub">ile osób?</div>
+        </div>
+        <div class="stepper" style="transform:scale(0.85);transform-origin:right">
+          <button class="stepper-btn" onclick="change('gluten',-1)">−</button>
+          <div class="stepper-val" id="val-gluten">0</div>
+          <button class="stepper-btn" onclick="change('gluten',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opcje -->
+    <div class="section">
+      <div class="section-title">🔥 Opcje dodatkowe</div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Planujemy grilla</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-grill" onchange="state.grill=this.checked;save()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Alkohol na pokładzie</div>
+          <div class="toggle-sub">ilości orientacyjne — dostosuj do załogi</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-alkohol" onchange="state.alkohol=this.checked;save()">
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn-primary" style="width:100%" onclick="generateList()">Generuj listę zakupów</button>
+  </div>
+</div>
+
+<!-- ══════════ LISTA ══════════ -->
+<div id="screen-lista" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('config')">←</button>
+    <div>
+      <div class="logo">⚓ <span>ARMATOR</span>.PRO</div>
+      <div class="top-meta" id="lista-meta"></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn-tab active" onclick="showScreen('lista')">Lista</button>
+      <button class="btn-tab" onclick="showScreen('zapasy')">Zapasy</button>
+    </div>
+  </div>
+  <div class="lista-body">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="progress-label">
+      <span id="progress-bought">0 kupionych</span>
+      <span id="progress-left">0 do kupienia</span>
+    </div>
+    <div class="swipe-hint">Kliknij ✓ aby oznaczyć jako kupione</div>
+    <div id="lista-content"></div>
+    <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center">
+      Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ZAPASY ══════════ -->
+<div id="screen-zapasy" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('lista')">←</button>
+    <div>
+      <div class="logo">⚓ <span>ARMATOR</span>.PRO</div>
+      <div class="top-meta" id="zapasy-meta"></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn-tab" onclick="showScreen('lista')">Lista</button>
+      <button class="btn-tab active" onclick="showScreen('zapasy')">Zapasy</button>
+    </div>
+  </div>
+  <div class="zapasy-body">
+    <div class="day-selector" id="day-selector"></div>
+    <div id="zapasy-content"></div>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<script>
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+const STORAGE_KEY = 'armator_pro_v1';
+
+let state = {
+  adults: 4, children: 0, days: 5,
+  sklep: 'Port co 2 dni',
+  rejon: 'Bałtyk',
+  styl: 'Raczej jemy na jachcie',
+  apetyt: 'Normalnie',
+  drinks: { gazowana:2, soki:2, cola:2, syrop:2 },
+  wege:0, laktoza:0, gluten:0,
+  grill: false, alkohol: false,
+  bought: {},   // productId → true
+  zapasy: {},   // day → { productId → qty }
+  currentDay: 1,
+  list: []
+};
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+}
+function load() {
+  try {
+    const d = localStorage.getItem(STORAGE_KEY);
+    if (d) Object.assign(state, JSON.parse(d));
+  } catch(e){}
+}
+
+// ════════════════════════════════════════════
+// CONFIG DATA
+// ════════════════════════════════════════════
+const CFG = {
+  sklep: { 'Mariny codziennie':0.85, 'Port co 2 dni':1.0, 'Sklepy rzadko':1.15, 'Dzicz':1.3 },
+  apetyt: { 'Lekko':0.85, 'Normalnie':1.0, 'Głodni żeglarze':1.2, 'Bardzo obficie':1.3 },
+  styl: {
+    'Głównie restauracje':    { sniadanie:0.3, gotowanie:0.0, szybki:0.2, przekaski:1.0, kuchnia:1.0, grill:0.4 },
+    'Pół na pół':             { sniadanie:0.8, gotowanie:0.5, szybki:0.8, przekaski:1.0, kuchnia:1.0, grill:0.7 },
+    'Raczej jemy na jachcie': { sniadanie:1.0, gotowanie:1.0, szybki:1.0, przekaski:1.0, kuchnia:1.0, grill:1.0 },
+    'Gotujemy wszystko':      { sniadanie:1.0, gotowanie:1.2, szybki:1.0, przekaski:1.0, kuchnia:1.0, grill:1.1 },
+  },
+  rejon: {
+    'Bałtyk':         { Pieczywo:1.1, Lodówka:1.2, Warzywa:1.0, Owoce:1.0, Suche:1.0, Trwałe:0.9, Przekąski:1.1, Napoje:0.9, Dodatki:1.0, Higiena:1.0, Chemia:1.0, Apteczka:1.0, Grill:1.0, Alkohol:1.0 },
+    'Śródziemnomorze':{ Pieczywo:1.0, Lodówka:1.1, Warzywa:1.2, Owoce:1.3, Suche:0.9, Trwałe:0.8, Przekąski:1.0, Napoje:1.2, Dodatki:1.0, Higiena:1.0, Chemia:1.0, Apteczka:1.0, Grill:1.0, Alkohol:1.0 },
+    'Atlantyk':       { Pieczywo:0.8, Lodówka:0.7, Warzywa:0.7, Owoce:0.8, Suche:1.2, Trwałe:1.4, Przekąski:1.2, Napoje:1.1, Dodatki:1.0, Higiena:1.0, Chemia:1.0, Apteczka:1.0, Grill:1.0, Alkohol:1.0 },
+    'Tropiki':        { Pieczywo:0.9, Lodówka:0.6, Warzywa:1.1, Owoce:1.4, Suche:0.9, Trwałe:0.8, Przekąski:1.3, Napoje:1.5, Dodatki:1.0, Higiena:1.0, Chemia:1.0, Apteczka:1.0, Grill:1.0, Alkohol:1.0 },
+  },
+  wodaNorma: { 'Bałtyk':2.0, 'Śródziemnomorze':2.5, 'Atlantyk':2.2, 'Tropiki':3.0 },
+  drinks: {
+    gazowana: [0, 0.2, 0.4, 0.7, 1.0],
+    soki:     [0, 0.1, 0.2, 0.3, 0.5],
+    cola:     [0, 0.1, 0.25, 0.5, 0.7],
+    syrop:    [0, 0.5, 1.0, 1.5, 2.0],
+  }
+};
+
+// ════════════════════════════════════════════
+// PRODUCT DATABASE
+// ════════════════════════════════════════════
+// format: [id, kategoria, nazwa, jednostka, norma, nOsob, nDni, opakowanie, grupaStylem, dietaGrupa]
+// nOsob=0 i nDni=0 → stała ilość (nie skaluje)
+const PRODUCTS = [
+  // Pieczywo
+  ['p01','Pieczywo','Chleb','szt',0.25,1,2,1,'sniadanie',''],
+  ['p02','Pieczywo','Bułki','szt',0.5,1,1,1,'sniadanie',''],
+  ['p03','Pieczywo','Tortilla','szt',0.5,1,1,6,'szybki','gluten'],
+  ['p04','Pieczywo','Sucharki','opak',1,0,0,1,'sniadanie','gluten'],
+  ['p05','Pieczywo','Chleb bezglutenowy','szt',0.25,1,1,1,'sniadanie','zamiennik_gluten'],
+  ['p06','Pieczywo','Wafle/chrupki ryżowe','opak',1,0,0,1,'sniadanie','zamiennik_gluten'],
+  // Lodówka
+  ['p07','Lodówka','Masło','kostka',1,4,5,1,'sniadanie',''],
+  ['p08','Lodówka','Ser żółty','g',25,1,1,150,'sniadanie','laktoza'],
+  ['p09','Lodówka','Ser wegański','g',25,1,1,150,'sniadanie','zamiennik_laktoza'],
+  ['p10','Lodówka','Wędlina','g',25,1,1,100,'sniadanie','wege'],
+  ['p11','Lodówka','Jajka','szt',0.25,1,1,10,'sniadanie',''],
+  ['p12','Lodówka','Mleko','l',0.25,1,1,1,'sniadanie','laktoza'],
+  ['p13','Lodówka','Mleko roślinne','l',0.25,1,1,1,'sniadanie','zamiennik_laktoza'],
+  // Warzywa
+  ['p14','Warzywa','Ziemniaki','kg',0.3,1,5,1,'gotowanie',''],
+  ['p15','Warzywa','Cebula','szt',0.33,1,3,1,'gotowanie',''],
+  ['p16','Warzywa','Pomidory','szt',0.33,1,1,1,'gotowanie',''],
+  ['p17','Warzywa','Ogórek','szt',0.5,1,2,1,'sniadanie',''],
+  ['p18','Warzywa','Papryka','szt',0.5,1,2,1,'sniadanie',''],
+  ['p19','Warzywa','Cukinia','szt',0.5,1,3,1,'gotowanie',''],
+  // Owoce
+  ['p20','Owoce','Jabłka/Gruszki','szt',0.35,1,1,1,'przekaski',''],
+  ['p21','Owoce','Cytrusy','kg',0.15,1,2,1,'przekaski',''],
+  ['p22','Owoce','Sezonowe','kg',0.05,1,1,1,'przekaski',''],
+  // Suche
+  ['p23','Suche','Makaron','g',60,1,1,500,'gotowanie','gluten'],
+  ['p24','Suche','Makaron bezglutenowy','g',60,1,1,500,'gotowanie','zamiennik_gluten'],
+  ['p25','Suche','Ryż','g',60,1,1,400,'gotowanie',''],
+  ['p26','Suche','Kasza','g',40,1,1,400,'gotowanie',''],
+  ['p27','Suche','Płatki','g',50,1,1,250,'sniadanie','gluten'],
+  ['p28','Suche','Musli','g',40,1,1,300,'sniadanie','gluten'],
+  // Trwałe
+  ['p29','Trwałe','Konserwa mięsna','szt',0.5,1,2,1,'szybki','wege'],
+  ['p30','Trwałe','Konserwa rybna','szt',0.33,1,3,1,'szybki',''],
+  ['p31','Trwałe','Fasola/ciecierzyca','szt',0.5,1,2,1,'szybki','zamiennik_wege'],
+  ['p32','Trwałe','Sos do makaronu','słoik',1,4,2,1,'gotowanie',''],
+  ['p33','Trwałe','Zupa instant','szt',1,2,3,1,'szybki',''],
+  ['p34','Trwałe','Hummus/pasta roślinna','opak',1,4,2,1,'sniadanie','zamiennik_wege'],
+  // Przekąski
+  ['p35','Przekąski','Batony','szt',1,1,1,1,'przekaski',''],
+  ['p36','Przekąski','Ciastka','opak',1,4,3,1,'przekaski','gluten'],
+  ['p37','Przekąski','Orzechy','g',10,1,1,150,'przekaski',''],
+  ['p38','Przekąski','Chipsy','opak',1,4,2,1,'przekaski',''],
+  // Napoje
+  ['p39','Napoje','Kawa','g',200,4,5,250,'kuchnia',''],
+  ['p40','Napoje','Herbata','torebki',1,1,1,20,'kuchnia',''],
+  ['p41','Napoje','Cukier','g',5,1,1,25,'kuchnia',''],
+  // Woda - obliczana osobno
+  ['p42','Napoje','Woda pitna','l',0,0,0,1,'kuchnia',''], // specjalna
+  ['p43','Napoje','Woda gazowana','l',0,0,0,1,'kuchnia',''], // ze suwaka
+  ['p44','Napoje','Soki','l',0,0,0,1,'kuchnia',''],
+  ['p45','Napoje','Cola/napoje','l',0,0,0,1,'kuchnia',''],
+  ['p46','Napoje','Syrop do wody','szt',0,0,0,1,'kuchnia',''],
+  // Dodatki
+  ['p47','Dodatki','Sól','opak',1,0,0,1,'kuchnia',''],
+  ['p48','Dodatki','Pieprz','opak',1,0,0,1,'kuchnia',''],
+  ['p49','Dodatki','Olej/oliwa','l',0.5,4,7,1,'kuchnia',''],
+  ['p50','Dodatki','Ketchup','szt',1,0,0,1,'kuchnia',''],
+  ['p51','Dodatki','Musztarda','szt',1,0,0,1,'kuchnia',''],
+  // Chemia
+  ['p52','Chemia','Worki na śmieci małe','opak',1,0,0,1,'kuchnia',''],
+  ['p53','Chemia','Worki na śmieci duże','opak',1,0,0,1,'kuchnia',''],
+  ['p54','Chemia','Gąbki do naczyń','szt',1,0,0,1,'kuchnia',''],
+  ['p55','Chemia','Płyn do naczyń','szt',1,0,0,1,'kuchnia',''],
+  ['p56','Chemia','Ręczniki papierowe','rolka',1,8,3,1,'kuchnia',''],
+  // Higiena
+  ['p57','Higiena','Krem z filtrem SPF','szt',1,0,0,1,'kuchnia',''],
+  ['p58','Higiena','Środek na komary','szt',1,0,0,1,'kuchnia',''],
+  ['p59','Higiena','Żel/mydło','szt',1,4,5,1,'kuchnia',''],
+  ['p60','Higiena','Szampon','szt',1,4,7,1,'kuchnia',''],
+  ['p61','Higiena','Pasta do zębów','szt',1,2,14,1,'kuchnia',''],
+  ['p62','Higiena','Papier toaletowy','rolka',1,1,3,1,'kuchnia',''],
+  // Apteczka
+  ['p63','Apteczka','Ibuprom/paracetamol','opak',1,0,0,1,'kuchnia',''],
+  ['p64','Apteczka','Tabletki na morską','opak',1,0,0,1,'kuchnia',''],
+  ['p65','Apteczka','Plastry + opatrunki','opak',1,0,0,1,'kuchnia',''],
+  ['p66','Apteczka','Elektrolity','opak',1,0,0,1,'kuchnia',''],
+  ['p67','Apteczka','Węgiel aktywny','opak',1,0,0,1,'kuchnia',''],
+  ['p68','Apteczka','Krem na oparzenia','szt',1,0,0,1,'kuchnia',''],
+  // Grill
+  ['p69','Grill','Kiełbasa na ognisko','kg',0.3,1,3,0.5,'grill','wege'],
+  ['p70','Grill','Mięso na grilla','kg',0.3,1,3,0.5,'grill','wege'],
+  ['p71','Grill','Tofu/tempeh na grilla','kg',0.2,1,3,0.5,'grill','zamiennik_wege'],
+  ['p72','Grill','Pieczarki','g',50,1,3,250,'grill',''],
+  ['p73','Grill','Sos BBQ/czosnkowy','opak',1,0,0,1,'kuchnia',''],
+  ['p74','Grill','Ser halloumi','g',150,2,3,200,'grill',''],
+  ['p75','Grill','Tacki aluminiowe','szt',1,4,3,5,'kuchnia',''],
+  // Alkohol
+  ['p76','Alkohol','Piwo','szt',1,1,2,1,'kuchnia',''],
+  ['p77','Alkohol','Wino','but.',1,4,3,1,'kuchnia',''],
+  ['p78','Alkohol','Wódka/rum','but.',1,5,0,1,'kuchnia',''],
+];
+
+const CAT_ICONS = {
+  'Pieczywo':'🍞','Lodówka':'🧊','Warzywa':'🥦','Owoce':'🍎',
+  'Suche':'🌾','Trwałe':'🥫','Przekąski':'🍫','Napoje':'🥤',
+  'Dodatki':'🧂','Chemia':'🧹','Higiena':'🧴','Apteczka':'🩹',
+  'Grill':'🔥','Alkohol':'🍺','Zamienniki':'🌱'
+};
+
+// ════════════════════════════════════════════
+// ENGINE
+// ════════════════════════════════════════════
+function calcQty(p) {
+  const [id, kat, nazwa, jedn, norma, nOsob, nDni, opak, grupaS, dieta] = p;
+  const ekw = state.adults + state.children * 0.7;
+  const dni = state.days;
+
+  // Napoje ze suwaka
+  if (id === 'p42') {
+    const normaWoda = CFG.wodaNorma[state.rejon] || 2.4;
+    return Math.ceil(ekw * dni * normaWoda);
+  }
+  if (id === 'p43') return Math.ceil(CFG.drinks.gazowana[state.drinks.gazowana] * ekw * dni);
+  if (id === 'p44') return Math.ceil(CFG.drinks.soki[state.drinks.soki] * ekw * dni);
+  if (id === 'p45') return Math.ceil(CFG.drinks.cola[state.drinks.cola] * ekw * dni);
+  if (id === 'p46') return Math.ceil(CFG.drinks.syrop[state.drinks.syrop]);
+
+  // Grill — tylko jeśli aktywowany
+  if (kat === 'Grill' && !state.grill) return 0;
+  // Alkohol — tylko jeśli aktywowany
+  if (kat === 'Alkohol' && !state.alkohol) return 0;
+
+  // Mnożniki
+  const mSklep  = CFG.sklep[state.sklep] || 1;
+  const mApetyt = CFG.apetyt[state.apetyt] || 1;
+  const mStyl   = (CFG.styl[state.styl] || {})[grupaS] ?? 1;
+  const mRejon  = (CFG.rejon[state.rejon] || {})[kat] ?? 1;
+
+  // Ilość bazowa
+  let qty;
+  if (nOsob === 0 && nDni === 0) {
+    qty = norma * mSklep * mApetyt * mStyl * mRejon;
+  } else if (nOsob > 0 && nDni > 0) {
+    qty = norma * (ekw / nOsob) * (dni / nDni) * mSklep * mApetyt * mStyl * mRejon;
+  } else if (nOsob > 0) {
+    qty = norma * (ekw / nOsob) * mSklep * mApetyt * mStyl * mRejon;
+  } else {
+    qty = norma * (dni / nDni) * mSklep * mApetyt * mStyl * mRejon;
+  }
+
+  // Diety — redukcja proporcjonalna
+  if (dieta === 'wege') qty *= Math.max(0, 1 - state.wege / ekw);
+  else if (dieta === 'zamiennik_wege') qty *= Math.min(1, state.wege / ekw);
+  else if (dieta === 'laktoza') qty *= Math.max(0, 1 - state.laktoza / ekw);
+  else if (dieta === 'zamiennik_laktoza') qty *= Math.min(1, state.laktoza / ekw);
+  else if (dieta === 'gluten') qty *= Math.max(0, 1 - state.gluten / ekw);
+  else if (dieta === 'zamiennik_gluten') qty *= Math.min(1, state.gluten / ekw);
+
+  // Zaokrąglenie do opakowania w górę
+  if (qty <= 0) return 0;
+  return Math.ceil(qty / opak) * opak;
+}
+
+function planOnDay(qty, day) {
+  if (!qty) return 0;
+  const remain = Math.round(qty * (state.days - day + 1) / state.days * 10) / 10;
+  return remain;
+}
+
+// ════════════════════════════════════════════
+// SCREENS
+// ════════════════════════════════════════════
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ════════════════════════════════════════════
+// CONFIG UI
+// ════════════════════════════════════════════
+function change(key, delta) {
+  const mins = { adults:1, children:0, days:1, wege:0, laktoza:0, gluten:0 };
+  const maxs = { adults:20, children:10, days:30, wege:20, laktoza:20, gluten:20 };
+  state[key] = Math.max(mins[key]||0, Math.min(maxs[key]||99, (state[key]||0) + delta));
+  const el = document.getElementById('val-' + key);
+  if (el) el.textContent = state[key];
+  save();
+}
+
+function selectChip(group, el) {
+  const container = document.getElementById('chips-' + group);
+  container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state[group] = el.dataset.val;
+  save();
+}
+
+function selectDrink(drink, el) {
+  const container = document.getElementById('drink-' + drink);
+  container.querySelectorAll('.drink-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.drinks[drink] = parseInt(el.dataset.v);
+  save();
+}
+
+// ════════════════════════════════════════════
+// GENERATE LIST
+// ════════════════════════════════════════════
+function generateList() {
+  const ekw = state.adults + state.children * 0.7;
+  state.list = PRODUCTS.map(p => ({
+    id: p[0], kat: p[1], nazwa: p[2], jedn: p[3],
+    qty: calcQty(p)
+  })).filter(p => p.qty > 0);
+
+  renderLista();
+  renderZapasy();
+
+  document.getElementById('lista-meta').textContent =
+    `${state.adults} dorosłych · ${state.days} dni · ${state.rejon}`;
+  document.getElementById('zapasy-meta').textContent =
+    `${state.adults} dorosłych · ${state.days} dni`;
+
+  save();
+  showScreen('lista');
+}
+
+// ════════════════════════════════════════════
+// RENDER LISTA
+// ════════════════════════════════════════════
+function renderLista() {
+  const list = state.list;
+  if (!list.length) return;
+
+  let html = '';
+  let currentKat = '';
+
+  list.forEach(p => {
+    if (p.kat !== currentKat) {
+      currentKat = p.kat;
+      const cnt = list.filter(x => x.kat === currentKat).length;
+      html += `<div class="category-header">
+        <span class="cat-icon">${CAT_ICONS[currentKat]||'📦'}</span>
+        ${currentKat}
+        <span class="cat-count">${cnt}</span>
+      </div>`;
+    }
+    const bought = state.bought[p.id];
+    const qtyFmt = formatQty(p.qty, p.jedn);
+    html += `<div class="product-row ${bought?'bought':''}" id="row-${p.id}">
+      <div class="prod-name">${p.nazwa}</div>
+      <div class="prod-qty">${qtyFmt}</div>
+      <button class="prod-check" onclick="toggleBought('${p.id}')">${bought?'✓':''}</button>
+    </div>`;
+  });
+
+  document.getElementById('lista-content').innerHTML = html;
+  updateProgress();
+}
+
+function toggleBought(id) {
+  state.bought[id] = !state.bought[id];
+  const row = document.getElementById('row-' + id);
+  if (row) {
+    row.classList.toggle('bought', state.bought[id]);
+    const btn = row.querySelector('.prod-check');
+    btn.textContent = state.bought[id] ? '✓' : '';
+  }
+  updateProgress();
+  save();
+}
+
+function updateProgress() {
+  const total = state.list.length;
+  const bought = state.list.filter(p => state.bought[p.id]).length;
+  const pct = total ? Math.round(bought/total*100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-bought').textContent = bought + ' kupionych';
+  document.getElementById('progress-left').textContent = (total-bought) + ' do kupienia';
+}
+
+function formatQty(qty, jedn) {
+  if (jedn === 'g') {
+    if (qty >= 1000) return (qty/1000).toFixed(qty%1000===0?0:1) + ' kg';
+    return qty + ' g';
+  }
+  if (jedn === 'l') return qty + ' l';
+  const rounded = Math.round(qty * 10) / 10;
+  return rounded + (jedn ? ' ' + jedn : '');
+}
+
+// ════════════════════════════════════════════
+// RENDER ZAPASY
+// ════════════════════════════════════════════
+function renderZapasy() {
+  // day selector
+  let dayHtml = '';
+  for (let d = 1; d <= state.days; d++) {
+    dayHtml += `<button class="day-btn ${d===state.currentDay?'active':''}" onclick="setDay(${d})">
+      ${d}<div class="day-label">dzień</div>
+    </button>`;
+  }
+  document.getElementById('day-selector').innerHTML = dayHtml;
+
+  // zapasy content
+  const list = state.list;
+  let html = '';
+  let currentKat = '';
+  const dayKey = 'd' + state.currentDay;
+  const dayZapasy = state.zapasy[dayKey] || {};
+
+  list.forEach(p => {
+    if (p.kat !== currentKat) {
+      currentKat = p.kat;
+      html += `<div class="category-header">
+        <span class="cat-icon">${CAT_ICONS[currentKat]||'📦'}</span>
+        ${currentKat}
+      </div>`;
+    }
+
+    const planNaDzis = planOnDay(p.qty, state.currentDay);
+    const zostalo = dayZapasy[p.id] !== undefined ? dayZapasy[p.id] : '';
+    let status = 'none', statusTxt = '—';
+
+    if (zostalo !== '') {
+      const z = parseFloat(zostalo);
+      if (z >= planNaDzis) { status = 'ok'; statusTxt = 'OK ✓'; }
+      else if (z >= planNaDzis * 0.7) { status = 'low'; statusTxt = 'Mało ⚠'; }
+      else { status = 'empty'; statusTxt = 'Brak ✗'; }
+    }
+
+    const planFmt = formatQty(planNaDzis, p.jedn);
+    html += `<div class="zapas-row">
+      <div class="zapas-top">
+        <div class="zapas-name">${p.nazwa}</div>
+        <div class="zapas-status ${status}">${statusTxt}</div>
+      </div>
+      <div class="zapas-bottom">
+        <div class="zapas-plan">Plan: ${planFmt}</div>
+        <input class="zapas-input" type="number" min="0" step="0.1"
+          placeholder="Zostało..."
+          value="${zostalo}"
+          onchange="setZapas('${p.id}', this.value)">
+        <div class="zapas-unit">${p.jedn}</div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('zapasy-content').innerHTML = html;
+}
+
+function setDay(d) {
+  state.currentDay = d;
+  renderZapasy();
+  save();
+}
+
+function setZapas(pid, val) {
+  const dayKey = 'd' + state.currentDay;
+  if (!state.zapasy[dayKey]) state.zapasy[dayKey] = {};
+  state.zapasy[dayKey][pid] = val === '' ? undefined : parseFloat(val);
+  // re-render status only
+  renderZapasy();
+  save();
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+load();
+
+// Restore UI from state
+document.getElementById('val-adults').textContent = state.adults;
+document.getElementById('val-children').textContent = state.children;
+document.getElementById('val-days').textContent = state.days;
+document.getElementById('val-wege').textContent = state.wege;
+document.getElementById('val-laktoza').textContent = state.laktoza;
+document.getElementById('val-gluten').textContent = state.gluten;
+document.getElementById('toggle-grill').checked = state.grill;
+document.getElementById('toggle-alkohol').checked = state.alkohol;
+
+// Chips
+['sklep','rejon','styl','apetyt'].forEach(g => {
+  const chips = document.querySelectorAll(`#chips-${g} .chip`);
+  chips.forEach(c => {
+    c.classList.toggle('selected', c.dataset.val === state[g]);
+  });
+});
+
+// Drinks
+['gazowana','soki','cola','syrop'].forEach(d => {
+  document.querySelectorAll(`#drink-${d} .drink-chip`).forEach(c => {
+    c.classList.toggle('selected', parseInt(c.dataset.v) === state.drinks[d]);
+  });
+});
+
+// Restore list if exists
+if (state.list && state.list.length > 0) {
+  document.getElementById('lista-meta').textContent =
+    `${state.adults} dorosłych · ${state.days} dni · ${state.rejon}`;
+  document.getElementById('zapasy-meta').textContent =
+    `${state.adults} dorosłych · ${state.days} dni`;
+  renderLista();
+  renderZapasy();
+}
+</script>
+</body>
+</html>
