@@ -506,22 +506,87 @@ const CFG = {
 };
 
 // Domyślne ceny (PLN)
+// Ceny: dla jedn='g' → zł/kg, dla jedn='l' → zł/l, dla reszty → zł/szt lub zł/opak
 const DEFAULT_PRICES = {
-  p01:5,p02:4,p03:6,p04:8,p05:9,p06:7,
-  p07:7,p08:20,p09:18,p10:18,p11:10,p12:4,p13:6,
-  p14:3,p15:2,p16:3,p17:3,p18:3,p19:4,
-  p20:5,p21:8,p22:10,
-  p23:5,p24:9,p25:4,p26:4,p27:9,p28:10,
-  p29:8,p30:7,p31:5,p32:9,p33:4,p34:8,
-  p35:3,p36:9,p37:12,p38:7,
-  p39:30,p40:8,p41:5,
-  p42:3,p43:5,p44:6,p45:5,p46:8,
-  p47:4,p48:5,p49:12,p50:5,p51:5,
-  p52:6,p53:7,p54:4,p55:8,p56:5,
-  p57:20,p58:15,p59:8,p60:12,p61:7,p62:5,
-  p63:15,p64:12,p65:10,p66:8,p67:6,p68:8,
-  p69:25,p70:35,p71:20,p72:8,p73:8,p74:25,p75:5,
-  p76:4,p77:30,p78:60,
+  p01:4,   // Chleb szt
+  p02:0.8, // Bułki szt
+  p03:2,   // Tortilla szt
+  p04:8,   // Sucharki opak
+  p05:6,   // Chleb bezgl szt
+  p06:9,   // Wafle opak
+  p07:7,   // Masło kostka
+  p08:60,  // Ser żółty zł/kg
+  p09:55,  // Ser wegański zł/kg
+  p10:50,  // Wędlina zł/kg
+  p11:1.5, // Jajka szt
+  p12:4,   // Mleko l → zł/l
+  p13:6,   // Mleko roślinne zł/l
+  p14:3,   // Ziemniaki zł/kg
+  p15:2,   // Cebula szt
+  p16:2,   // Pomidory szt
+  p17:2,   // Ogórek szt
+  p18:3,   // Papryka szt
+  p19:4,   // Cukinia szt
+  p20:3,   // Jabłka szt
+  p21:8,   // Cytrusy zł/kg
+  p22:12,  // Sezonowe zł/kg
+  p23:12,  // Makaron zł/kg
+  p24:20,  // Makaron bezgl zł/kg
+  p25:8,   // Ryż zł/kg
+  p26:8,   // Kasza zł/kg
+  p27:16,  // Płatki zł/kg
+  p28:20,  // Musli zł/kg
+  p29:8,   // Konserwa mięsna szt
+  p30:7,   // Konserwa rybna szt
+  p31:5,   // Fasola szt
+  p32:9,   // Sos do makaronu słoik
+  p33:4,   // Zupa instant szt
+  p34:6,   // Pasztet szt
+  p35:8,   // Hummus opak
+  p36:3,   // Batony szt
+  p37:12,  // Ciastka opak
+  p38:60,  // Orzechy zł/kg
+  p39:7,   // Chipsy opak
+  p40:80,  // Kawa zł/kg
+  p41:8,   // Herbata opak
+  p42:5,   // Cukier opak
+  p43:3,   // Woda pitna zł/l
+  p44:4,   // Woda gazowana zł/l
+  p45:5,   // Soki zł/l
+  p46:4,   // Cola zł/l
+  p47:8,   // Syrop szt
+  p48:4,   // Sól opak
+  p49:5,   // Pieprz opak
+  p50:20,  // Olej zł/l
+  p51:5,   // Ketchup szt
+  p52:5,   // Musztarda szt
+  p53:6,   // Worki małe opak
+  p54:7,   // Worki duże opak
+  p55:4,   // Gąbki szt
+  p56:8,   // Płyn szt
+  p57:5,   // Ręczniki rolka
+  p58:20,  // Krem SPF szt
+  p59:15,  // Środek na komary szt
+  p60:8,   // Żel/mydło szt
+  p61:12,  // Szampon szt
+  p62:7,   // Pasta szt
+  p63:5,   // Papier toaletowy rolka
+  p64:15,  // Ibuprom opak
+  p65:12,  // Tabletki morska opak
+  p66:10,  // Plastry opak
+  p67:8,   // Elektrolity opak
+  p68:6,   // Węgiel aktywny opak
+  p69:8,   // Krem oparzenia szt
+  p70:25,  // Kiełbasa zł/kg
+  p71:35,  // Mięso zł/kg
+  p72:30,  // Tofu zł/kg
+  p73:20,  // Pieczarki zł/kg
+  p74:8,   // Sos BBQ opak
+  p75:60,  // Halloumi zł/kg
+  p76:5,   // Tacki szt
+  p77:4,   // Piwo szt
+  p78:30,  // Wino but.
+  p79:60,  // Wódka/rum but.
 };
 
 // ══════════════════════════════════════
@@ -666,14 +731,17 @@ function calcQty(p){
 
 function getPrice(id){return state.prices[id]??DEFAULT_PRICES[id]??0;}
 
+function qtyForPrice(qty,jedn){return jedn==='g'?qty/1000:qty;}
+
+function lineTotal(p){
+  const qty=state.customQty[p.id]??p.qty;
+  return qtyForPrice(qty,p.jedn)*getPrice(p.id);
+}
+
 function calcTotal(){
   return state.list.reduce((sum,p)=>{
     if(state.skip[p.id]) return sum;
-    const qty=state.customQty[p.id]??p.qty;
-    const price=getPrice(p.id);
-    const jedn=p.jedn;
-    // dla gramów: cena za opakowanie, nie za gram
-    return sum+(qty*price);
+    return sum+lineTotal(p);
   },0);
 }
 
@@ -759,8 +827,7 @@ function renderLista(){
     const comment=state.comments[p.id]||'';
     const customQ=state.customQty[p.id]??p.qty;
     const qtyDisplay=formatQty(customQ,p.jedn);
-    const price=getPrice(p.id);
-    const lineCost=(customQ*price).toFixed(0);
+    const lineCost=lineTotal(p).toFixed(0);
     html+=`<div class="product-row ${bought?'bought':''} ${skip?'skip':''}" id="row-${p.id}">
       <div style="flex:1;min-width:0">
         <div class="prod-name">${p.nazwa}</div>
@@ -854,14 +921,16 @@ function renderKoszty(){
     }
     const qty=state.customQty[p.id]??p.qty;
     const price=getPrice(p.id);
-    const lineTotal=(qty*price).toFixed(0);
+    const jedn=p.jedn;
+    const priceLabel=jedn==='g'?'zł/kg':jedn==='l'?'zł/l':'zł/szt';
+    const total=lineTotal(p).toFixed(0);
     html+=`<div class="price-row">
       <div class="price-name">${p.nazwa}</div>
       <div class="price-qty">${formatQty(qty,p.jedn)}</div>
       <input class="price-input" type="number" min="0" step="0.5" value="${price}"
         onchange="setPrice('${p.id}',this.value)">
-      <div class="currency-label">zł</div>
-      <div class="price-total">${lineTotal} zł</div>
+      <div class="currency-label">${priceLabel}</div>
+      <div class="price-total">${total} zł</div>
     </div>`;
   });
   document.getElementById('koszty-content').innerHTML=html;
