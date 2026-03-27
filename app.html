@@ -88,22 +88,22 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .lista-body{flex:1;}
 .category-header{padding:20px 20px 8px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;}
 .cat-icon{font-size:16px;}.cat-count{margin-left:auto;background:rgba(255,255,255,0.05);border-radius:20px;padding:2px 8px;font-size:11px;}
-.product-row{display:flex;align-items:center;padding:10px 20px;border-bottom:1px solid rgba(255,255,255,0.04);transition:all .2s;gap:8px;}
+.product-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04);transition:all .2s;gap:6px;min-width:0;}
 .product-row.bought{background:rgba(0,200,150,0.06);}
 .product-row.skip{opacity:0.25;}
 .product-row.bought .prod-name{text-decoration:line-through;color:var(--muted);}
 .prod-name{font-size:15px;flex:1;min-width:0;}
 .prod-comment{font-size:11px;color:var(--muted);font-style:italic;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.prod-qty-wrap{display:flex;align-items:center;gap:4px;}
-.prod-qty-input{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--cyan);background:transparent;border:none;width:52px;text-align:right;cursor:pointer;border-radius:6px;padding:2px 4px;transition:background .15s;}
+.prod-qty-wrap{display:flex;align-items:center;gap:3px;flex-shrink:0;}
+.prod-qty-input{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);background:transparent;border:none;width:44px;text-align:right;cursor:pointer;border-radius:6px;padding:2px 2px;transition:background .15s;}
 .prod-qty-input:focus{outline:none;background:rgba(0,212,255,0.1);color:var(--white);}
-.prod-qty-unit{font-size:11px;color:var(--muted);}
-.prod-actions{display:flex;gap:6px;align-items:center;}
-.prod-check{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent;flex-shrink:0;}
+.prod-qty-unit{font-size:10px;color:var(--muted);}
+.prod-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.prod-check{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;flex-shrink:0;}
 .product-row.bought .prod-check{background:var(--green);border-color:var(--green);color:white;}
-.prod-skip-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--border);background:transparent;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.prod-skip-btn{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border);background:transparent;cursor:pointer;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
 .product-row.skip .prod-skip-btn{background:rgba(255,71,87,0.15);border-color:var(--red);color:var(--red);}
-.prod-comment-btn{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--border);background:transparent;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
+.prod-comment-btn{width:26px;height:26px;border-radius:7px;border:1.5px solid var(--border);background:transparent;cursor:pointer;font-size:11px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;}
 .prod-comment-btn.has-comment{border-color:var(--amber);color:var(--amber);}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;}
 .modal-overlay.hidden{display:none;}
@@ -254,7 +254,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
 
     <div class="section">
-      <div class="section-title" id="cfg-drinks">🥤 Napoje (oprócz wody)</div>
+      <div class="section-title" id="cfg-drinks">🥤 Napoje (oprócz wody pitnej)</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:14px;margin-top:-8px;line-height:1.5;" id="cfg-drinks-hint">Skala 0–4 = ile litrów / os / dzień. Woda pitna liczona jest automatycznie na podstawie rejonu.</div>
       <div class="drink-row"><div class="drink-label" id="drink-lbl-gazowana">Woda gazowana</div><div class="drink-chips" id="drink-gazowana"><div class="drink-chip selected" data-v="0" onclick="selectDrink('gazowana',this)">0</div><div class="drink-chip" data-v="1" onclick="selectDrink('gazowana',this)">1</div><div class="drink-chip" data-v="2" onclick="selectDrink('gazowana',this)">2</div><div class="drink-chip" data-v="3" onclick="selectDrink('gazowana',this)">3</div><div class="drink-chip" data-v="4" onclick="selectDrink('gazowana',this)">4</div></div></div>
       <div class="drink-row"><div class="drink-label" id="drink-lbl-soki">Soki</div><div class="drink-chips" id="drink-soki"><div class="drink-chip selected" data-v="0" onclick="selectDrink('soki',this)">0</div><div class="drink-chip" data-v="1" onclick="selectDrink('soki',this)">1</div><div class="drink-chip" data-v="2" onclick="selectDrink('soki',this)">2</div><div class="drink-chip" data-v="3" onclick="selectDrink('soki',this)">3</div><div class="drink-chip" data-v="4" onclick="selectDrink('soki',this)">4</div></div></div>
       <div class="drink-row"><div class="drink-label" id="drink-lbl-cola">Cola / napoje</div><div class="drink-chips" id="drink-cola"><div class="drink-chip selected" data-v="0" onclick="selectDrink('cola',this)">0</div><div class="drink-chip" data-v="1" onclick="selectDrink('cola',this)">1</div><div class="drink-chip" data-v="2" onclick="selectDrink('cola',this)">2</div><div class="drink-chip" data-v="3" onclick="selectDrink('cola',this)">3</div><div class="drink-chip" data-v="4" onclick="selectDrink('cola',this)">4</div></div></div>
@@ -348,7 +349,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="modal-overlay hidden" id="comment-modal">
   <div class="modal-box">
     <div class="modal-title" id="modal-product-name">Komentarz</div>
-    <input class="modal-input" id="modal-input" type="text" placeholder="np. wieloziarnisty..." maxlength="60">
+    <input class="modal-input" id="modal-input" type="text" placeholder="np. rodzaj / marka..." maxlength="60">
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal()" id="modal-cancel">Anuluj</button>
       <button class="btn-confirm" onclick="saveComment()" id="modal-save">Zapisz</button>
@@ -369,7 +370,8 @@ const T = {
     cfgCrew:'👥 Załoga', cfgAdults:'Dorośli', cfgChildren:'Dzieci', cfgChildrenSub:'liczone jako 0,7 dorosłego',
     cfgTrip:'🧭 Rejs', cfgDays:'Liczba dni', cfgShopAccess:'Dostęp do sklepów', cfgRegion:'Rejon żeglarski',
     cfgCooking:'🍳 Gotowanie na jachcie', cfgAppetite:'Apetyt załogi',
-    cfgDrinks:'🥤 Napoje (oprócz wody)',
+    cfgDrinks:'🥤 Napoje (oprócz wody pitnej)',
+    cfgDrinksHint:'Skala 0–4 = ile litrów / os / dzień. Woda pitna liczona jest automatycznie na podstawie rejonu.',
     drinkGazowana:'Woda gazowana', drinkSoki:'Soki', drinkCola:'Cola / napoje', drinkSyrop:'Syrop do wody',
     cfgDiet:'🌱 Diety i ograniczenia',
     cfgVege:'Wegetarianie w załodze', cfgVegeSub:'ile osób?',
@@ -384,7 +386,7 @@ const T = {
     progressBought:(n)=>`${n} kupionych`, progressLeft:(n)=>`${n} do kupienia`,
     kosztyTotalLabel:'Łączny szacunkowy koszt', kosztyPerOsoba:(n)=>`${n} zł / osoba`,
     dayLabel:'dzień', planLabel:'Plan:', statusOk:'OK ✓', statusLow:'Mało ⚠', statusEmpty:'Brak ✗', statusNone:'—',
-    modalCancel:'Anuluj', modalSave:'Zapisz', modalPlaceholder:'np. wieloziarnisty...',
+    modalCancel:'Anuluj', modalSave:'Zapisz', modalPlaceholder:'np. rodzaj / marka...',
     sklep:['Mariny codziennie','Port co 2 dni','Sklepy rzadko','Dzicz'],
     sklepSub:['sklep prawie codziennie','normalne żeglowanie','dłuższe przeloty','brak sklepów'],
     rejon:['Śródlądzie','Bałtyk','Śródziemnomorze','Atlantyk','Tropiki'],
@@ -400,7 +402,8 @@ const T = {
     cfgCrew:'👥 Crew', cfgAdults:'Adults', cfgChildren:'Children', cfgChildrenSub:'counted as 0.7 adult',
     cfgTrip:'🧭 Trip', cfgDays:'Number of days', cfgShopAccess:'Shop access', cfgRegion:'Sailing region',
     cfgCooking:'🍳 Cooking on board', cfgAppetite:'Crew appetite',
-    cfgDrinks:'🥤 Drinks (besides water)',
+    cfgDrinks:'🥤 Additional drinks (besides water)',
+    cfgDrinksHint:'Scale 0–4 = litres per person per day. Drinking water is always calculated separately based on your region.',
     drinkGazowana:'Sparkling water', drinkSoki:'Juices', drinkCola:'Cola / soft drinks', drinkSyrop:'Water syrup',
     cfgDiet:'🌱 Diets & restrictions',
     cfgVege:'Vegetarians on board', cfgVegeSub:'how many?',
@@ -415,11 +418,11 @@ const T = {
     progressBought:(n)=>`${n} bought`, progressLeft:(n)=>`${n} remaining`,
     kosztyTotalLabel:'Total estimated cost', kosztyPerOsoba:(n)=>`${n} zł / person`,
     dayLabel:'day', planLabel:'Plan:', statusOk:'OK ✓', statusLow:'Low ⚠', statusEmpty:'Out ✗', statusNone:'—',
-    modalCancel:'Cancel', modalSave:'Save', modalPlaceholder:'e.g. wholegrain...',
+    modalCancel:'Cancel', modalSave:'Save', modalPlaceholder:'e.g. type / brand...',
     sklep:['Marina daily','Port every 2 days','Shops rarely','Wilderness'],
     sklepSub:['shop almost daily','normal sailing','longer passages','no shops'],
-    rejon:['Inland','Baltic','Mediterranean','Atlantic','Tropics'],
-    rejonSub:['rivers, lakes','temperate waters','warm, sunny','cooler, windy','Caribbean, Thailand'],
+    rejon:['Inshore','Baltic','Mediterranean','Atlantic','Tropics'],
+    rejonSub:['rivers, lakes, inland','temperate waters','warm, sunny','cooler, windy','Caribbean, Thailand'],
     styl:['Mostly restaurants','Half and half','Mostly on board','Cook everything'],
     apetyt:['Light','Normal','Hungry sailors','Very hearty'],
     apetytyub:['small portions','standard crew','lots of activity','large portions'],
@@ -521,6 +524,7 @@ function applyLang(){
   el('cfg-cooking').textContent=L.cfgCooking;
   el('cfg-appetite').textContent=L.cfgAppetite;
   el('cfg-drinks').textContent=L.cfgDrinks;
+  if(el('cfg-drinks-hint'))el('cfg-drinks-hint').textContent=L.cfgDrinksHint;
   el('drink-lbl-gazowana').textContent=L.drinkGazowana;
   el('drink-lbl-soki').textContent=L.drinkSoki;
   el('drink-lbl-cola').textContent=L.drinkCola;
