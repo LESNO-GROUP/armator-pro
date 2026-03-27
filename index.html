@@ -191,17 +191,26 @@ footer{padding:48px 40px;border-top:1px solid var(--border);display:flex;align-i
 }
 
 /* ── LANG ── */
-[data-lang="en"]{display:block;}
+/* Language switching */
 [data-lang="pl"]{display:none;}
-body.lang-pl [data-lang="en"]{display:none;}
 body.lang-pl [data-lang="pl"]{display:block;}
-span[data-lang]{display:inline;}
-body.lang-pl span[data-lang="en"]{display:none;}
+body.lang-pl [data-lang="en"]{display:none;}
+span[data-lang="en"]{display:inline;}
+span[data-lang="pl"]{display:none;}
 body.lang-pl span[data-lang="pl"]{display:inline;}
-li[data-lang]{display:flex;}
-body.lang-pl li[data-lang="en"]{display:none;}
+body.lang-pl span[data-lang="en"]{display:none;}
+li[data-lang="en"]{display:flex;}
+li[data-lang="pl"]{display:none;}
 body.lang-pl li[data-lang="pl"]{display:flex;}
-body:not(.lang-pl) li[data-lang="pl"]{display:none;}
+body.lang-pl li[data-lang="en"]{display:none;}
+a.nav-cta[data-lang="pl"],a.btn-hero[data-lang="pl"],a.btn-ghost[data-lang="pl"],
+a.btn-pricing[data-lang="pl"],a.footer-link[data-lang="pl"]{display:none;}
+body.lang-pl a.nav-cta[data-lang="pl"],body.lang-pl a.btn-hero[data-lang="pl"],
+body.lang-pl a.btn-ghost[data-lang="pl"],body.lang-pl a.btn-pricing[data-lang="pl"],
+body.lang-pl a.footer-link[data-lang="pl"]{display:inline-block;}
+body.lang-pl a.nav-cta[data-lang="en"],body.lang-pl a.btn-hero[data-lang="en"],
+body.lang-pl a.btn-ghost[data-lang="en"],body.lang-pl a.btn-pricing[data-lang="en"],
+body.lang-pl a.footer-link[data-lang="en"]{display:none;}
 </style>
 </head>
 <body class="lang-en">
@@ -220,8 +229,8 @@ body:not(.lang-pl) li[data-lang="pl"]{display:none;}
       <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
       <button class="lang-btn" onclick="setLang('pl')" id="btn-pl">PL</button>
     </div>
-    <a href="https://armatorpro.com/app" class="nav-cta" data-lang="en">Try free →</a>
-    <a href="https://armatorpro.com/app" class="nav-cta" data-lang="pl">Wypróbuj →</a>
+    <a href="https://armator-pro.vercel.app" class="nav-cta" data-lang="en">Try free →</a>
+    <a href="https://armator-pro.vercel.app" class="nav-cta" data-lang="pl">Wypróbuj →</a>
   </div>
 </nav>
 
@@ -245,8 +254,8 @@ body:not(.lang-pl) li[data-lang="pl"]{display:none;}
     </p>
 
     <div class="hero-actions fade-up">
-      <a href="https://armatorpro.com/app" class="btn-hero" data-lang="en">Generate my list — free</a>
-      <a href="https://armatorpro.com/app" class="btn-hero" data-lang="pl">Wygeneruj listę — za darmo</a>
+      <a href="https://armator-pro.vercel.app" class="btn-hero" data-lang="en">Generate my list — free</a>
+      <a href="https://armator-pro.vercel.app" class="btn-hero" data-lang="pl">Wygeneruj listę — za darmo</a>
       <a href="#how" class="btn-ghost" data-lang="en">See how it works</a>
       <a href="#how" class="btn-ghost" data-lang="pl">Jak to działa?</a>
     </div>
@@ -367,8 +376,8 @@ body:not(.lang-pl) li[data-lang="pl"]{display:none;}
     </div>
 
     <div style="text-align:center;margin-top:56px;">
-      <a href="https://armatorpro.com/app" class="btn-hero" data-lang="en">Try it now — it's free</a>
-      <a href="https://armatorpro.com/app" class="btn-hero" data-lang="pl">Wypróbuj teraz — za darmo</a>
+      <a href="https://armator-pro.vercel.app" class="btn-hero" data-lang="en">Try it now — it's free</a>
+      <a href="https://armator-pro.vercel.app" class="btn-hero" data-lang="pl">Wypróbuj teraz — za darmo</a>
     </div>
   </div>
 </section>
@@ -520,8 +529,8 @@ body:not(.lang-pl) li[data-lang="pl"]{display:none;}
           <li class="muted" data-lang="en">No cost estimator</li>
           <li class="muted" data-lang="pl">Bez kalkulatora kosztów</li>
         </ul>
-        <a href="https://armatorpro.com/app" class="btn-pricing btn-pricing-ghost" data-lang="en">Get started</a>
-        <a href="https://armatorpro.com/app" class="btn-pricing btn-pricing-ghost" data-lang="pl">Zacznij</a>
+        <a href="https://armator-pro.vercel.app" class="btn-pricing btn-pricing-ghost" data-lang="en">Get started</a>
+        <a href="https://armator-pro.vercel.app" class="btn-pricing btn-pricing-ghost" data-lang="pl">Zacznij</a>
       </div>
       <div class="pricing-card featured">
         <div class="pricing-badge" data-lang="en">Coming soon</div>
@@ -618,8 +627,8 @@ body:not(.lang-pl) li[data-lang="pl"]{display:none;}
 <footer>
   <div class="footer-logo">ARMA<span>TOR</span>.PRO</div>
   <div class="footer-links">
-    <a href="https://armatorpro.com/app" class="footer-link" data-lang="en">Launch app</a>
-    <a href="https://armatorpro.com/app" class="footer-link" data-lang="pl">Otwórz aplikację</a>
+    <a href="https://armator-pro.vercel.app" class="footer-link" data-lang="en">Launch app</a>
+    <a href="https://armator-pro.vercel.app" class="footer-link" data-lang="pl">Otwórz aplikację</a>
     <a href="#newsletter" class="footer-link" data-lang="en">Newsletter</a>
     <a href="#newsletter" class="footer-link" data-lang="pl">Newsletter</a>
   </div>
