@@ -221,10 +221,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
       <div class="section-title mt8" id="cfg-shop-access">Dostęp do sklepów</div>
       <div class="chip-group" id="chips-sklep">
-        <div class="chip" data-val="Mariny codziennie" onclick="selectChip('sklep',this)"><span class="chip-lbl">Mariny codziennie</span><div class="chip-sub" data-sub="sklep-0">sklep prawie codziennie</div></div>
-        <div class="chip selected" data-val="Port co 2 dni" onclick="selectChip('sklep',this)"><span class="chip-lbl">Port co 2 dni</span><div class="chip-sub" data-sub="sklep-1">normalne żeglowanie</div></div>
-        <div class="chip" data-val="Sklepy rzadko" onclick="selectChip('sklep',this)"><span class="chip-lbl">Sklepy rzadko</span><div class="chip-sub" data-sub="sklep-2">dłuższe przeloty</div></div>
-        <div class="chip" data-val="Dzicz" onclick="selectChip('sklep',this)"><span class="chip-lbl">Dzicz</span><div class="chip-sub" data-sub="sklep-3">brak sklepów</div></div>
+        <div class="chip" data-val="Mariny codziennie" onclick="selectChip('sklep',this)"><span class="chip-lbl" data-sklep="0">Mariny codziennie</span><div class="chip-sub" data-sub="sklep-0">sklep prawie codziennie</div></div>
+        <div class="chip selected" data-val="Port co 2 dni" onclick="selectChip('sklep',this)"><span class="chip-lbl" data-sklep="1">Port co 2 dni</span><div class="chip-sub" data-sub="sklep-1">normalne żeglowanie</div></div>
+        <div class="chip" data-val="Sklepy rzadko" onclick="selectChip('sklep',this)"><span class="chip-lbl" data-sklep="2">Sklepy rzadko</span><div class="chip-sub" data-sub="sklep-2">dłuższe przeloty</div></div>
+        <div class="chip" data-val="Dzicz" onclick="selectChip('sklep',this)"><span class="chip-lbl" data-sklep="3">Dzicz</span><div class="chip-sub" data-sub="sklep-3">brak sklepów</div></div>
       </div>
       <div class="section-title mt8" id="cfg-region">Rejon żeglarski</div>
       <div class="chip-group" id="chips-rejon">
@@ -545,6 +545,7 @@ function applyLang(){
   document.querySelectorAll('[data-sub^="sklep-"]').forEach((e,i)=>{e.textContent=L.sklepSub[i]||e.textContent;});
   document.querySelectorAll('[data-sub^="rejon-"]').forEach((e,i)=>{e.textContent=L.rejonSub[i]||e.textContent;});
   document.querySelectorAll('[data-sub^="ap-"]').forEach((e,i)=>{e.textContent=L.apetytyub[i]||e.textContent;});
+  document.querySelectorAll('[data-sklep]').forEach(e=>{const i=parseInt(e.dataset.sklep);e.textContent=L.sklep[i]||e.textContent;});
   document.querySelectorAll('[data-rej]').forEach(e=>{const i=parseInt(e.dataset.rej);e.textContent=L.rejon[i]||e.textContent;});
   document.querySelectorAll('[data-styl]').forEach(e=>{const i=parseInt(e.dataset.styl);e.textContent=L.styl[i]||e.textContent;});
   document.querySelectorAll('[data-ap]').forEach(e=>{const i=parseInt(e.dataset.ap);e.textContent=L.apetyt[i]||e.textContent;});
