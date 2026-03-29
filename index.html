@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Armator.PRO — Smart Provisioning for Sailors</title>
 <meta name="description" content="Stop guessing what to buy for your sailing trip. Armator.PRO calculates the exact quantities of provisions for your crew, voyage length, and sailing region.">
 <meta name="keywords" content="sailing provisions planner, jacht planer zapasów, sailing shopping list, yacht provisioning, armator, żeglarstwo">
@@ -55,9 +55,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:fl
 .hero-content{position:relative;max-width:660px;}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--sea);background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.2);border-radius:30px;padding:6px 16px;margin-bottom:28px;}
 .hero-tag::before{content:'⚓';font-size:14px;}
-.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(44px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:12px;}
+.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(32px,8vw,72px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:12px;}
 .hero-h1 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--sea);font-weight:400;}
-.hero-sub{font-size:clamp(17px,2vw,20px);color:var(--mist);line-height:1.6;max-width:520px;margin-bottom:40px;}
+.hero-sub{font-size:clamp(15px,3.5vw,20px);color:var(--mist);line-height:1.6;max-width:520px;margin-bottom:40px;}
 .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:56px;}
 .btn-hero{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;padding:18px 40px;border-radius:50px;border:none;cursor:pointer;background:var(--sea);color:var(--ink);letter-spacing:0.02em;transition:all .25s;text-decoration:none;display:inline-block;box-shadow:0 0 40px rgba(14,165,233,0.25);}
 .btn-hero:hover{background:#38bdf8;transform:translateY(-2px);box-shadow:0 0 60px rgba(14,165,233,0.4);}
@@ -183,11 +183,20 @@ footer{padding:48px 40px;border-top:1px solid var(--border);display:flex;align-i
 @media(max-width:768px){
   nav{padding:16px 20px;}
   .nav-links .nav-link{display:none;}
-  .hero{padding:100px 20px 60px;}
+  .hero{padding:90px 20px 60px;overflow-x:hidden;}
+  .hero-content{width:100%;max-width:100%;}
+  .hero-h1{word-break:break-word;hyphens:auto;font-size:clamp(28px,9vw,48px);}
+  .hero-sub{font-size:15px;max-width:100%;}
+  .hero-actions{flex-direction:column;align-items:stretch;}
+  .hero-actions a{text-align:center;}
+  .hero-proof{gap:16px;}
+  .hero-tag{font-size:10px;padding:5px 12px;}
   section{padding:72px 20px;}
   .regions-intro{grid-template-columns:1fr;}
   .regions-visual{display:none;}
   footer{padding:32px 20px;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .section-h2{font-size:clamp(26px,7vw,40px);}
 }
 
 /* ── LANG ── */
