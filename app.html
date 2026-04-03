@@ -175,7 +175,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div id="screen-splash" class="screen active">
   <div class="splash-anchor">⚓</div>
   <div class="splash-title">ARMA<span>TOR</span></div>
-  <div class="splash-sub">Planer Zapasów · PRO</div>
+  <div class="splash-sub"><span data-lang="pl">Planer Zapasów · PRO</span><span data-lang="en">Provision Planner · PRO</span></div>
   <div class="splash-lang">
     <button class="lang-btn" onclick="setLang('pl')" id="lang-pl" style="border-color:var(--cyan);color:var(--cyan)">PL</button>
     <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
@@ -187,7 +187,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div><div class="stat-val amber">60</div><div class="stat-label" id="stat-time">do listy</div></div>
     <div><div class="stat-val green">0</div><div class="stat-label" id="stat-waste">marnowania</div></div>
   </div>
-  <div class="splash-credit">by LESNO — żeglowanie z głową</div>
+  <div class="splash-credit"><span data-lang="pl">by LESNO — żeglowanie z głową</span><span data-lang="en">by LESNO — sailing with purpose</span></div>
   <a href="https://armatorpro.com" style="margin-top:12px;font-size:11px;color:rgba(0,212,255,0.4);text-decoration:none;" id="back-to-site">← armatorpro.com</a>
 </div>
 
@@ -509,6 +509,12 @@ function toggleLang(){setLang(state.lang==='pl'?'en':'pl');}
 
 function applyLang(){
   const L=t();
+  // handle data-lang spans globally
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    if(el.tagName==='SPAN'||el.tagName==='DIV'){
+      el.style.display=el.dataset.lang===state.lang?'':'none';
+    }
+  });
   // splash
   el('splash-tagline').textContent=L.splashTagline;
   el('btn-start').textContent=L.btnStart;
