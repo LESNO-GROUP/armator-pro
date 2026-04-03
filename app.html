@@ -18,14 +18,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .screen{display:none;min-height:100vh;}
 .screen.active{display:flex;flex-direction:column;}
 /* TOP BAR */
-.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:rgba(10,22,40,0.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:rgba(10,22,40,0.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:100;gap:8px;min-width:0;overflow:hidden;}
 .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.05em;color:var(--white);display:flex;align-items:center;gap:8px;}
 .logo span{color:var(--cyan);}
 .top-meta{font-size:11px;color:var(--muted);text-align:right;line-height:1.4;}
 .btn-back{background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;padding:4px;transition:color .2s;}
 .btn-back:hover{color:var(--cyan);}
-.top-actions{display:flex;gap:6px;align-items:center;}
-.btn-tab{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;}
+.top-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.btn-tab{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;padding:5px 9px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;}
 .btn-tab.active,.btn-tab:hover{background:var(--cyan);color:var(--navy);border-color:var(--cyan);}
 .lang-btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:5px 10px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:0.05em;}
 .lang-btn:hover{border-color:var(--cyan);color:var(--cyan);}
@@ -184,10 +184,22 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <button class="btn-primary" onclick="showScreen('config')" id="btn-start">Zaplanuj rejs</button>
   <div class="splash-stats">
     <div><div class="stat-val cyan">70+</div><div class="stat-label" id="stat-products">produktów</div></div>
-    <div><div class="stat-val amber">60s</div><div class="stat-label" id="stat-time">do listy</div></div>
+    <div><div class="stat-val amber">60</div><div class="stat-label" id="stat-time">do listy</div></div>
     <div><div class="stat-val green">0</div><div class="stat-label" id="stat-waste">marnowania</div></div>
   </div>
   <div class="splash-credit">by LESNO — żeglowanie z głową</div>
+  <a href="https://armatorpro.com" style="margin-top:12px;font-size:11px;color:rgba(0,212,255,0.4);text-decoration:none;" id="back-to-site">← armatorpro.com</a>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:var(--navy-mid);border-top:1px solid var(--border);padding:14px 20px;display:none;align-items:center;gap:12px;">
+  <div style="font-size:24px;">⚓</div>
+  <div style="flex:1;">
+    <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;" id="pwa-title">Dodaj do ekranu głównego</div>
+    <div style="font-size:11px;color:var(--muted);" id="pwa-sub">Używaj jak natywna aplikacja</div>
+  </div>
+  <button onclick="installPWA()" style="background:var(--cyan);border:none;color:var(--navy);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;padding:8px 16px;border-radius:20px;cursor:pointer;" id="pwa-btn">Dodaj</button>
+  <button onclick="document.getElementById('pwa-banner').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;">×</button>
 </div>
 
 <!-- CONFIG -->
@@ -304,6 +316,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div id="lista-content"></div>
     <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center" id="lista-footer">Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.</div>
+    <div style="padding:0 20px 24px;text-align:center;">
+      <a href="https://armatorpro.com" style="font-size:11px;color:rgba(0,212,255,0.35);text-decoration:none;" id="footer-back-link">← armatorpro.com</a>
+    </div>
   </div>
 </div>
 
@@ -365,7 +380,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 const T = {
   pl: {
     splashTagline:'Koniec z kupowaniem na oko. Podaj parametry rejsu — dostaniesz dokładną listę zakupów.',
-    btnStart:'Zaplanuj rejs', statProducts:'produktów', statTime:'do listy', statWaste:'marnowania',
+    btnStart:'Zaplanuj rejs', statProducts:'produktów', statTime:'sek do listy', statWaste:'marnowania',
     cfgTitle:'Opowiedz o rejsie', cfgSubtitle:'Na tej podstawie policzę ile czego potrzebujesz.',
     cfgCrew:'👥 Załoga', cfgAdults:'Dorośli', cfgChildren:'Dzieci', cfgChildrenSub:'liczone jako 0,7 dorosłego',
     cfgTrip:'🧭 Rejs', cfgDays:'Liczba dni', cfgShopAccess:'Dostęp do sklepów', cfgRegion:'Rejon żeglarski',
@@ -397,7 +412,7 @@ const T = {
   },
   en: {
     splashTagline:'Stop guessing what to buy. Set your trip parameters — get an exact shopping list.',
-    btnStart:'Plan my trip', statProducts:'products', statTime:'to list', statWaste:'waste',
+    btnStart:'Plan my trip', statProducts:'products', statTime:'sec to list', statWaste:'waste',
     cfgTitle:'Tell us about your trip', cfgSubtitle:'We\'ll calculate exactly what you need.',
     cfgCrew:'👥 Crew', cfgAdults:'Adults', cfgChildren:'Children', cfgChildrenSub:'counted as 0.7 adult',
     cfgTrip:'🧭 Trip', cfgDays:'Number of days', cfgShopAccess:'Shop access', cfgRegion:'Sailing region',
@@ -800,7 +815,15 @@ function selectDrink(drink,elem){
 function generateList(){
   state.list=PRODUCTS.map(p=>({id:p[0],kat:p[1],jedn:p[2],qty:calcQty(p)})).filter(p=>p.qty>0);
   state.bought={};state.skip={};state.comments={};state.customQty={};
-  const meta=`${state.adults} ${t().cfgAdults.toLowerCase()} · ${state.days} ${t().dayLabel} · ${T[state.lang].rejon[['Śródlądzie','Bałtyk','Śródziemnomorze','Atlantyk','Tropiki'].indexOf(state.rejon)]||state.rejon}`;
+  const ekw=state.adults+state.children*0.7;
+  const adultsStr = state.lang==='pl'
+    ? `${state.adults} ${state.adults===1?'dorosły':state.adults<5?'dorosłych':'dorosłych'}`
+    : `${state.adults} ${state.adults===1?'adult':'adults'}`;
+  const daysStr = state.lang==='pl'
+    ? `${state.days} ${state.days===1?'dzień':state.days<5?'dni':'dni'}`
+    : `${state.days} ${state.days===1?'day':'days'}`;
+  const rejonStr = T[state.lang].rejon[['Śródlądzie','Bałtyk','Śródziemnomorze','Atlantyk','Tropiki'].indexOf(state.rejon)]||state.rejon;
+  const meta=`${adultsStr} · ${daysStr} · ${rejonStr}`;
   el('lista-meta').textContent=meta;el('zapasy-meta').textContent=meta;
   renderLista();renderZapasy();save();showScreen('lista');
 }
@@ -985,6 +1008,38 @@ if(state.list&&state.list.length>0){
   el('zapasy-meta').textContent=`${state.adults} · ${state.days} ${t().dayLabel}`;
   renderLista();renderZapasy();
 }
+
+// PWA install banner
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
+  const banner=document.getElementById('pwa-banner');
+  if(banner){banner.style.display='flex';}
+});
+function installPWA(){
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(()=>{
+    deferredPrompt=null;
+    const banner=document.getElementById('pwa-banner');
+    if(banner) banner.style.display='none';
+  });
+}
+// Update PWA banner text with lang
+function updatePWALang(){
+  const isEN=state.lang==='en';
+  const t=document.getElementById('pwa-title');
+  const s=document.getElementById('pwa-sub');
+  const b=document.getElementById('pwa-btn');
+  const back=document.getElementById('back-to-site');
+  if(t) t.textContent=isEN?'Add to Home Screen':'Dodaj do ekranu głównego';
+  if(s) s.textContent=isEN?'Use like a native app':'Używaj jak natywna aplikacja';
+  if(b) b.textContent=isEN?'Add':'Dodaj';
+  if(back) back.textContent=isEN?'← armatorpro.com':'← armatorpro.com';
+}
+const _origApplyLang=applyLang;
+// call after lang change
+document.addEventListener('DOMContentLoaded',updatePWALang);
 </script>
 </body>
 </html>
