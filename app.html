@@ -881,7 +881,7 @@ function renderLista(){
     const customQ=state.customQty[p.id]??p.qty;
     html+=`<div class="product-row ${bought?'bought':''} ${skip?'skip':''}" id="row-${p.id}">
       <div style="flex:1;min-width:0"><div class="prod-name">${pn(p.id)}</div>${comment?`<div class="prod-comment">💬 ${comment}</div>`:''}</div>
-      <div class="prod-qty-wrap"><input class="prod-qty-input" type="number" min="0" step="${p.jedn==='g'?50:p.jedn==='kg'?0.1:1}" value="${customQ}" onchange="setCustomQty('${p.id}',this.value)"><span class="prod-qty-unit">${p.jedn}</span></div>
+      <div class="prod-qty-wrap"><input class="prod-qty-input" type="number" min="0" step="${p.jedn==='g'?50:p.jedn==='kg'?0.1:1}" value="${customQ}" onchange="setCustomQty('${p.id}',this.value)"><span class="prod-qty-unit">${tu(p.jedn)}</span></div>
       <div class="prod-actions">
         <button class="prod-comment-btn ${comment?'has-comment':''}" onclick="openModal('${p.id}')">💬</button>
         <button class="prod-skip-btn" onclick="toggleSkip('${p.id}')">${skip?'✗':'–'}</button>
@@ -1116,7 +1116,7 @@ function renderZapasy(){
           <div class="zapas-stepper-val" id="zval-${p.id}">${zostalo!==''?zostalo:'?'}</div>
           <button class="zapas-stepper-btn" onclick="changeZapas('${p.id}',1,'${p.jedn}')">+</button>
         </div>
-        <div class="zapas-unit">${p.jedn}</div>
+        <div class="zapas-unit">${tu(p.jedn)}</div>
       </div>
     </div>`;
   });
