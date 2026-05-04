@@ -1,53 +1,64 @@
-// Armator.PRO Service Worker v1
-const CACHE_NAME = 'armator-v1';
+// Armator.PRO Service Worker
+// WAŻNE: zmień CACHE_VERSION przy każdym deploymencie
+const CACHE_VERSION = 'v6';
+const CACHE_NAME = `armator-${CACHE_VERSION}`;
+
 const ASSETS = [
   '/app.html',
   '/manifest.json',
-  'https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap'
 ];
 
-// Install — cache assets
+// Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS).catch(err => {
-        console.log('Cache partial fail:', err);
-      });
+      return cache.addAll(ASSETS).catch(err => console.log('Cache partial:', err));
     })
   );
+  // Aktywuj natychmiast bez czekania na zamknięcie starych kart
   self.skipWaiting();
 });
 
-// Activate — clean old caches
+// Activate - usuń WSZYSTKIE stare cache
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => {
+        console.log('Deleting old cache:', k);
+        return caches.delete(k);
+      }))
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch — cache first, then network
+// Fetch - Network First (zawsze próbuj sieć, cache jako fallback)
+// To zapewnia że użytkownik zawsze dostaje najnowszą wersję
 self.addEventListener('fetch', event => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
+  // Dla plików aplikacji: network first
+  if (event.request.url.includes('/app.html') || 
+      event.request.url.includes('/manifest.json')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Dla reszty: cache first
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
-      return fetch(event.request).then(response => {
-        // Cache successful responses for same-origin requests
-        if (response.ok && event.request.url.startsWith(self.location.origin)) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => {
-        // Offline fallback for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/app.html');
-        }
+      return fetch(event.request).catch(() => {
+        if (event.request.mode === 'navigate') return caches.match('/app.html');
       });
     })
   );
