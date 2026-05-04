@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a1628">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Armator">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Armator.PRO — Planer Zapasów</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -21,6 +27,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .btn-back:hover{color:var(--cyan);}
 .top-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
 .btn-tab{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;padding:5px 9px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap;}
+@media(max-width:380px){
+  .btn-tab{font-size:10px;padding:4px 7px;}
+  .logo{font-size:15px;}
+  .top-bar{padding:10px 12px;gap:6px;}
+  .lang-btn{padding:4px 6px;font-size:10px;}
+}
 .btn-tab.active,.btn-tab:hover{background:var(--cyan);color:var(--navy);border-color:var(--cyan);}
 .lang-btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:5px 8px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:0.05em;flex-shrink:0;}
 .lang-btn:hover{border-color:var(--cyan);color:var(--cyan);}
@@ -230,6 +242,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-config">EN</button>
   </div>
   <div class="config-body">
+    <!-- Wczytaj zapisany rejs -->
+    <div id="config-saved-section" style="display:none;margin-bottom:20px;">
+      <div style="font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:10px;" id="cfg-load-title">Wczytaj zapisany rejs</div>
+      <div id="config-saved-list"></div>
+    </div>
     <div class="config-title" id="cfg-title">Opowiedz o rejsie</div>
     <div class="config-subtitle" id="cfg-subtitle">Na tej podstawie policzę ile czego potrzebujesz.</div>
 
@@ -697,17 +714,24 @@ function qtyForPrice(qty,jedn){return jedn==='g'?qty/1000:qty;}
 function lineTotal(p){const qty=state.customQty[p.id]??p.qty;return qtyForPrice(qty,p.jedn)*getPrice(p.id);}
 function calcTotal(){return state.list.reduce((sum,p)=>{if(state.skip[p.id])return sum;return sum+lineTotal(p);},0);}
 
+// Unit translations
+const UNITS={
+  pl:{szt:'szt',opak:'opak',kostka:'kostka',słoik:'słoik',torebki:'torebki',rolka:'rolka','but.':'but.',g:'g',l:'l',kg:'kg'},
+  en:{szt:'pcs',opak:'pack',kostka:'block',słoik:'jar',torebki:'bags',rolka:'roll','but.':'btl',g:'g',l:'l',kg:'kg'}
+};
+function tu(jedn){return(UNITS[state.lang]||UNITS.pl)[jedn]||jedn;}
+
 function formatQty(qty,jedn){
   if(jedn==='g'){if(qty>=1000)return(qty/1000).toFixed(qty%1000===0?0:1)+' kg';return qty+' g';}
   if(jedn==='l')return qty+' l';
   const r=Math.round(qty*10)/10;
-  return r+(jedn?' '+jedn:'');
+  return r+(jedn?' '+tu(jedn):'');
 }
 function priceLbl(jedn){
   const cur=currency();
   if(jedn==='g')return cur+'/kg';
   if(jedn==='l')return cur+'/l';
-  return cur+'/szt';
+  return cur+'/'+tu(jedn);
 }
 function planOnDay(qty,day){if(!qty)return 0;return Math.round(qty*(state.days-day+1)/state.days);}
 
@@ -797,6 +821,7 @@ function showScreen(name){
   if(name==='koszty')renderKoszty();
   if(name==='zapasy')renderZapasy();
   if(name==='splash')renderSavedTrips();
+  if(name==='config')renderSavedTrips();
 }
 
 // ══════════════════════════════════════
@@ -914,16 +939,36 @@ el('save-modal').addEventListener('click',function(e){if(e.target===this)closeSa
 
 function renderSavedTrips(){
   const trips=loadTrips();
+  const L=t();
+  // Splash screen
   const section=el('saved-trips-section');
-  if(!section)return;
-  if(trips.length===0){section.style.display='none';return;}
-  section.style.display='block';
-  const list=el('saved-trips-list');
-  list.innerHTML=trips.map(trip=>`
-    <div class="saved-trip-item" onclick="loadTrip(${trip.id})">
-      <div><div class="saved-trip-name">${trip.name}</div><div class="saved-trip-meta">${trip.date} · ${trip.state.adults} os · ${trip.state.days} dni</div></div>
-      <button class="saved-trip-del" onclick="deleteTrip(event,${trip.id})">×</button>
-    </div>`).join('');
+  if(section){
+    if(trips.length===0){section.style.display='none';}
+    else{
+      section.style.display='block';
+      const list=el('saved-trips-list');
+      list.innerHTML=trips.map(trip=>`
+        <div class="saved-trip-item" onclick="loadTrip(${trip.id})">
+          <div><div class="saved-trip-name">${trip.name}</div><div class="saved-trip-meta">${trip.date} · ${trip.state.adults} os · ${trip.state.days} dni</div></div>
+          <button class="saved-trip-del" onclick="deleteTrip(event,${trip.id})">×</button>
+        </div>`).join('');
+    }
+  }
+  // Config screen
+  const cfgSection=el('config-saved-section');
+  if(cfgSection){
+    if(trips.length===0){cfgSection.style.display='none';}
+    else{
+      cfgSection.style.display='block';
+      if(el('cfg-load-title'))el('cfg-load-title').textContent=L.lang==='en'?'Load saved trip':'Wczytaj zapisany rejs';
+      const cfgList=el('config-saved-list');
+      cfgList.innerHTML=trips.map(trip=>`
+        <div class="saved-trip-item" onclick="loadTrip(${trip.id})">
+          <div><div class="saved-trip-name">${trip.name}</div><div class="saved-trip-meta">${trip.date} · ${trip.state.adults} · ${trip.state.days} dni</div></div>
+          <button class="saved-trip-del" onclick="deleteTrip(event,${trip.id})">×</button>
+        </div>`).join('');
+    }
+  }
 }
 
 function loadTrip(id){
@@ -1103,8 +1148,15 @@ function restoreUI(){
 }
 
 // ══════════════════════════════════════
-// PWA
+// PWA + SERVICE WORKER
 // ══════════════════════════════════════
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js')
+      .then(()=>console.log('SW registered'))
+      .catch(err=>console.log('SW error',err));
+  });
+}
 let deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();deferredPrompt=e;
