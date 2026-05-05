@@ -181,14 +181,17 @@ footer{padding:48px 40px;border-top:1px solid var(--border);display:flex;align-i
 .fade-up:nth-child(5){animation-delay:.5s}
 
 /* ── RESPONSIVE ── */
+.nav-sub{display:none;}
 @media(max-width:768px){
-  nav{padding:14px 20px;}
-  .nav-links{gap:12px;}
-  .nav-links .nav-link{display:none;}
-  .nav-links .lang-toggle{display:flex;}
-  .nav-links .nav-cta{padding:8px 16px;font-size:12px;}
+  nav{padding:12px 20px;}
+  .nav-links{display:none!important;}
   .nav-logo{font-size:16px;}
-  .hero{padding:90px 20px 60px;overflow-x:hidden;}
+  .nav-sub{display:flex;position:fixed;top:52px;left:0;right:0;z-index:99;background:rgba(13,17,23,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:8px 16px;gap:8px;align-items:center;justify-content:space-between;}
+  .nav-sub a{font-size:12px;color:var(--mist);text-decoration:none;font-family:"Syne",sans-serif;font-weight:600;padding:6px 12px;border-radius:20px;border:1px solid var(--border);transition:all .2s;}
+  .nav-sub a:hover,.nav-sub a.cta{background:var(--sea);color:var(--ink);border-color:var(--sea);}
+  .nav-sub .lang-wrap{display:flex;gap:4px;}
+  .nav-sub .lang-btn{font-size:11px;font-weight:700;padding:5px 9px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--mist);cursor:pointer;font-family:"Syne",sans-serif;}
+  .hero{padding:110px 20px 60px;overflow-x:hidden;}
   .hero-content{width:100%;max-width:100%;}
   .hero-h1{word-break:break-word;hyphens:auto;font-size:clamp(28px,9vw,48px);}
   .hero-sub{font-size:15px;max-width:100%;}
@@ -250,6 +253,26 @@ body.lang-pl a.footer-link[data-lang="en"]{display:none;}
     <a href="https://armator-pro.vercel.app/app.html" class="nav-cta" data-lang="pl">Wypróbuj →</a>
   </div>
 </nav>
+
+<!-- MOBILE SUB-NAV -->
+<div class="nav-sub" id="nav-sub">
+  <div style="display:flex;gap:6px;">
+    <a href="#how" data-lang="en">How it works</a>
+    <a href="#how" data-lang="pl" style="display:none">Jak działa</a>
+    <a href="#features" data-lang="en">Features</a>
+    <a href="#features" data-lang="pl" style="display:none">Funkcje</a>
+    <a href="#pricing" data-lang="en">Pricing</a>
+    <a href="#pricing" data-lang="pl" style="display:none">Cennik</a>
+  </div>
+  <div style="display:flex;gap:6px;align-items:center;">
+    <div class="lang-wrap">
+      <button class="lang-btn" onclick="setLang('en')" id="sub-btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('pl')" id="sub-btn-pl">PL</button>
+    </div>
+    <a href="https://armator-pro.vercel.app/app.html" class="cta" data-lang="en">Try →</a>
+    <a href="https://armator-pro.vercel.app/app.html" class="cta" data-lang="pl" style="display:none">Wypróbuj →</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -689,6 +712,13 @@ function setLang(lang){
   document.body.className=lang==='pl'?'lang-pl':'lang-en';
   document.getElementById('btn-en').className='lang-btn'+(lang==='en'?' active':'');
   document.getElementById('btn-pl').className='lang-btn'+(lang==='pl'?' active':'');
+  const se=document.getElementById('sub-btn-en');const sp=document.getElementById('sub-btn-pl');
+  if(se)se.className='lang-btn'+(lang==='en'?' active':'');
+  if(sp)sp.className='lang-btn'+(lang==='pl'?' active':'');
+  // update sub-nav data-lang links
+  document.querySelectorAll('#nav-sub [data-lang]').forEach(e=>{
+    e.style.display=e.dataset.lang===lang?'':'none';
+  });
   document.documentElement.lang=lang;
   localStorage.setItem('armator_lang',lang);
 }

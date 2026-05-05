@@ -197,6 +197,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 }
 .hidden{display:none!important;}
 .mt8{margin-top:8px;}
+
+/* BOTTOM TAB BAR */
+.tab-bar{display:flex;background:rgba(10,22,40,0.95);border-top:1px solid var(--border);padding:8px 16px;gap:6px;justify-content:center;position:sticky;bottom:0;z-index:50;backdrop-filter:blur(10px);}
+.tab-bar-btn{flex:1;max-width:100px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;padding:8px 4px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center;}
+.tab-bar-btn.active{background:rgba(0,212,255,0.15);border-color:var(--cyan);color:var(--white);}
+/* Hide old inline tabs from top-bar on mobile */
+@media(max-width:600px){
+  .top-actions .btn-tab{display:none;}
+  .top-actions .lang-btn{display:flex;}
+}
 </style>
 </head>
 <body>
@@ -350,6 +360,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center" id="lista-footer">Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.</div>
     <div style="padding:0 20px 24px;text-align:center;"><a href="https://armatorpro.com" style="font-size:11px;color:rgba(0,212,255,0.35);text-decoration:none;" id="footer-back-link">← armatorpro.com</a></div>
   </div>
+  <div class="tab-bar"><button class="tab-bar-btn active" id="tab-lista-tb" onclick="showScreen('lista')">📋 <span id="tab-lista-tb-lbl">Lista</span></button><button class="tab-bar-btn" id="tab-zapasy-tb" onclick="showScreen('zapasy')">📦 <span id="tab-zapasy-tb-lbl">Zapasy</span></button><button class="tab-bar-btn" id="tab-koszty-tb" onclick="showScreen('koszty')">💰 <span id="tab-koszty-tb-lbl">Koszty</span></button></div>
 </div>
 
 <!-- ZAPASY -->
@@ -367,6 +378,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="day-selector" id="day-selector"></div>
     <div id="zapasy-content"></div>
   </div>
+  <div class="tab-bar"><button class="tab-bar-btn" id="tab-lista-tb" onclick="showScreen('lista')">📋 <span id="tab-lista-tb-lbl">Lista</span></button><button class="tab-bar-btn active" id="tab-zapasy-tb" onclick="showScreen('zapasy')">📦 <span id="tab-zapasy-tb-lbl">Zapasy</span></button><button class="tab-bar-btn" id="tab-koszty-tb" onclick="showScreen('koszty')">💰 <span id="tab-koszty-tb-lbl">Koszty</span></button></div>
 </div>
 
 <!-- KOSZTY -->
@@ -388,6 +400,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div id="koszty-content"></div>
   </div>
+  <div class="tab-bar"><button class="tab-bar-btn" id="tab-lista-tb" onclick="showScreen('lista')">📋 <span id="tab-lista-tb-lbl">Lista</span></button><button class="tab-bar-btn" id="tab-zapasy-tb" onclick="showScreen('zapasy')">📦 <span id="tab-zapasy-tb-lbl">Zapasy</span></button><button class="tab-bar-btn active" id="tab-koszty-tb" onclick="showScreen('koszty')">💰 <span id="tab-koszty-tb-lbl">Koszty</span></button></div>
 </div>
 
 <!-- MODAL komentarz -->
@@ -807,6 +820,11 @@ function applyLang(){
   document.querySelectorAll('[data-styl]').forEach(e=>{const i=parseInt(e.dataset.styl);e.textContent=L.styl[i]||e.textContent;});
   document.querySelectorAll('[data-ap]').forEach(e=>{const i=parseInt(e.dataset.ap);e.textContent=L.apetyt[i]||e.textContent;});
   document.querySelectorAll('[data-sub^="ap-"]').forEach((e,i)=>{e.textContent=L.apetytyub[i]||e.textContent;});
+  // Tab bar labels
+  ['lista','zapasy','koszty'].forEach((tab,i)=>{
+    const lbl=el('tab-'+tab+'-tb-lbl');
+    if(lbl)lbl.textContent=[L.tabLista,L.tabZapasy,L.tabKoszt][i];
+  });
   if(state.list&&state.list.length>0){renderLista();if(el('screen-zapasy').classList.contains('active'))renderZapasy();if(el('screen-koszty').classList.contains('active'))renderKoszty();}
   renderSavedTrips();
 }
@@ -822,6 +840,13 @@ function showScreen(name){
   if(name==='zapasy')renderZapasy();
   if(name==='splash')renderSavedTrips();
   if(name==='config')renderSavedTrips();
+  // Update tab-bar active state
+  ['lista','zapasy','koszty'].forEach(tab=>{
+    ['tb'].forEach(suffix=>{
+      const b=el('tab-'+tab+'-'+suffix);
+      if(b)b.classList.toggle('active',tab===name);
+    });
+  });
 }
 
 // ══════════════════════════════════════
