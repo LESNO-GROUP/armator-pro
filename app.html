@@ -589,7 +589,13 @@ let state={
   bought:{},skip:{},comments:{},customQty:{},prices:{},
   zapasy:{},currentDay:1,list:[]
 };
-function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
+function save(){
+  try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
+  // Sync to Supabase if sharing
+  if(typeof shareSessionId!=='undefined' && shareSessionId && !isReadonly){
+    syncToSupabase();
+  }
+}
 function load(){try{const d=localStorage.getItem(STORAGE_KEY);if(d)Object.assign(state,JSON.parse(d));}catch(e){}}
 
 // Saved trips
@@ -1414,14 +1420,7 @@ async function loadFromUrl(){
   }
 }
 
-// Override save() to also sync to Supabase when sharing
-const _originalSave = save;
-function save(){
-  _originalSave();
-  if(shareSessionId && !isReadonly){
-    syncToSupabase();
-  }
-}
+// save() already syncs to Supabase (see save() function above)
 
 // ══════════════════════════════════════
 // PWA + SERVICE WORKER
