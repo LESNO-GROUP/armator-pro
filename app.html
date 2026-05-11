@@ -210,6 +210,50 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .share-copy-btn{background:var(--cyan);border:none;color:var(--navy);font-size:11px;font-weight:700;font-family:"Syne",sans-serif;padding:6px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;}
 .share-readonly-bar{background:rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.15);padding:8px 20px;font-size:12px;color:var(--cyan);text-align:center;display:none;}
 .share-readonly-bar.visible{display:block;}
+
+/* ROZLICZENIE */
+#screen-rozliczenie{padding-bottom:80px;}
+.rozl-body{flex:1;padding:16px 20px;}
+.rozl-identity{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.rozl-identity-label{font-size:12px;color:var(--muted);margin-bottom:4px;}
+.rozl-identity-name{font-family:"Syne",sans-serif;font-size:16px;font-weight:700;}
+.rozl-identity-change{font-size:11px;color:var(--cyan-dim);cursor:pointer;text-decoration:underline;border:none;background:none;margin-left:auto;}
+.rozl-summary{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:16px;}
+.rozl-summary-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.rozl-summary-row:last-child{border-bottom:none;}
+.rozl-summary-name{font-size:14px;}
+.rozl-summary-spent{font-family:"Syne",sans-serif;font-size:14px;font-weight:700;color:var(--white);}
+.rozl-summary-diff{font-size:12px;font-weight:600;padding:2px 8px;border-radius:20px;}
+.rozl-summary-diff.plus{background:rgba(0,200,150,0.15);color:var(--green);}
+.rozl-summary-diff.minus{background:rgba(255,71,87,0.15);color:var(--red);}
+.rozl-summary-diff.zero{background:rgba(255,255,255,0.05);color:var(--muted);}
+.rozl-transfers{background:var(--card);border:1px solid rgba(0,200,150,0.2);border-radius:16px;padding:16px 20px;margin-bottom:16px;}
+.rozl-transfers-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.rozl-transfer-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;}
+.rozl-transfer-row:last-child{border-bottom:none;}
+.rozl-transfer-row.done{opacity:0.4;text-decoration:line-through;}
+.rozl-transfer-check{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--border);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;}
+.rozl-transfer-check.done{background:var(--green);border-color:var(--green);color:white;}
+.rozl-transfer-amount{margin-left:auto;font-family:"Syne",sans-serif;font-weight:700;color:var(--amber);}
+.rozl-add-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:16px;}
+.rozl-add-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan-dim);margin-bottom:14px;}
+.rozl-input-row{display:flex;gap:8px;margin-bottom:10px;}
+.rozl-input{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;color:var(--white);font-size:14px;font-family:"DM Sans",sans-serif;padding:10px 12px;flex:1;}
+.rozl-input:focus{outline:none;border-color:var(--cyan);}
+.rozl-input.amount{font-family:"Syne",sans-serif;font-weight:700;width:90px;flex:none;text-align:center;}
+.rozl-add-btn{background:var(--cyan);border:none;color:var(--navy);font-family:"Syne",sans-serif;font-size:13px;font-weight:700;padding:10px 20px;border-radius:10px;cursor:pointer;width:100%;}
+.rozl-entries{margin-bottom:16px;}
+.rozl-entry-row{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);gap:8px;}
+.rozl-entry-who{font-family:"Syne",sans-serif;font-size:13px;font-weight:700;color:var(--cyan);min-width:70px;}
+.rozl-entry-what{font-size:13px;flex:1;color:var(--muted);}
+.rozl-entry-amount{font-family:"Syne",sans-serif;font-size:14px;font-weight:700;color:var(--amber);}
+.rozl-entry-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px 6px;}
+.rozl-entry-del:hover{color:var(--red);}
+.rozl-empty{text-align:center;padding:32px 20px;color:var(--muted);font-size:14px;}
+.rozl-identity-setup{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:16px;text-align:center;}
+.rozl-setup-title{font-family:"Syne",sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;}
+.rozl-setup-sub{font-size:14px;color:var(--muted);margin-bottom:20px;}
+
 /* BOTTOM TAB BAR */
 .tab-bar{display:flex;background:rgba(10,22,40,0.95);border-top:1px solid var(--border);padding:8px 16px;gap:6px;justify-content:center;position:sticky;bottom:0;z-index:50;backdrop-filter:blur(10px);}
 .tab-bar-btn{flex:1;max-width:100px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;padding:8px 4px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center;}
@@ -380,7 +424,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center" id="lista-footer">Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.</div>
     <div style="padding:0 20px 24px;text-align:center;"><a href="https://armatorpro.com" style="font-size:11px;color:rgba(0,212,255,0.35);text-decoration:none;" id="footer-back-link">← armatorpro.com</a></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn active" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn active" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- ZAPASY -->
@@ -398,7 +442,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="day-selector" id="day-selector"></div>
     <div id="zapasy-content"></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn active" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn active" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- KOSZTY -->
@@ -420,7 +464,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div id="koszty-content"></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn active" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn active" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- MODAL komentarz -->
@@ -463,6 +507,61 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
 </div>
 
+
+<!-- ROZLICZENIE -->
+<div id="screen-rozliczenie" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('lista')">←</button>
+    <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div></div>
+    <div class="top-actions">
+      <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-rozl">EN</button>
+    </div>
+  </div>
+  <div class="rozl-body">
+    <!-- Identity setup -->
+    <div class="rozl-identity-setup" id="rozl-setup" style="display:none;">
+      <div class="rozl-setup-title" id="rozl-setup-title">Jak masz na imię?</div>
+      <div class="rozl-setup-sub" id="rozl-setup-sub">Twoje imię zostanie przypisane do Twoich wydatków.</div>
+      <div style="display:flex;gap:8px;">
+        <input class="rozl-input" id="rozl-name-input" type="text" placeholder="np. Paweł" maxlength="20">
+        <button class="rozl-add-btn" style="width:auto;padding:10px 20px;" onclick="saveIdentity()" id="rozl-setup-btn">OK</button>
+      </div>
+    </div>
+
+    <!-- Identity display -->
+    <div class="rozl-identity" id="rozl-identity-bar" style="display:none;">
+      <div>
+        <div class="rozl-identity-label" id="rozl-you-label">Ty</div>
+        <div class="rozl-identity-name" id="rozl-identity-name"></div>
+      </div>
+      <button class="rozl-identity-change" onclick="changeIdentity()" id="rozl-change-btn">zmień</button>
+    </div>
+
+    <!-- Add expense -->
+    <div class="rozl-add-section" id="rozl-add-section" style="display:none;">
+      <div class="rozl-add-title" id="rozl-add-title">Dodaj wydatek</div>
+      <div class="rozl-input-row">
+        <input class="rozl-input" id="rozl-what-input" type="text" placeholder="Co kupiono?" maxlength="40" id="rozl-what-input">
+        <input class="rozl-input amount" id="rozl-amount-input" type="number" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <button class="rozl-add-btn" onclick="addExpense()" id="rozl-add-expense-btn">+ Dodaj wydatek</button>
+    </div>
+
+    <!-- Entries list -->
+    <div id="rozl-entries-list"></div>
+
+    <!-- Summary -->
+    <div id="rozl-summary-section" style="display:none;">
+      <div class="rozl-summary" id="rozl-summary"></div>
+      <div class="rozl-transfers" id="rozl-transfers-section" style="display:none;">
+        <div class="rozl-transfers-title" id="rozl-transfers-title">Do zapłaty</div>
+        <div id="rozl-transfers-list"></div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn active" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+</div>
+
 <!-- PWA BANNER -->
 <div id="pwa-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:999;background:var(--navy-mid);border-top:1px solid var(--border);padding:14px 20px;align-items:center;gap:12px;">
   <div style="font-size:24px;">⚓</div>
@@ -492,7 +591,7 @@ const T={
     btnGenerate:'Generuj listę zakupów',
     tabLista:'Lista',tabZapasy:'Zapasy',tabKoszt:'Koszt',
     costLabel:'Szacunkowy koszt',costEditBtn:'edytuj ceny →',
-    pdfLabel:'Eksport PDF',saveLabel:'Zapisz rejs',addLabel:'Dodaj',shareLabel:'Udostępnij',shareCopied:'Skopiowano!',shareReadonly:'🔗 Tryb współdzielony — zmiany widoczne dla wszystkich',
+    pdfLabel:'Eksport PDF',saveLabel:'Zapisz rejs',addLabel:'Dodaj',shareLabel:'Udostępnij',shareCopied:'Skopiowano!',shareReadonly:'🔗 Tryb współdzielony — zmiany widoczne dla wszystkich',tabRozl:'Rozlicz',rozlSetupTitle:'Jak masz na imię?',rozlSetupSub:'Twoje imię zostanie przypisane do Twoich wydatków.',rozlSetupBtn:'OK',rozlYouLabel:'Ty w tej sesji',rozlChangeBtn:'zmień',rozlAddTitle:'Dodaj wydatek',rozlWhatPlaceholder:'Co kupiono?',rozlAddBtn:'+ Dodaj wydatek',rozlTransfersTitle:'Do zapłaty',rozlNoExpenses:'Brak wydatków. Dodaj pierwszy wydatek powyżej.',rozlShouldPay:'powinien(na) zapłacić',rozlCurrencySymbol:()=>currency(),
     listaFooter:'Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.',
     progressBought:(n)=>`${n} kupionych`,progressLeft:(n)=>`${n} do kupienia`,
     kosztyTotalLabel:'Łączny szacunkowy koszt',kosztyPerOsoba:(n,cur)=>`${n} ${cur} / osoba`,
@@ -525,7 +624,7 @@ const T={
     btnGenerate:'Generate shopping list',
     tabLista:'List',tabZapasy:'Stores',tabKoszt:'Cost',
     costLabel:'Estimated cost',costEditBtn:'edit prices →',
-    pdfLabel:'Export PDF',saveLabel:'Save trip',addLabel:'Add',shareLabel:'Share',shareCopied:'Copied!',shareReadonly:'🔗 Collaborative mode — changes visible to everyone',
+    pdfLabel:'Export PDF',saveLabel:'Save trip',addLabel:'Add',shareLabel:'Share',shareCopied:'Copied!',shareReadonly:'🔗 Collaborative mode — changes visible to everyone',tabRozl:'Split',rozlSetupTitle:'What is your name?',rozlSetupSub:'Your name will be assigned to your expenses.',rozlSetupBtn:'OK',rozlYouLabel:'You in this session',rozlChangeBtn:'change',rozlAddTitle:'Add expense',rozlWhatPlaceholder:'What was bought?',rozlAddBtn:'+ Add expense',rozlTransfersTitle:'To pay',rozlNoExpenses:'No expenses yet. Add the first one above.',rozlShouldPay:'should pay',rozlCurrencySymbol:()=>currency(),
     listaFooter:"List generated by Armator.PRO<br>Quantities are estimates — adjust to your crew's preferences.",
     progressBought:(n)=>`${n} bought`,progressLeft:(n)=>`${n} remaining`,
     kosztyTotalLabel:'Total estimated cost',kosztyPerOsoba:(n,cur)=>`${n} ${cur} / person`,
@@ -587,7 +686,7 @@ let state={
   drinks:{gazowana:0,soki:0,cola:0,syrop:0},
   wege:0,laktoza:0,gluten:0,grill:false,alkohol:false,
   bought:{},skip:{},comments:{},customQty:{},prices:{},
-  zapasy:{},currentDay:1,list:[]
+  zapasy:{},currentDay:1,list:[],expenses:[],transfersDone:{}
 };
 function save(){
   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
@@ -873,6 +972,16 @@ function applyLang(){
   document.querySelectorAll('.tbl-lista').forEach(e=>e.textContent=L.tabLista);
   document.querySelectorAll('.tbl-zapasy').forEach(e=>e.textContent=L.tabZapasy);
   document.querySelectorAll('.tbl-koszty').forEach(e=>e.textContent=L.tabKoszt);
+  document.querySelectorAll('.tbl-rozl').forEach(e=>e.textContent=L.tabRozl);
+  if(el('rozl-setup-title'))el('rozl-setup-title').textContent=L.rozlSetupTitle;
+  if(el('rozl-setup-sub'))el('rozl-setup-sub').textContent=L.rozlSetupSub;
+  if(el('rozl-setup-btn'))el('rozl-setup-btn').textContent=L.rozlSetupBtn;
+  if(el('rozl-you-label'))el('rozl-you-label').textContent=L.rozlYouLabel;
+  if(el('rozl-change-btn'))el('rozl-change-btn').textContent=L.rozlChangeBtn;
+  if(el('rozl-add-title'))el('rozl-add-title').textContent=L.rozlAddTitle;
+  if(el('rozl-what-input'))el('rozl-what-input').placeholder=L.rozlWhatPlaceholder;
+  if(el('rozl-add-expense-btn'))el('rozl-add-expense-btn').textContent=L.rozlAddBtn;
+  if(el('rozl-transfers-title'))el('rozl-transfers-title').textContent=L.rozlTransfersTitle;
   if(state.list&&state.list.length>0){renderLista();if(el('screen-zapasy').classList.contains('active'))renderZapasy();if(el('screen-koszty').classList.contains('active'))renderKoszty();}
   renderSavedTrips();
 }
@@ -888,6 +997,7 @@ function showScreen(name){
   if(name==='zapasy')renderZapasy();
   if(name==='splash')renderSavedTrips();
   if(name==='config')renderSavedTrips();
+  if(name==='rozliczenie')renderRozliczenie();
   // Update tab-bar active state
   ['lista','zapasy','koszty'].forEach(tab=>{
     ['tb'].forEach(suffix=>{
@@ -1260,6 +1370,199 @@ function restoreUI(){
   applyLang();
 }
 
+
+// ══════════════════════════════════════
+// ROZLICZENIE (SETTLEMENT)
+// ══════════════════════════════════════
+const IDENTITY_KEY = 'armator_identity';
+
+function getIdentity(){
+  return localStorage.getItem(IDENTITY_KEY)||'';
+}
+function saveIdentity(){
+  const name = el('rozl-name-input').value.trim();
+  if(!name) return;
+  localStorage.setItem(IDENTITY_KEY, name);
+  renderRozliczenie();
+}
+function changeIdentity(){
+  localStorage.removeItem(IDENTITY_KEY);
+  renderRozliczenie();
+}
+
+function addExpense(){
+  const who = getIdentity();
+  if(!who) return;
+  const what = el('rozl-what-input').value.trim();
+  const amount = parseFloat(el('rozl-amount-input').value);
+  if(!amount || amount<=0) return;
+
+  if(!state.expenses) state.expenses = [];
+  state.expenses.push({
+    id: 'exp_'+Date.now(),
+    who,
+    what: what || '—',
+    amount,
+    done: false
+  });
+  el('rozl-what-input').value = '';
+  el('rozl-amount-input').value = '';
+  save();
+  renderRozliczenie();
+
+  // Broadcast if sharing
+  if(shareSessionId && typeof broadcastState==='function') broadcastState();
+}
+
+function deleteExpense(id){
+  if(!state.expenses) return;
+  state.expenses = state.expenses.filter(e=>e.id!==id);
+  save();
+  renderRozliczenie();
+  if(shareSessionId && typeof broadcastState==='function') broadcastState();
+}
+
+function toggleTransferDone(idx){
+  if(!state.transfersDone) state.transfersDone = {};
+  state.transfersDone[idx] = !state.transfersDone[idx];
+  save();
+  renderRozliczenie();
+}
+
+// Minimal transfers algorithm
+function calcTransfers(balances){
+  const creditors = [];
+  const debtors = [];
+  Object.entries(balances).forEach(([name,bal])=>{
+    if(bal>0.01) creditors.push({name,amt:bal});
+    else if(bal<-0.01) debtors.push({name,amt:-bal});
+  });
+  creditors.sort((a,b)=>b.amt-a.amt);
+  debtors.sort((a,b)=>b.amt-a.amt);
+  const transfers = [];
+  let i=0,j=0;
+  while(i<creditors.length && j<debtors.length){
+    const amt = Math.min(creditors[i].amt, debtors[j].amt);
+    transfers.push({from:debtors[j].name, to:creditors[i].name, amt:Math.round(amt*100)/100});
+    creditors[i].amt -= amt;
+    debtors[j].amt -= amt;
+    if(creditors[i].amt<0.01) i++;
+    if(debtors[j].amt<0.01) j++;
+  }
+  return transfers;
+}
+
+function renderRozliczenie(){
+  const L = t();
+  const identity = getIdentity();
+  const lang_toggle = el('lang-toggle-rozl');
+  if(lang_toggle) lang_toggle.textContent = state.lang==='pl'?'EN':'PL';
+
+  // Identity
+  const setup = el('rozl-setup');
+  const identityBar = el('rozl-identity-bar');
+  const addSection = el('rozl-add-section');
+  const summarySection = el('rozl-summary-section');
+
+  if(!identity){
+    if(setup){ setup.style.display='block'; }
+    if(identityBar){ identityBar.style.display='none'; }
+    if(addSection){ addSection.style.display='none'; }
+    if(summarySection){ summarySection.style.display='none'; }
+    el('rozl-entries-list').innerHTML='';
+    return;
+  }
+
+  if(setup){ setup.style.display='none'; }
+  if(identityBar){ identityBar.style.display='flex'; }
+  if(addSection){ addSection.style.display='block'; }
+
+  const nameEl = el('rozl-identity-name');
+  if(nameEl) nameEl.textContent = identity;
+
+  const expenses = state.expenses || [];
+
+  // Render entries
+  const entriesEl = el('rozl-entries-list');
+  if(entriesEl){
+    if(expenses.length===0){
+      entriesEl.innerHTML = `<div class="rozl-empty">${L.rozlNoExpenses}</div>`;
+    } else {
+      const cur = currency();
+      entriesEl.innerHTML = expenses.map(e=>`
+        <div class="rozl-entry-row">
+          <span class="rozl-entry-who">${e.who}</span>
+          <span class="rozl-entry-what">${e.what}</span>
+          <span class="rozl-entry-amount">${e.amount.toFixed(2)} ${cur}</span>
+          ${e.who===identity?`<button class="rozl-entry-del" onclick="deleteExpense('${e.id}')">×</button>`:'<span style="width:24px"></span>'}
+        </div>`).join('');
+    }
+  }
+
+  // Summary + transfers
+  if(expenses.length===0){
+    if(summarySection){ summarySection.style.display='none'; }
+    return;
+  }
+
+  if(summarySection){ summarySection.style.display='block'; }
+
+  // Per-person totals
+  const totals = {};
+  expenses.forEach(e=>{
+    totals[e.who] = (totals[e.who]||0) + e.amount;
+  });
+  const people = Object.keys(totals);
+  const total = Object.values(totals).reduce((s,v)=>s+v,0);
+  const perPerson = total / people.length;
+  const cur = currency();
+
+  // Balances (positive = paid more = owed money, negative = paid less = owes)
+  const balances = {};
+  people.forEach(p=>{ balances[p] = totals[p] - perPerson; });
+
+  const summaryEl = el('rozl-summary');
+  if(summaryEl){
+    summaryEl.innerHTML = people.map(p=>{
+      const diff = balances[p];
+      const cls = diff>0.01?'plus':diff<-0.01?'minus':'zero';
+      const sign = diff>0.01?'+':'';
+      return `<div class="rozl-summary-row">
+        <span class="rozl-summary-name">${p}</span>
+        <span class="rozl-summary-spent">${totals[p].toFixed(2)} ${cur}</span>
+        <span class="rozl-summary-diff ${cls}">${sign}${diff.toFixed(2)} ${cur}</span>
+      </div>`;
+    }).join('') +
+    `<div class="rozl-summary-row" style="margin-top:4px;">
+      <span class="rozl-summary-name" style="color:var(--muted);font-size:12px;">Razem</span>
+      <span class="rozl-summary-spent" style="font-size:12px;">${total.toFixed(2)} ${cur}</span>
+      <span class="rozl-summary-diff zero">${perPerson.toFixed(2)} ${cur}/os</span>
+    </div>`;
+  }
+
+  // Transfers
+  const transfers = calcTransfers(balances);
+  const transfersSection = el('rozl-transfers-section');
+  const transfersList = el('rozl-transfers-list');
+  if(!state.transfersDone) state.transfersDone = {};
+
+  if(transfers.length>0){
+    if(transfersSection){ transfersSection.style.display='block'; }
+    if(transfersList){
+      transfersList.innerHTML = transfers.map((tr,idx)=>{
+        const done = state.transfersDone[idx];
+        return `<div class="rozl-transfer-row ${done?'done':''}">
+          <button class="rozl-transfer-check ${done?'done':''}" onclick="toggleTransferDone(${idx})">${done?'✓':''}</button>
+          <span>${tr.from} → ${tr.to}</span>
+          <span class="rozl-transfer-amount">${tr.amt.toFixed(2)} ${cur}</span>
+        </div>`;
+      }).join('');
+    }
+  } else {
+    if(transfersSection){ transfersSection.style.display='none'; }
+  }
+}
+
 // ══════════════════════════════════════
 // SUPABASE + SHARING
 // ══════════════════════════════════════
@@ -1375,9 +1678,12 @@ function startRealtimeSync(sessionId){
           }
         });
       }
+      // sync expenses
+      if(remoteState.expenses) state.expenses = remoteState.expenses;
       renderLista();
       updateProgress();
       updateCostBar();
+      if(el('screen-rozliczenie').classList.contains('active')) renderRozliczenie();
     })
     .subscribe((status) => {
       console.log('Realtime status:', status, 'session:', sessionId);
@@ -1398,7 +1704,8 @@ async function broadcastState(){
         customQty: state.customQty,
         customProducts: state.list
           .filter(p=>p.id.startsWith('custom_'))
-          .map(p=>({id:p.id,kat:p.kat,jedn:p.jedn,qty:p.qty,name:PROD_NAMES[p.id]}))
+          .map(p=>({id:p.id,kat:p.kat,jedn:p.jedn,qty:p.qty,name:PROD_NAMES[p.id]})),
+        expenses: state.expenses||[]
       }
     });
   }catch(err){ console.log('Broadcast error:', err); }
