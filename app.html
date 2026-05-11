@@ -10,7 +10,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Armator.PRO — Planer Zapasów</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0a1628;--navy-mid:#112240;--navy-light:#1a3358;--cyan:#00d4ff;--cyan-dim:#0099bb;--amber:#f0a500;--green:#00c896;--red:#ff4757;--white:#f0f4f8;--muted:#8899aa;--border:rgba(0,212,255,0.15);--card:rgba(17,34,64,0.8);}
@@ -1257,7 +1257,7 @@ function restoreUI(){
 // ══════════════════════════════════════
 const SUPA_URL = 'https://vdjtmngdbjacomfreuai.supabase.co';
 const SUPA_KEY = 'sb_publishable_MxOwlMKpkJMdylQBEyDWpg_o1izs4KO';
-const supabase = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
 
 // Generate random 8-char ID
 function genId(){
@@ -1280,7 +1280,7 @@ async function shareList(){
     const shareState = JSON.parse(JSON.stringify(state));
     shareState.bought = {}; // Reset bought for shared view
 
-    const { error } = await supabase
+    const { error } = await supa
       .from('sessions')
       .insert({ id: sessionId, state: shareState });
 
@@ -1329,7 +1329,7 @@ function copyShareLink(){
 async function syncToSupabase(){
   if(!shareSessionId || isReadonly) return;
   try{
-    await supabase
+    await supa
       .from('sessions')
       .update({ state: JSON.parse(JSON.stringify(state)) })
       .eq('id', shareSessionId);
@@ -1342,7 +1342,7 @@ async function syncToSupabase(){
 function startRealtimeSync(sessionId, readonly){
   if(realtimeChannel){ realtimeChannel.unsubscribe(); }
 
-  realtimeChannel = supabase
+  realtimeChannel = supa
     .channel('session:' + sessionId)
     .on('postgres_changes', {
       event: 'UPDATE',
@@ -1370,7 +1370,7 @@ async function loadFromUrl(){
   if(!sessionId) return false;
 
   try{
-    const { data, error } = await supabase
+    const { data, error } = await supa
       .from('sessions')
       .select('state')
       .eq('id', sessionId)
@@ -1454,8 +1454,8 @@ if(isIOS&&!isInStandalone){const h=el('ios-hint');if(h)h.style.display='block';}
 load();
 restoreUI();
 
-// Check if opened via share link
-(async () => {
+// Check if opened via share link - runs after all functions defined
+window.addEventListener('DOMContentLoaded', async () => {
   const loaded = await loadFromUrl();
   if(loaded) {
     restoreUI();
@@ -1463,7 +1463,7 @@ restoreUI();
     renderZapasy();
     showScreen('lista');
   }
-})();
+});
 
 if(state.list&&state.list.length>0){
   const rejonStr=t().rejon[['Śródlądzie','Bałtyk','Śródziemnomorze','Atlantyk','Tropiki'].indexOf(state.rejon)]||state.rejon;
