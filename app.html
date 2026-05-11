@@ -1040,8 +1040,10 @@ function confirmAddProduct(){
   if(!CAT_NAMES.pl['Inne'])CAT_NAMES.pl['Inne']='Inne';
   if(!CAT_NAMES.en['Inne'])CAT_NAMES.en['Inne']='Other';
   if(!CAT_ICONS['Inne'])CAT_ICONS['Inne']='📝';
-  // Add to list
-  state.list.push(product);
+  // Insert after last item of same category
+  const lastCatIdx=state.list.reduce((acc,p,i)=>p.kat===_addModalKat?i:acc,-1);
+  if(lastCatIdx>=0) state.list.splice(lastCatIdx+1,0,product);
+  else state.list.push(product);
   closeAddModal();
   renderLista();
   save();
@@ -1358,11 +1360,21 @@ function startRealtimeSync(sessionId){
     .on('broadcast', { event: 'state_update' }, (payload) => {
       if(_isBroadcasting) return; // ignore own echo
       const remoteState = payload.payload;
-      // Merge - don't overwrite everything, just sync interactive fields
       state.bought = remoteState.bought || {};
       state.skip = remoteState.skip || {};
       state.comments = remoteState.comments || {};
       state.customQty = remoteState.customQty || {};
+      if(remoteState.customProducts && remoteState.customProducts.length>0){
+        remoteState.customProducts.forEach(cp=>{
+          if(!state.list.find(p=>p.id===cp.id)){
+            if(cp.name) PROD_NAMES[cp.id]=cp.name;
+            const lastIdx=state.list.reduce((acc,p,i)=>p.kat===cp.kat?i:acc,-1);
+            const prod={id:cp.id,kat:cp.kat,jedn:cp.jedn,qty:cp.qty};
+            if(lastIdx>=0) state.list.splice(lastIdx+1,0,prod);
+            else state.list.push(prod);
+          }
+        });
+      }
       renderLista();
       updateProgress();
       updateCostBar();
@@ -1383,7 +1395,10 @@ async function broadcastState(){
         bought: state.bought,
         skip: state.skip,
         comments: state.comments,
-        customQty: state.customQty
+        customQty: state.customQty,
+        customProducts: state.list
+          .filter(p=>p.id.startsWith('custom_'))
+          .map(p=>({id:p.id,kat:p.kat,jedn:p.jedn,qty:p.qty,name:PROD_NAMES[p.id]}))
       }
     });
   }catch(err){ console.log('Broadcast error:', err); }
