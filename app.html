@@ -1334,6 +1334,9 @@ function copyShareLink(){
 // Save to Supabase when in share mode
 async function syncToSupabase(){
   if(!shareSessionId || isReadonly) return;
+  // Broadcast for real-time (fast)
+  broadcastState();
+  // Also persist to DB (for new joiners)
   try{
     await supa
       .from('sessions')
@@ -1349,24 +1352,38 @@ function startRealtimeSync(sessionId, readonly){
   if(realtimeChannel){ realtimeChannel.unsubscribe(); }
 
   realtimeChannel = supa
-    .channel('session:' + sessionId)
-    .on('postgres_changes', {
-      event: 'UPDATE',
-      schema: 'public',
-      table: 'sessions',
-      filter: `id=eq.${sessionId}`
-    }, (payload) => {
+    .channel('room:' + sessionId)
+    .on('broadcast', { event: 'state_update' }, (payload) => {
       if(readonly || isReadonly){
-        // Update state from remote
-        const remoteState = payload.new.state;
+        const remoteState = payload.payload;
         state.bought = remoteState.bought || {};
         state.skip = remoteState.skip || {};
         state.comments = remoteState.comments || {};
         state.customQty = remoteState.customQty || {};
         renderLista();
+        updateProgress();
+        updateCostBar();
       }
     })
-    .subscribe();
+    .subscribe((status) => {
+      console.log('Realtime status:', status);
+    });
+}
+
+async function broadcastState(){
+  if(!realtimeChannel || isReadonly) return;
+  try{
+    await realtimeChannel.send({
+      type: 'broadcast',
+      event: 'state_update',
+      payload: {
+        bought: state.bought,
+        skip: state.skip,
+        comments: state.comments,
+        customQty: state.customQty
+      }
+    });
+  }catch(err){ console.log('Broadcast error:', err); }
 }
 
 // Load session from URL param
