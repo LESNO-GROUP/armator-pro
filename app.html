@@ -106,6 +106,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .lista-body{flex:1;}
 .category-header{padding:20px 20px 8px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;}
 .cat-icon{font-size:16px;} .cat-count{margin-left:auto;background:rgba(255,255,255,0.05);border-radius:20px;padding:2px 8px;font-size:11px;}
+.cat-add-btn{background:none;border:1px solid var(--border);border-radius:20px;color:var(--muted);cursor:pointer;font-size:11px;padding:2px 8px;margin-left:6px;transition:all .15s;line-height:1;}
+.cat-add-btn:hover{border-color:var(--cyan);color:var(--cyan);}
 .product-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.04);transition:all .2s;gap:6px;min-width:0;}
 .product-row.bought{background:rgba(0,200,150,0.06);}
 .product-row.skip{opacity:0.25;}
@@ -355,7 +357,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="lista-action-bar">
       <button class="btn-action primary" onclick="exportPDF()" id="btn-pdf">📄 <span id="pdf-label">Eksport PDF</span></button>
       <button class="btn-action" onclick="saveTrip()" id="btn-save-trip">💾 <span id="save-label">Zapisz rejs</span></button>
-      <button class="btn-action" onclick="openAddModal()" id="btn-add-product">➕ <span id="add-label">Dodaj</span></button>
     </div>
     <div id="lista-content"></div>
     <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center" id="lista-footer">Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.</div>
@@ -920,7 +921,8 @@ function renderLista(){
     if(p.kat!==currentKat){
       currentKat=p.kat;
       const cnt=list.filter(x=>x.kat===currentKat&&!state.skip[x.id]).length;
-      html+=`<div class="category-header"><span class="cat-icon">${CAT_ICONS[currentKat]||'📦'}</span>${cn(currentKat)}<span class="cat-count">${cnt}</span></div>`;
+      const katEsc=currentKat.replace(/'/g,"\\'");
+      html+=`<div class="category-header"><span class="cat-icon">${CAT_ICONS[currentKat]||'📦'}</span>${cn(currentKat)}<span class="cat-count">${cnt}</span><button class="cat-add-btn" onclick="openAddModal('${katEsc}')">+ ${state.lang==='en'?'add':'dodaj'}</button></div>`;
     }
     const bought=state.bought[p.id];const skip=state.skip[p.id];
     const comment=state.comments[p.id]||'';
@@ -986,7 +988,11 @@ el('save-modal').addEventListener('click',function(e){if(e.target===this)closeSa
 // ══════════════════════════════════════
 // ADD CUSTOM PRODUCT
 // ══════════════════════════════════════
-function openAddModal(){
+let _addModalKat='Inne';
+function openAddModal(kat){
+  _addModalKat=kat||'Inne';
+  const katLabel=cn(_addModalKat);
+  el('add-modal-title').textContent=(state.lang==='en'?'Add to ':'Dodaj do ')+katLabel;
   el('add-modal-name').value='';
   el('add-modal-qty').value='1';
   el('add-modal-unit').value=state.lang==='en'?'pcs':'szt';
@@ -1001,7 +1007,7 @@ function confirmAddProduct(){
   const unit=el('add-modal-unit').value.trim()||'szt';
   // Generate unique custom id
   const id='custom_'+Date.now();
-  const product={id,kat:'Inne',jedn:unit,qty};
+  const product={id,kat:_addModalKat,jedn:unit,qty};
   // Add to PROD_NAMES
   PROD_NAMES[id]={pl:name,en:name};
   // Add to CAT_NAMES if not exists
