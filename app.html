@@ -211,6 +211,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .share-readonly-bar{background:rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.15);padding:8px 20px;font-size:12px;color:var(--cyan);text-align:center;display:none;}
 .share-readonly-bar.visible{display:block;}
 
+
+/* PRO SYSTEM */
+.pro-badge{background:linear-gradient(135deg,#f0a500,#ff6b00);color:white;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:2px 7px;border-radius:20px;vertical-align:middle;margin-left:6px;}
+.pro-lock-overlay{position:relative;}
+.pro-lock-overlay::after{content:'';position:absolute;inset:0;background:rgba(10,22,40,0.85);border-radius:inherit;z-index:10;pointer-events:none;}
+.pro-upgrade-banner{background:linear-gradient(135deg,rgba(240,165,0,0.12),rgba(255,107,0,0.08));border:1px solid rgba(240,165,0,0.3);border-radius:16px;padding:20px;margin:8px 20px;text-align:center;}
+.pro-upgrade-icon{font-size:32px;margin-bottom:8px;}
+.pro-upgrade-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.pro-upgrade-sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.btn-upgrade{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:12px 32px;border-radius:30px;border:none;background:linear-gradient(135deg,#f0a500,#ff6b00);color:white;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(240,165,0,0.3);}
+.btn-upgrade:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(240,165,0,0.4);}
+.pro-price{font-family:'Syne',sans-serif;font-size:12px;color:var(--muted);margin-top:8px;}
+.pro-activated-bar{background:linear-gradient(135deg,rgba(0,200,150,0.12),rgba(0,212,255,0.08));border:1px solid rgba(0,200,150,0.3);border-radius:12px;padding:10px 16px;margin:8px 20px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--green);}
+
 /* ROZLICZENIE */
 #screen-rozliczenie{padding-bottom:80px;}
 .rozl-body{flex:1;padding:16px 20px;}
@@ -264,6 +278,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .top-actions .lang-btn{display:flex;}
 }
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87ZNBS3PH2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87ZNBS3PH2');
+</script>
 </head>
 <body>
 <div id="app">
@@ -284,8 +306,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div><div class="stat-val amber">60</div><div class="stat-label" id="stat-time">sek do listy</div></div>
     <div><div class="stat-val green">0</div><div class="stat-label" id="stat-waste">marnowania</div></div>
   </div>
-  <div class="splash-credit"><span data-lang="pl">by LESNO — żeglowanie z głową</span><span data-lang="en" style="display:none">by LESNO — sailing with purpose</span></div>
+  <div class="splash-credit"><span data-lang="pl">armatorpro.com</span><span data-lang="en" style="display:none">armatorpro.com</span></div>
   <a href="https://armatorpro.com" style="margin-top:12px;font-size:11px;color:rgba(0,212,255,0.4);text-decoration:none;">← armatorpro.com</a>
+  <div class="pro-activated-bar" id="pro-status-bar" style="display:none;margin-top:12px;"><span>✓</span><span id="pro-status-text">PRO aktywowane</span></div>
+  <button onclick="showProUpgradeScreen()" style="margin-top:8px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;" id="btn-get-pro">Uzyskaj PRO →</button>
 
   <!-- Zapisane rejsy -->
   <div class="saved-trips-section" id="saved-trips-section" style="display:none">
@@ -560,6 +584,44 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
   <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn active" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+</div>
+
+
+<!-- PRO UPGRADE MODAL -->
+<div class="modal-overlay hidden" id="pro-upgrade-modal">
+  <div class="modal-box" style="max-width:480px;">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:40px;margin-bottom:8px;">⚓</div>
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;" id="pro-modal-title">Armator.PRO</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px;" id="pro-modal-sub">Odblokuj pełne możliwości</div>
+    </div>
+    <div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;margin-bottom:16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em;" id="pro-modal-includes">Co zawiera PRO:</div>
+      <div style="display:flex;flex-direction:column;gap:6px;font-size:13px;" id="pro-modal-features">
+        <div>🔗 <span id="pf1">Udostępnianie listy z załogą (real-time)</span></div>
+        <div>🤝 <span id="pf2">Rozliczenie wydatków</span></div>
+        <div>📦 <span id="pf3">Kontrola zapasów dzień po dniu</span></div>
+        <div>💰 <span id="pf4">Kalkulator kosztów per produkt</span></div>
+        <div>💾 <span id="pf5">Nieograniczona historia rejsów</span></div>
+        <div>📄 <span id="pf6">Eksport PDF bez znaku wodnego</span></div>
+        <div>➕ <span id="pf7">Dodawanie własnych produktów</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-bottom:16px;">
+      <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--amber);" id="pro-price-display">39 zł</div>
+      <div style="font-size:12px;color:var(--muted);" id="pro-price-sub">jednorazowa płatność · na zawsze</div>
+    </div>
+    <a id="pro-buy-btn" href="https://buy.stripe.com/PLACEHOLDER" target="_blank" style="display:block;text-align:center;padding:14px;border-radius:30px;background:linear-gradient(135deg,#f0a500,#ff6b00);color:white;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;text-decoration:none;margin-bottom:16px;" id="pro-buy-link">🚀 Kup PRO — 39 zł</a>
+    <div style="border-top:1px solid var(--border);padding-top:16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;" id="pro-have-key">Masz już klucz licencyjny?</div>
+      <div style="display:flex;gap:8px;">
+        <input class="modal-input" id="pro-license-input" type="text" placeholder="ARMATOR-XXXX-XXXX-XXXX" style="font-family:'DM Sans',sans-serif;font-size:13px;text-transform:uppercase;margin-bottom:0;">
+        <button class="btn-confirm" onclick="submitLicenseKey()" style="flex:none;padding:12px 16px;" id="pro-activate-btn">Aktywuj</button>
+      </div>
+      <div style="font-size:12px;color:var(--red);margin-top:6px;min-height:16px;" id="pro-license-error"></div>
+    </div>
+    <button class="btn-secondary" onclick="closeProUpgrade()" style="width:100%;margin-top:12px;" id="pro-modal-close">Zamknij</button>
+  </div>
 </div>
 
 <!-- PWA BANNER -->
@@ -973,6 +1035,27 @@ function applyLang(){
   document.querySelectorAll('.tbl-zapasy').forEach(e=>e.textContent=L.tabZapasy);
   document.querySelectorAll('.tbl-koszty').forEach(e=>e.textContent=L.tabKoszt);
   document.querySelectorAll('.tbl-rozl').forEach(e=>e.textContent=L.tabRozl);
+  // PRO modal translations
+  const isEN = state.lang==='en';
+  if(el('pro-modal-title'))el('pro-modal-title').textContent='Armator.PRO';
+  if(el('pro-modal-sub'))el('pro-modal-sub').textContent=isEN?'Unlock all features':'Odblokuj pełne możliwości';
+  if(el('pro-modal-includes'))el('pro-modal-includes').textContent=isEN?'What PRO includes:':'Co zawiera PRO:';
+  if(el('pf1'))el('pf1').textContent=isEN?'List sharing with crew (real-time)':'Udostępnianie listy z załogą (real-time)';
+  if(el('pf2'))el('pf2').textContent=isEN?'Expense splitting':'Rozliczenie wydatków';
+  if(el('pf3'))el('pf3').textContent=isEN?'Day-by-day inventory tracking':'Kontrola zapasów dzień po dniu';
+  if(el('pf4'))el('pf4').textContent=isEN?'Per-product cost calculator':'Kalkulator kosztów per produkt';
+  if(el('pf5'))el('pf5').textContent=isEN?'Unlimited saved trips':'Nieograniczona historia rejsów';
+  if(el('pf6'))el('pf6').textContent=isEN?'PDF export without watermark':'Eksport PDF bez znaku wodnego';
+  if(el('pf7'))el('pf7').textContent=isEN?'Add your own products':'Dodawanie własnych produktów';
+  if(el('pro-price-display'))el('pro-price-display').textContent=isEN?'€10':'39 zł';
+  if(el('pro-price-sub'))el('pro-price-sub').textContent=isEN?'one-time payment · yours forever':'jednorazowa płatność · na zawsze';
+  if(el('pro-buy-btn'))el('pro-buy-btn').textContent=isEN?'🚀 Buy PRO — €10':'🚀 Kup PRO — 39 zł';
+  if(el('pro-have-key'))el('pro-have-key').textContent=isEN?'Already have a license key?':'Masz już klucz licencyjny?';
+  if(el('pro-activate-btn'))el('pro-activate-btn').textContent=isEN?'Activate':'Aktywuj';
+  if(el('pro-modal-close'))el('pro-modal-close').textContent=isEN?'Close':'Zamknij';
+  if(el('btn-get-pro'))el('btn-get-pro').textContent=isEN?'Get PRO →':'Uzyskaj PRO →';
+  if(el('pro-status-text'))el('pro-status-text').textContent=isEN?'PRO activated':'PRO aktywowane';
+  renderProStatus();
   if(el('rozl-setup-title'))el('rozl-setup-title').textContent=L.rozlSetupTitle;
   if(el('rozl-setup-sub'))el('rozl-setup-sub').textContent=L.rozlSetupSub;
   if(el('rozl-setup-btn'))el('rozl-setup-btn').textContent=L.rozlSetupBtn;
@@ -1113,6 +1196,12 @@ function confirmSaveTrip(){
   const name=el('save-modal-input').value.trim();
   if(!name)return;
   const trips=loadTrips();
+  // Free: max 1 trip
+  if(!isPro() && trips.length>=1){
+    closeSaveModal();
+    showProUpgradeScreen();
+    return;
+  }
   trips.unshift({id:Date.now(),name,state:JSON.parse(JSON.stringify(state)),date:new Date().toLocaleDateString()});
   if(trips.length>10)trips.pop();
   saveTrips(trips);
@@ -1137,6 +1226,11 @@ function openAddModal(kat){
 }
 function closeAddModal(){el('add-product-modal').classList.add('hidden');}
 function confirmAddProduct(){
+  if(!isPro()){
+    closeAddModal();
+    showProUpgradeScreen();
+    return;
+  }
   const name=el('add-modal-name').value.trim();
   if(!name)return;
   const qty=parseFloat(el('add-modal-qty').value)||1;
@@ -1268,7 +1362,8 @@ function exportPDF(){
     <div class="total-label">${state.lang==='pl'?'Łączny szacunkowy koszt':'Total estimated cost'}</div>
     <div class="total-val">${total.toFixed(isEUR()?2:0)} ${cur}</div>
   </div>
-  <div class="footer">armatorpro.com · ${state.lang==='pl'?'Ilości są orientacyjne':'Quantities are estimates'}</div>
+  <div class="footer">armatorpro.com · ${state.lang==='pl'?'Ilości są orientacyjne':'Quantities are estimates'}${!isPro()?' · Wygenerowano w wersji Free — armatorpro.com':''}</div>
+  ${!isPro()?`<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:60px;font-weight:900;color:rgba(0,0,0,0.06);pointer-events:none;white-space:nowrap;z-index:0;">ARMATOR.PRO FREE</div>`:''}
   </body></html>`;
 
   const win=window.open('','_blank');
@@ -1280,6 +1375,22 @@ function exportPDF(){
 // ══════════════════════════════════════
 function renderKoszty(){
   const cur=currency();
+  // PRO check - Free gets summary only
+  if(!isPro()){
+    const body = document.querySelector('#screen-koszty .koszty-body');
+    if(body){
+      const total=calcTotal();
+      const ekw=state.adults+state.children*0.7;
+      body.innerHTML = `
+        <div class="koszty-total-card">
+          <div class="koszty-total-label">${t().kosztyTotalLabel}</div>
+          <div class="koszty-total-val" style="font-size:36px;">${total.toFixed(isEUR()?2:0)} ${currency()}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">${ekw>0?t().kosztyPerOsoba((total/ekw).toFixed(isEUR()?2:0),currency()):''}</div>
+        </div>
+        ${proUpgradeBanner('Kalkulator kosztów per produkt','Per-product cost calculator')}`;
+    }
+    return;
+  }
   const list=state.list.filter(p=>!state.skip[p.id]);
   let html='';let currentKat='';
   list.forEach(p=>{
@@ -1316,6 +1427,12 @@ function setPrice(id,val){
 // ══════════════════════════════════════
 function renderZapasy(){
   const L=t();
+  // PRO check
+  if(!isPro()){
+    const body = document.querySelector('#screen-zapasy .zapasy-body');
+    if(body) body.innerHTML = proUpgradeBanner('Kontrola zapasów', 'Inventory tracking');
+    return;
+  }
   let dayHtml='';
   for(let d=1;d<=state.days;d++){dayHtml+=`<button class="day-btn ${d===state.currentDay?'active':''}" onclick="setDay(${d})">${d}<div class="day-label">${L.dayLabel}</div></button>`;}
   el('day-selector').innerHTML=dayHtml;
@@ -1368,6 +1485,107 @@ function restoreUI(){
     const sl=el('slider-'+d);if(sl){sl.value=state.drinks[d];updateDrink(d,state.drinks[d]);}
   });
   applyLang();
+}
+
+
+
+// ══════════════════════════════════════
+// PRO LICENSE SYSTEM
+// ══════════════════════════════════════
+const PRO_KEY = 'armator_pro_license';
+
+function isPro(){
+  return true; // TODO: re-enable when Stripe is ready
+  /*
+  try{
+    const data = JSON.parse(localStorage.getItem(PRO_KEY)||'null');
+    if(!data) return false;
+    if(data.key && data.activated) return true;
+    return false;
+  }catch(e){ return false; }
+  */
+}
+
+function activatePro(licenseKey){
+  // Validate key format: ARMATOR-XXXX-XXXX-XXXX
+  const clean = licenseKey.trim().toUpperCase();
+  if(!clean.startsWith('ARMATOR-') || clean.length < 20){
+    return false;
+  }
+  localStorage.setItem(PRO_KEY, JSON.stringify({
+    key: clean,
+    activated: Date.now(),
+    email: ''
+  }));
+  return true;
+}
+
+function deactivatePro(){
+  localStorage.removeItem(PRO_KEY);
+}
+
+// PRO upgrade banner HTML
+function proUpgradeBanner(featureName, featureNameEN){
+  const L = t();
+  const isEN = state.lang === 'en';
+  const feature = isEN ? featureNameEN : featureName;
+  const title = isEN ? `${featureNameEN} is a PRO feature` : `${featureName} wymaga wersji PRO`;
+  const sub = isEN
+    ? `Unlock sharing, expense splitting, inventory tracking, PDF without watermark, unlimited saved trips and more.`
+    : `Odblokuj udostępnianie, rozliczenie wydatków, kontrolę zapasów, PDF bez znaku wodnego, nieograniczoną historię rejsów i więcej.`;
+  const price = isEN ? 'One-time payment · €10 · yours forever' : 'Jednorazowa płatność · 39 zł · na zawsze';
+  const btn = isEN ? '🚀 Upgrade to PRO' : '🚀 Przejdź na PRO';
+
+  return `<div class="pro-upgrade-banner">
+    <div class="pro-upgrade-icon">⚓</div>
+    <div class="pro-upgrade-title">${title}</div>
+    <div class="pro-upgrade-sub">${sub}</div>
+    <button class="btn-upgrade" onclick="showProUpgradeScreen()">${btn}</button>
+    <div class="pro-price">${price}</div>
+  </div>`;
+}
+
+function showProUpgradeScreen(){
+  // Show upgrade modal
+  el('pro-upgrade-modal').classList.remove('hidden');
+}
+
+function closeProUpgrade(){
+  el('pro-upgrade-modal').classList.add('hidden');
+}
+
+function submitLicenseKey(){
+  const key = el('pro-license-input').value.trim();
+  if(!key){
+    el('pro-license-error').textContent = state.lang==='en' ? 'Please enter a license key.' : 'Wpisz klucz licencyjny.';
+    return;
+  }
+  if(activatePro(key)){
+    closeProUpgrade();
+    el('pro-license-error').textContent = '';
+    // Show success
+    renderProStatus();
+    // Re-render current screen
+    const active = document.querySelector('.screen.active');
+    if(active){
+      const name = active.id.replace('screen-','');
+      showScreen(name);
+    }
+    alert(state.lang==='en' ? '✓ PRO activated! Enjoy all features.' : '✓ PRO aktywowane! Korzystaj ze wszystkich funkcji.');
+  } else {
+    el('pro-license-error').textContent = state.lang==='en' ? 'Invalid license key. Check and try again.' : 'Nieprawidłowy klucz. Sprawdź i spróbuj ponownie.';
+  }
+}
+
+function renderProStatus(){
+  const bar = el('pro-status-bar');
+  if(!bar) return;
+  if(isPro()){
+    bar.innerHTML = `<span>✓</span> <span id="pro-status-text">${state.lang==='en'?'PRO activated':'PRO aktywowane'}</span>`;
+    bar.style.display = 'flex';
+  } else {
+    bar.style.display = 'none';
+  }
 }
 
 
@@ -1454,6 +1672,14 @@ function calcTransfers(balances){
 
 function renderRozliczenie(){
   const L = t();
+  // PRO check
+  const rozlBody = document.querySelector('#screen-rozliczenie .rozl-body');
+  if(!isPro()){
+    if(rozlBody){
+      rozlBody.innerHTML = proUpgradeBanner('Rozliczenie wydatków', 'Expense splitting');
+    }
+    return;
+  }
   const identity = getIdentity();
   const lang_toggle = el('lang-toggle-rozl');
   if(lang_toggle) lang_toggle.textContent = state.lang==='pl'?'EN':'PL';
@@ -1581,6 +1807,10 @@ let isReadonly = false; // always false now - full collaborative
 let realtimeChannel = null;
 
 async function shareList(){
+  if(!isPro()){
+    showProUpgradeScreen();
+    return;
+  }
   const L = t();
   const btn = el('btn-share');
   if(btn){ btn.disabled=true; }
@@ -1808,6 +2038,7 @@ if(state.list&&state.list.length>0){
   renderLista();renderZapasy();
 }
 renderSavedTrips();
+renderProStatus();
 </script>
 </body>
 </html>
