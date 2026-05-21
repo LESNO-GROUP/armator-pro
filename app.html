@@ -1203,7 +1203,7 @@ function confirmSaveTrip(){
     return;
   }
   trips.unshift({id:Date.now(),name,state:JSON.parse(JSON.stringify(state)),date:new Date().toLocaleDateString()});
-  if(trips.length>10)trips.pop();
+  if(trips.length>25)trips.pop();
   saveTrips(trips);
   closeSaveModal();
   renderSavedTrips();
