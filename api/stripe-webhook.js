@@ -1,17 +1,17 @@
 // api/stripe-webhook.js
 // Armator PRO — Stripe Webhook Handler
 // Odbiera płatność → generuje klucz → zapisuje do Supabase → wysyła email przez Brevo
- 
+
 const crypto = require('crypto');
- 
+
 const SUPABASE_URL = 'https://vdjtmngdbjacomfreuai.supabase.co';
- 
+
 export const config = {
   api: { bodyParser: false },
 };
- 
+
 // --- Helpers ---
- 
+
 function getRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -20,36 +20,36 @@ function getRawBody(req) {
     req.on('error', reject);
   });
 }
- 
+
 function verifyStripeSignature(rawBody, sig, secret) {
   const parts = sig.split(',').reduce((acc, part) => {
     const [k, v] = part.split('=');
     acc[k] = v;
     return acc;
   }, {});
- 
+
   const timestamp = parts['t'];
   const v1 = parts['v1'];
   if (!timestamp || !v1) throw new Error('Invalid signature header');
- 
-  const tolerance = 300; // 5 minut
+
+  const tolerance = 300;
   if (Math.abs(Date.now() / 1000 - parseInt(timestamp)) > tolerance) {
     throw new Error('Timestamp too old');
   }
- 
+
   const payload = `${timestamp}.${rawBody}`;
   const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex');
- 
+
   if (expected !== v1) throw new Error('Signature mismatch');
   return true;
 }
- 
+
 function generateLicenseKey() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const seg = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   return `ARMATOR-${seg()}-${seg()}-${seg()}`;
 }
- 
+
 async function saveLicense({ licenseKey, email, sessionId, currency, amount }) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/licenses`, {
     method: 'POST',
@@ -68,20 +68,20 @@ async function saveLicense({ licenseKey, email, sessionId, currency, amount }) {
       status: 'active',
     }),
   });
- 
+
   if (!res.ok) {
     const err = await res.text();
     throw new Error(`Supabase error: ${err}`);
   }
 }
- 
+
 async function sendLicenseEmail({ email, licenseKey, currency }) {
   const isPL = currency === 'PLN';
- 
+
   const subject = isPL
     ? 'Twój klucz licencyjny Armator PRO ⚓'
     : 'Your Armator PRO License Key ⚓';
- 
+
   const htmlContent = isPL ? `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#0a1628;color:#fff;padding:40px;border-radius:12px;">
       <h1 style="color:#38bdf8;text-align:center;">⚓ Armator PRO</h1>
@@ -121,7 +121,7 @@ async function sendLicenseEmail({ email, licenseKey, currency }) {
       </p>
     </div>
   `;
- 
+
   const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
@@ -135,46 +135,58 @@ async function sendLicenseEmail({ email, licenseKey, currency }) {
       htmlContent,
     }),
   });
- 
+
   if (!res.ok) {
     const err = await res.text();
     throw new Error(`Brevo error: ${err}`);
   }
 }
- 
+
 // --- Handler ---
- 
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
- 
+
   const rawBody = await getRawBody(req);
+  const rawBodyStr = rawBody.toString();
   const sig = req.headers['stripe-signature'];
- 
+
+  // Wybierz właściwy sekret (test vs live)
+  let event;
   try {
-    verifyStripeSignature(rawBody.toString(), sig, process.env.STRIPE_WEBHOOK_SECRET);
+    event = JSON.parse(rawBodyStr);
+  } catch (err) {
+    return res.status(400).json({ error: 'Invalid JSON' });
+  }
+
+  const isTestMode = event?.livemode === false;
+  const webhookSecret = isTestMode
+    ? process.env.STRIPE_WEBHOOK_SECRET_TEST
+    : process.env.STRIPE_WEBHOOK_SECRET;
+
+  try {
+    verifyStripeSignature(rawBodyStr, sig, webhookSecret);
   } catch (err) {
     console.error('Webhook verification failed:', err.message);
     return res.status(400).json({ error: `Webhook Error: ${err.message}` });
   }
- 
-  const event = JSON.parse(rawBody.toString());
- 
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const email = session.customer_details?.email;
     const currency = (session.currency || 'pln').toUpperCase();
     const amount = session.amount_total || 0;
     const sessionId = session.id;
- 
+
     if (!email) {
       console.error('No email in session:', sessionId);
       return res.status(200).json({ received: true });
     }
- 
+
     const licenseKey = generateLicenseKey();
- 
+
     try {
       await saveLicense({ licenseKey, email, sessionId, currency, amount });
       console.log(`License saved: ${licenseKey} for ${email}`);
@@ -182,16 +194,14 @@ export default async function handler(req, res) {
       console.error('Failed to save license:', err.message);
       return res.status(500).json({ error: 'Database error' });
     }
- 
+
     try {
       await sendLicenseEmail({ email, licenseKey, currency });
       console.log(`Email sent to: ${email}`);
     } catch (err) {
-      // Email failure nie blokuje — klucz jest w bazie, można wysłać ręcznie
       console.error('Failed to send email:', err.message);
     }
   }
- 
+
   return res.status(200).json({ received: true });
 }
- 
