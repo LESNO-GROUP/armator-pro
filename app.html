@@ -1827,6 +1827,12 @@ async function shareList(){
     const sessionId = genId();
     const shareState = JSON.parse(JSON.stringify(state));
     shareState.bought = {}; // Reset bought for shared view
+    // Save custom product names so guests see them correctly
+    const customNames = {};
+    state.list.filter(p=>p.id.startsWith('custom_')).forEach(p=>{
+      if(PROD_NAMES[p.id]) customNames[p.id] = PROD_NAMES[p.id];
+    });
+    shareState.customProductNames = customNames;
 
     const { error } = await supa
       .from('sessions')
@@ -1906,8 +1912,9 @@ function startRealtimeSync(sessionId){
       state.customQty = remoteState.customQty || {};
       if(remoteState.customProducts && remoteState.customProducts.length>0){
         remoteState.customProducts.forEach(cp=>{
+          // Always update name regardless of whether product is in list
+          if(cp.name) PROD_NAMES[cp.id]=cp.name;
           if(!state.list.find(p=>p.id===cp.id)){
-            if(cp.name) PROD_NAMES[cp.id]=cp.name;
             const lastIdx=state.list.reduce((acc,p,i)=>p.kat===cp.kat?i:acc,-1);
             const prod={id:cp.id,kat:cp.kat,jedn:cp.jedn,qty:cp.qty};
             if(lastIdx>=0) state.list.splice(lastIdx+1,0,prod);
@@ -1971,6 +1978,12 @@ async function loadFromUrl(){
     const sharedState = data.state;
     Object.assign(state, sharedState);
     state.bought = sharedState.bought || {};
+    // Restore custom product names
+    if(sharedState.customProductNames){
+      Object.entries(sharedState.customProductNames).forEach(([id, name])=>{
+        PROD_NAMES[id] = name;
+      });
+    }
     shareSessionId = sessionId;
     isReadonly = !isPro(); // PRO = pełna edycja, Free = tylko odhaczanie
 
