@@ -1972,7 +1972,7 @@ async function loadFromUrl(){
     Object.assign(state, sharedState);
     state.bought = sharedState.bought || {};
     shareSessionId = sessionId;
-    isReadonly = true; // guests can check items but not edit
+    isReadonly = !isPro(); // PRO = pełna edycja, Free = tylko odhaczanie
 
     // Show collaborative bar
     const bar = el('share-readonly-bar');
