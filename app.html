@@ -272,6 +272,115 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .tab-bar{display:flex;background:rgba(10,22,40,0.95);border-top:1px solid var(--border);padding:8px 16px;gap:6px;justify-content:center;position:sticky;bottom:0;z-index:50;backdrop-filter:blur(10px);}
 .tab-bar-btn{flex:1;max-width:100px;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:500;padding:8px 4px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s;text-align:center;}
 .tab-bar-btn.active{background:rgba(0,212,255,0.15);border-color:var(--cyan);color:var(--white);}
+/* MENU / PLAN POSIŁKÓW */
+.lista-action-bar{flex-wrap:wrap;}
+.menu-body{padding:16px 20px 24px;flex:1;}
+.menu-intro{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:16px;}
+.menu-intro-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.menu-intro-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.menu-intro-sub{font-size:12px;color:var(--muted);line-height:1.55;margin-top:8px;}
+.menu-toggle{position:relative;width:48px;height:28px;border-radius:20px;border:1px solid var(--border);background:rgba(0,0,0,0.3);cursor:pointer;flex-shrink:0;transition:all .2s;}
+.menu-toggle.on{background:var(--cyan);border-color:var(--cyan);}
+.menu-toggle::after{content:'';position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:var(--white);transition:all .2s;}
+.menu-toggle.on::after{left:23px;background:var(--navy);}
+.menu-day{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:6px 16px 8px;margin-bottom:12px;}
+.menu-day-head{display:flex;align-items:center;gap:8px;padding:12px 0 4px;}
+.menu-day-num{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--navy);background:var(--cyan);width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.menu-day-label{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;}
+.menu-slot{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--border);}
+.menu-slot-meal{font-size:10px;color:var(--cyan-dim);width:58px;flex-shrink:0;text-transform:uppercase;letter-spacing:0.06em;}
+.menu-slot-pick{flex:1;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:10px;padding:9px 12px;cursor:pointer;transition:all .2s;min-height:42px;min-width:0;}
+.menu-slot-pick:hover{border-color:var(--cyan);}
+.menu-slot-pick.empty{color:var(--muted);font-size:13px;}
+.menu-slot-icon{font-size:18px;flex-shrink:0;}
+.menu-slot-name{font-size:13px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.menu-slot-clear{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:6px;flex-shrink:0;}
+.menu-slot-clear:hover{color:var(--red);}
+.menu-summary{position:sticky;bottom:64px;background:rgba(10,22,40,0.97);backdrop-filter:blur(10px);border:1px solid var(--cyan);border-radius:16px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;box-shadow:0 8px 30px rgba(0,0,0,0.45);}
+.menu-summary-txt{font-size:12px;color:var(--muted);line-height:1.4;}
+.menu-summary-txt b{color:var(--cyan);font-family:'Syne',sans-serif;}
+.menu-apply-btn{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:11px 18px;border-radius:30px;border:none;background:var(--cyan);color:var(--navy);cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0;}
+.menu-apply-btn:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(0,212,255,0.4);}
+.menu-badge{font-size:11px;opacity:0.9;}
+.recipe-list{display:flex;flex-direction:column;gap:8px;max-height:58vh;overflow-y:auto;margin:4px 0;}
+.recipe-card{display:flex;align-items:center;gap:12px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;padding:11px 14px;cursor:pointer;transition:all .2s;text-align:left;width:100%;}
+.recipe-card:hover{border-color:var(--cyan);background:rgba(0,212,255,0.06);}
+.recipe-card-icon{font-size:24px;flex-shrink:0;}
+.recipe-card-body{flex:1;min-width:0;}
+.recipe-card-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--white);display:flex;align-items:center;gap:6px;}
+.recipe-card-ing{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.recipe-veg{font-size:10px;color:var(--green);border:1px solid rgba(0,200,150,0.4);border-radius:10px;padding:1px 6px;font-family:'DM Sans',sans-serif;font-weight:500;}
+.recipe-modal-box{max-width:460px;width:92%;display:flex;flex-direction:column;}
+/* BOAT PROFILES + TEMPLATES */
+.splash-section{margin-top:28px;width:100%;max-width:320px;}
+.splash-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.splash-section-title{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);text-align:left;}
+.boat-tile{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:all .2s;gap:12px;}
+.boat-tile:hover{border-color:var(--cyan);}
+.boat-icon{font-size:22px;flex-shrink:0;}
+.boat-info{flex:1;text-align:left;min-width:0;}
+.boat-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;}
+.boat-meta{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.boat-del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px;flex-shrink:0;}
+.boat-del:hover{color:var(--red);}
+.tpl-list{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;margin:4px 0 14px;}
+.tpl-empty{font-size:13px;color:var(--muted);text-align:center;padding:18px 4px;line-height:1.5;}
+.tpl-tile{display:flex;align-items:center;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:12px;padding:11px 14px;cursor:pointer;transition:all .2s;gap:12px;}
+.tpl-tile:hover{border-color:var(--cyan);}
+.tpl-info{flex:1;text-align:left;min-width:0;}
+.tpl-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;}
+.tpl-meta{font-size:11px;color:var(--muted);}
+.tpl-menu-tag{font-size:10px;color:var(--cyan);border:1px solid rgba(0,212,255,0.4);border-radius:10px;padding:1px 6px;font-family:'DM Sans',sans-serif;}
+.tpl-add-btn{width:100%;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:11px;border-radius:12px;border:1px dashed var(--cyan);background:rgba(0,212,255,0.06);color:var(--cyan);cursor:pointer;margin-bottom:14px;transition:all .2s;}
+.tpl-add-btn:hover{background:rgba(0,212,255,0.14);}
+.choice-row{display:flex;gap:10px;margin-bottom:8px;}
+.choice-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px 12px;border-radius:14px;border:1px solid var(--border);background:rgba(0,0,0,0.25);cursor:pointer;transition:all .2s;}
+.choice-btn:hover{border-color:var(--cyan);background:rgba(0,212,255,0.06);}
+.choice-ico{font-size:24px;}
+.choice-lbl{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--white);}
+.choice-sub{font-size:11px;color:var(--muted);text-align:center;line-height:1.4;}
+.cfg-profile-btn{width:100%;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:11px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;margin-top:10px;transition:all .2s;}
+.cfg-profile-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+/* CREW PRESENCE */
+.crew-bar{display:none;align-items:center;gap:8px;padding:10px 20px;flex-wrap:wrap;border-bottom:1px solid var(--border);background:rgba(0,212,255,0.03);}
+.crew-bar.visible{display:flex;}
+.crew-bar-lbl{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-right:2px;}
+.crew-ava{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3px 11px 3px 3px;}
+.crew-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:800;color:var(--navy);flex-shrink:0;}
+.crew-name-lbl{font-size:12px;font-weight:600;}
+.crew-seen{font-size:10px;color:var(--muted);}
+.crew-online-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px rgba(0,200,150,0.2);}
+.bought-by{font-size:10px;color:var(--green);margin-top:2px;display:flex;align-items:center;gap:3px;}
+/* ANALIZA (#4) */
+.analiza-body{padding:16px 20px 28px;flex:1;overflow-y:auto;}
+.analiza-empty{font-size:13px;color:var(--muted);text-align:center;padding:40px 12px;line-height:1.6;}
+.analiza-intro{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:15px 17px;margin-bottom:16px;}
+.analiza-intro-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.analiza-intro-s{font-size:12px;color:var(--muted);line-height:1.55;margin-top:6px;}
+.analiza-active{font-size:11px;color:var(--green);margin-top:10px;}
+.analiza-reset{color:var(--muted);text-decoration:underline;cursor:pointer;}
+.analiza-reset:hover{color:var(--red);}
+.analiza-sec{margin-bottom:18px;}
+.analiza-sec-h{display:flex;align-items:center;justify-content:space-between;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.analiza-applyall{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:6px 12px;border-radius:20px;border:none;background:var(--cyan);color:var(--navy);cursor:pointer;}
+.prop-row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:8px;}
+.prop-info{flex:1;min-width:0;}
+.prop-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;}
+.prop-sub{font-size:11px;margin-top:2px;}
+.prop-sub.up{color:var(--amber);}
+.prop-sub.down{color:var(--green);}
+.prop-actions{display:flex;gap:6px;flex-shrink:0;}
+.prop-btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:7px 11px;border-radius:18px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);}
+.prop-btn.apply{background:var(--cyan);color:var(--navy);border-color:var(--cyan);}
+.prop-btn.dismiss:hover{color:var(--white);}
+.metric-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.metric-chip{font-size:12px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--white);}
+.metric-chip b{color:var(--cyan);font-family:'Syne',sans-serif;}
+.metric-chip.over{border-color:rgba(240,165,0,0.35);}
+.metric-chip.over b{color:var(--amber);}
+.metric-chip.under{border-color:rgba(255,71,87,0.35);}
+.metric-chip.under b{color:var(--red);}
+.analiza-note{font-size:12px;color:var(--muted);text-align:center;padding:8px 12px;line-height:1.5;}
 /* Hide old inline tabs from top-bar on mobile */
 @media(max-width:600px){
   .top-actions .btn-tab{display:none;}
@@ -310,6 +419,22 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <a href="https://armatorpro.com" style="margin-top:12px;font-size:11px;color:rgba(0,212,255,0.4);text-decoration:none;">← armatorpro.com</a>
   <div class="pro-activated-bar" id="pro-status-bar" style="display:none;margin-top:12px;"><span>✓</span><span id="pro-status-text">PRO aktywowane</span></div>
   <button onclick="showProUpgradeScreen()" style="margin-top:8px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;" id="btn-get-pro">Uzyskaj PRO →</button>
+
+  <!-- Moje łodzie -->
+  <div class="splash-section" id="boats-section" style="display:none">
+    <div class="splash-section-head"><div class="splash-section-title" id="boats-title">Moje łodzie</div></div>
+    <div id="boats-list"></div>
+  </div>
+
+  <!-- Analiza rejsów -->
+  <div class="splash-section" id="analiza-splash" style="display:none">
+    <div class="splash-section-head"><div class="splash-section-title" id="analiza-splash-title">Analiza rejsów</div></div>
+    <button class="boat-tile" onclick="showScreen('analiza')" style="width:100%">
+      <span class="boat-icon">📊</span>
+      <div class="boat-info"><div class="boat-name" id="analiza-splash-name">Czego nauczył się planer</div><div class="boat-meta" id="analiza-splash-meta"></div></div>
+      <span style="color:var(--cyan);font-size:18px">→</span>
+    </button>
+  </div>
 
   <!-- Zapisane rejsy -->
   <div class="saved-trips-section" id="saved-trips-section" style="display:none">
@@ -406,7 +531,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
   <div class="bottom-bar">
-    <button class="btn-primary" style="width:100%" onclick="generateList()" id="btn-generate">Generuj listę zakupów</button>
+    <button class="cfg-profile-btn" onclick="saveBoatProfile()" id="cfg-save-boat">⚓ Zapisz jako profil łodzi</button>
+    <button class="btn-primary" style="width:100%;margin-top:8px" onclick="generateList()" id="btn-generate">Generuj listę zakupów</button>
   </div>
 </div>
 
@@ -439,16 +565,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="share-copy-btn" id="share-copy-btn">Kopiuj</button>
       </div>
     </div>
+    <div class="crew-bar" id="crew-bar"></div>
     <div class="lista-action-bar">
       <button class="btn-action primary" onclick="exportPDF()" id="btn-pdf">📄 <span id="pdf-label">Eksport PDF</span></button>
       <button class="btn-action" onclick="saveTrip()" id="btn-save-trip">💾 <span id="save-label">Zapisz rejs</span></button>
+      <button class="btn-action" onclick="openTemplatesModal()" id="btn-templates">📋 <span id="tpl-label">Szablony</span></button>
+      <button class="btn-action" onclick="showScreen('menu')" id="btn-menu">🍽️ <span id="menu-label">Plan posiłków</span></button>
       <button class="btn-action primary" onclick="shareList()" id="btn-share">🔗 <span id="share-label">Udostępnij</span></button>
     </div>
     <div id="lista-content"></div>
     <div style="padding:16px 20px;font-size:11px;color:rgba(136,153,170,0.4);text-align:center" id="lista-footer">Lista wygenerowana przez Armator.PRO<br>Ilości są orientacyjne — dostosuj do preferencji załogi.</div>
     <div style="padding:0 20px 24px;text-align:center;"><a href="https://armatorpro.com" style="font-size:11px;color:rgba(0,212,255,0.35);text-decoration:none;" id="footer-back-link">← armatorpro.com</a></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn active" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn active" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('menu')">🍽️ <span class="tbl-menu">Menu</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- ZAPASY -->
@@ -466,7 +595,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="day-selector" id="day-selector"></div>
     <div id="zapasy-content"></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn active" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn active" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('menu')">🍽️ <span class="tbl-menu">Menu</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- KOSZTY -->
@@ -488,7 +617,45 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
     <div id="koszty-content"></div>
   </div>
-  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn active" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn active" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('menu')">🍽️ <span class="tbl-menu">Menu</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+</div>
+
+<!-- MENU / PLAN POSIŁKÓW -->
+<div id="screen-menu" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('lista')">←</button>
+    <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="menu-meta"></div></div>
+    <div class="top-actions">
+      <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-menu">EN</button>
+    </div>
+  </div>
+  <div class="menu-body">
+    <div class="menu-intro">
+      <div class="menu-intro-top">
+        <div class="menu-intro-title" id="menu-intro-title">Plan posiłków</div>
+        <button class="menu-toggle" id="menu-mode-toggle" onclick="toggleMenuMode()"></button>
+      </div>
+      <div class="menu-intro-sub" id="menu-intro-sub"></div>
+    </div>
+    <div id="menu-days"></div>
+    <div class="menu-summary">
+      <div class="menu-summary-txt" id="menu-summary-txt"></div>
+      <button class="menu-apply-btn" onclick="applyMenuToList()" id="menu-apply-btn">Przelicz listę →</button>
+    </div>
+  </div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn active" onclick="showScreen('menu')">🍽️ <span class="tbl-menu">Menu</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
+</div>
+
+<!-- RECIPE PICKER MODAL -->
+<div class="modal-overlay hidden" id="recipe-modal">
+  <div class="modal-box recipe-modal-box">
+    <div class="modal-title" id="recipe-modal-title">Wybierz danie</div>
+    <div class="recipe-list" id="recipe-list"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="clearCurrentSlot()" id="recipe-clear-btn">Wyczyść</button>
+      <button class="btn-secondary" onclick="closeRecipeModal()" id="recipe-cancel-btn">Zamknij</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL komentarz -->
@@ -511,6 +678,68 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeSaveModal()" id="save-modal-cancel">Anuluj</button>
       <button class="btn-confirm" onclick="confirmSaveTrip()" id="save-modal-confirm">Zapisz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ANALIZA (#4) -->
+<div id="screen-analiza" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('splash')">←</button>
+    <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="analiza-title">Analiza rejsów</div></div>
+    <div class="top-actions"><button class="lang-btn" onclick="toggleLang()">EN</button></div>
+  </div>
+  <div class="analiza-body" id="analiza-content"></div>
+</div>
+
+<!-- MODAL imię załoganta -->
+<div class="modal-overlay hidden" id="name-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="name-modal-title">Jak masz na imię?</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5" id="name-modal-sub">Załoga zobaczy, kto jest online i kto co odhaczył.</div>
+    <input class="modal-input" id="name-modal-input" type="text" placeholder="np. Kuba" maxlength="20">
+    <div class="modal-actions">
+      <button class="btn-confirm" onclick="confirmCrewName()" id="name-modal-confirm" style="flex:1">Dołącz</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL profil łodzi -->
+<div class="modal-overlay hidden" id="boat-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="boat-modal-title">Zapisz profil łodzi</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5" id="boat-modal-sub">Zapisuje załogę, rejon, styl gotowania i diety — bez liczby dni. Następnym razem wybierzesz łódź jednym kliknięciem.</div>
+    <input class="modal-input" id="boat-modal-input" type="text" placeholder="np. Bavaria 46 / Moja załoga" maxlength="40">
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeBoatModal()" id="boat-modal-cancel">Anuluj</button>
+      <button class="btn-confirm" onclick="confirmSaveBoat()" id="boat-modal-confirm">Zapisz</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL szablony -->
+<div class="modal-overlay hidden" id="templates-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="tpl-modal-title">Szablony zapasów</div>
+    <button class="tpl-add-btn" onclick="saveCurrentAsTemplate()" id="tpl-save-current">+ Zapisz aktualną listę jako szablon</button>
+    <div class="tpl-list" id="tpl-list"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeTemplatesModal()" id="tpl-modal-close" style="flex:1">Zamknij</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL wybór dodaj/zastąp -->
+<div class="modal-overlay hidden" id="tpl-choice-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="tpl-choice-title">Zastosuj szablon</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px" id="tpl-choice-sub">Jak dodać produkty z szablonu do listy?</div>
+    <div class="choice-row">
+      <button class="choice-btn" onclick="applyTemplateChoice('add')"><span class="choice-ico">➕</span><span class="choice-lbl" id="choice-add-lbl">Dodaj do listy</span><span class="choice-sub" id="choice-add-sub">Dołącz produkty, zachowaj obecne</span></button>
+      <button class="choice-btn" onclick="applyTemplateChoice('replace')"><span class="choice-ico">♻️</span><span class="choice-lbl" id="choice-rep-lbl">Zastąp listę</span><span class="choice-sub" id="choice-rep-sub">Nowa lista tylko z szablonu</span></button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeTplChoice()" id="tpl-choice-cancel" style="flex:1">Anuluj</button>
     </div>
   </div>
 </div>
@@ -661,6 +890,27 @@ const T={
     modalCancel:'Anuluj',modalSave:'Zapisz',modalPlaceholder:'np. rodzaj / marka...',
     savedTripsTitle:'Zapisane rejsy',saveTripTitle:'Zapisz rejs',saveTripPlaceholder:'np. Chorwacja 2025',
     saveTripCancel:'Anuluj',saveTripConfirm:'Zapisz',addModalTitle:'Dodaj produkt',addModalName:'Nazwa produktu',addModalCancel:'Anuluj',addModalConfirm:'Dodaj',
+    crewUnit:'os',boatsTitle:'Moje łodzie',
+    nameModalTitle:'Jak masz na imię?',nameModalSub:'Załoga zobaczy, kto jest online i kto co odhaczył.',nameModalPlaceholder:'np. Kuba',nameModalConfirm:'Dołącz',
+    crewOnline:'Załoga:',agoNow:'teraz',agoMin:'min temu',agoHour:'godz temu',agoDay:'dni temu',
+    analizaSplashTitle:'Analiza rejsów',analizaSplashName:'Czego nauczył się planer',
+    analizaSplashMeta:(t,p,a)=>`${t} ${t===1?'rejs':'rejsów'} · ${p} ${p===1?'sugestia':'sugestii'}${a>0?' · '+a+' aktywnych korekt':''}`,
+    analizaTitle:'Analiza rejsów',
+    analizaEmpty:'Brak danych. Zapisz przynajmniej jeden rejs (z kontrolą zapasów), a planer zacznie uczyć się Twoich norm.',
+    analizaIntroT:'Planer uczy się Twojej załogi',
+    analizaIntroS:(n)=>`Na podstawie ${n} ${n===1?'zapisanego rejsu':'zapisanych rejsów'} — odhaczeń, korekt ilości i kontroli zapasów — proponuje poprawki norm na kolejny raz.`,
+    analizaActive:(n)=>`${n} ${n===1?'aktywna korekta':'aktywnych korekt'} norm`,analizaReset:'wyzeruj',
+    analizaProposals:'Sugerowane korekty norm',analizaApplyAll:'Zastosuj wszystkie',
+    analizaBuyMore:(p)=>`kupuj o ${p}% więcej — często brakowało`,analizaBuyLess:(p)=>`kupuj o ${p}% mniej — często zostawało`,
+    analizaIgnore:'Ignoruj',analizaApply:'Zastosuj',
+    analizaLeftovers:'Najczęściej zostaje (przepłacałeś)',analizaShortages:'Najczęściej brakuje',
+    analizaFrequent:'Najczęstsze produkty',analizaDishes:'Najczęstsze dania',
+    analizaNoProps:'Brak nowych sugestii — normy pasują do Twojej historii. Zapisuj kolejne rejsy, by planer uczył się dalej.',
+    boatModalTitle:'Zapisz profil łodzi',boatModalSub:'Zapisuje załogę, rejon, styl gotowania i diety — bez liczby dni. Następnym razem wybierzesz łódź jednym kliknięciem.',boatModalPlaceholder:'np. Bavaria 46 / Moja załoga',
+    tplLabel:'Szablony',tplModalTitle:'Szablony zapasów',tplSaveCurrent:'+ Zapisz aktualną listę jako szablon',tplClose:'Zamknij',
+    tplEmpty:'Brak szablonów. Zapisz aktualną listę, aby użyć jej ponownie na kolejnym rejsie.',tplItems:'produktów',tplMenuTag:'menu',
+    tplChoiceTitle:'Zastosuj szablon',tplChoiceSub:'Jak dodać produkty z szablonu do listy?',
+    choiceAddLbl:'Dodaj do listy',choiceAddSub:'Dołącz produkty, zachowaj obecne',choiceRepLbl:'Zastąp listę',choiceRepSub:'Nowa lista tylko z szablonu',
     pwaTitle:'Dodaj do ekranu głównego',pwaSub:'Używaj jak natywna aplikacja',pwaBtn:'Dodaj',
     iosHintTitle:'Dodaj do ekranu głównego:',iosHintBody:'Naciśnij <strong>Udostępnij</strong> → <strong>Dodaj do ekranu głównego</strong>',
     sklep:['Mariny codziennie','Port co 2 dni','Sklepy rzadko','Dzicz'],
@@ -670,6 +920,15 @@ const T={
     styl:['Głównie restauracje','Pół na pół','Raczej jemy na jachcie','Gotujemy wszystko'],
     apetyt:['Lekko','Normalnie','Głodni żeglarze','Bardzo obficie'],
     apetytyub:['małe porcje','standardowa załoga','dużo ruchu','duże porcje'],
+    tabMenu:'Menu',menuLabel:'Plan posiłków',
+    menuIntroTitle:'Plan posiłków',
+    menuIntroSub:'Zaplanuj posiłki, a lista jedzenia ułoży się dokładnie pod nie — kupujesz tylko składniki zaplanowanych dań. Niezaplanowane posiłki nie dodają jedzenia. Owoce, przekąski, napoje i chemia liczą się dalej automatycznie.',
+    mealB:'Śniadanie',mealL:'Obiad',mealD:'Kolacja',pickEmpty:'+ wybierz danie',
+    menuApply:'Pokaż listę →',
+    menuSummaryOn:(n,m)=>`<b>${n}</b> składników z <b>${m}</b> zaplanowanych dań · niezaplanowane posiłki bez zakupów`,
+    menuSummaryEmpty:'Zaplanuj posiłki, aby lista liczyła tylko ich składniki',
+    menuSummaryOff:'Tryb szacunków — lista z norm dla całej załogi. Zaplanuj posiłek, aby liczyć dokładnie z menu.',
+    recipeModalTitle:'Wybierz danie',recipeClear:'Wyczyść',recipeClose:'Zamknij',
   },
   en:{
     splashTagline:'Stop guessing what to buy. Set your trip parameters — get an exact shopping list.',
@@ -694,6 +953,27 @@ const T={
     modalCancel:'Cancel',modalSave:'Save',modalPlaceholder:'e.g. type / brand...',
     savedTripsTitle:'Saved trips',saveTripTitle:'Save trip',saveTripPlaceholder:'e.g. Croatia 2025',
     saveTripCancel:'Cancel',saveTripConfirm:'Save',addModalTitle:'Add product',addModalName:'Product name',addModalCancel:'Cancel',addModalConfirm:'Add',
+    crewUnit:'crew',boatsTitle:'My boats',
+    nameModalTitle:'What\'s your name?',nameModalSub:'Your crew will see who\'s online and who checked off what.',nameModalPlaceholder:'e.g. Jake',nameModalConfirm:'Join',
+    crewOnline:'Crew:',agoNow:'now',agoMin:'min ago',agoHour:'h ago',agoDay:'d ago',
+    analizaSplashTitle:'Trip analytics',analizaSplashName:'What the planner learned',
+    analizaSplashMeta:(t,p,a)=>`${t} ${t===1?'trip':'trips'} · ${p} ${p===1?'suggestion':'suggestions'}${a>0?' · '+a+' active corrections':''}`,
+    analizaTitle:'Trip analytics',
+    analizaEmpty:'No data yet. Save at least one trip (with inventory tracking) and the planner will start learning your norms.',
+    analizaIntroT:'The planner learns your crew',
+    analizaIntroS:(n)=>`Based on ${n} saved ${n===1?'trip':'trips'} — check-offs, quantity edits and inventory — it proposes norm corrections for next time.`,
+    analizaActive:(n)=>`${n} active norm ${n===1?'correction':'corrections'}`,analizaReset:'reset',
+    analizaProposals:'Suggested norm corrections',analizaApplyAll:'Apply all',
+    analizaBuyMore:(p)=>`buy ${p}% more — often ran short`,analizaBuyLess:(p)=>`buy ${p}% less — often left over`,
+    analizaIgnore:'Ignore',analizaApply:'Apply',
+    analizaLeftovers:'Most often left over (overpaid)',analizaShortages:'Most often short',
+    analizaFrequent:'Most frequent products',analizaDishes:'Most frequent dishes',
+    analizaNoProps:'No new suggestions — norms fit your history. Keep saving trips so the planner keeps learning.',
+    boatModalTitle:'Save boat profile',boatModalSub:'Saves crew, region, cooking style and diets — without the number of days. Next time pick the boat in one tap.',boatModalPlaceholder:'e.g. Bavaria 46 / My crew',
+    tplLabel:'Templates',tplModalTitle:'Supply templates',tplSaveCurrent:'+ Save current list as template',tplClose:'Close',
+    tplEmpty:'No templates yet. Save your current list to reuse it on the next trip.',tplItems:'products',tplMenuTag:'menu',
+    tplChoiceTitle:'Apply template',tplChoiceSub:'How should template products be added to the list?',
+    choiceAddLbl:'Add to list',choiceAddSub:'Append products, keep current ones',choiceRepLbl:'Replace list',choiceRepSub:'New list from template only',
     pwaTitle:'Add to Home Screen',pwaSub:'Use like a native app',pwaBtn:'Add',
     iosHintTitle:'Add to Home Screen:',iosHintBody:'Tap <strong>Share</strong> → <strong>Add to Home Screen</strong>',
     sklep:['Marina daily','Port every 2 days','Shops rarely','Wilderness'],
@@ -703,6 +983,15 @@ const T={
     styl:['Mostly restaurants','Half and half','Mostly on board','Cook everything'],
     apetyt:['Light','Normal','Hungry sailors','Very hearty'],
     apetytyub:['small portions','standard crew','lots of activity','large portions'],
+    tabMenu:'Menu',menuLabel:'Meal plan',
+    menuIntroTitle:'Meal plan',
+    menuIntroSub:'Plan your meals and the food list adapts exactly — you only buy ingredients for the dishes you planned. Unplanned meals add no food. Fruit, snacks, drinks and cleaning are still estimated automatically.',
+    mealB:'Breakfast',mealL:'Lunch',mealD:'Dinner',pickEmpty:'+ pick a dish',
+    menuApply:'Show list →',
+    menuSummaryOn:(n,m)=>`<b>${n}</b> ingredients from <b>${m}</b> planned meals · unplanned meals add nothing`,
+    menuSummaryEmpty:'Plan meals so the list only counts their ingredients',
+    menuSummaryOff:'Estimate mode — list from crew norms. Plan a meal to drive it exactly from the menu.',
+    recipeModalTitle:'Pick a dish',recipeClear:'Clear',recipeClose:'Close',
   }
 };
 
@@ -727,6 +1016,29 @@ const PROD_NAMES={
   p63:{pl:'Ibuprom/paracetamol',en:'Ibuprofen/paracetamol'},p64:{pl:'Tabletki na morską',en:'Seasickness tablets'},p65:{pl:'Plastry + opatrunki',en:'Plasters + bandages'},p66:{pl:'Elektrolity',en:'Electrolytes'},p67:{pl:'Węgiel aktywny',en:'Activated charcoal'},p68:{pl:'Krem na oparzenia',en:'Burn cream'},
   p69:{pl:'Kiełbasa na ognisko',en:'Sausages for BBQ'},p70:{pl:'Mięso na grilla',en:'BBQ meat'},p71:{pl:'Tofu/tempeh na grilla',en:'Tofu/tempeh BBQ'},p72:{pl:'Pieczarki',en:'Mushrooms'},p73:{pl:'Sos BBQ/czosnkowy',en:'BBQ/garlic sauce'},p74:{pl:'Ser halloumi',en:'Halloumi'},p75:{pl:'Tacki aluminiowe',en:'Aluminium trays'},
   p76:{pl:'Piwo',en:'Beer'},p77:{pl:'Wino',en:'Wine'},p78:{pl:'Wódka/rum',en:'Vodka/rum'},
+  p79:{pl:'Jogurt',en:'Yoghurt'},
+  p80:{pl:'Parówki',en:'Frankfurters'},p81:{pl:'Mieszanka naleśnikowa',en:'Pancake mix'},p82:{pl:'Dżem',en:'Jam'},
+  p83:{pl:'Pasztet (puszka)',en:'Pâté (tin)'},p84:{pl:'Ogórek kiszony',en:'Pickled cucumber'},p85:{pl:'Cynamon',en:'Cinnamon'},
+  p86:{pl:'Ser topiony',en:'Processed cheese'},p87:{pl:'Płatki kukurydziane',en:'Corn flakes'},
+  p88:{pl:'Sos bolognese (słoik)',en:'Bolognese sauce (jar)'},p89:{pl:'Pulpety (słoik)',en:'Meatballs (jar)'},
+  p90:{pl:'Sos pieczarkowy (słoik)',en:'Mushroom sauce (jar)'},p91:{pl:'Grochówka (puszka)',en:'Pea soup (tin)'},
+  p92:{pl:'Gulasz (słoik)',en:'Goulash (jar)'},p93:{pl:'Majonez',en:'Mayonnaise'},p94:{pl:'Kukurydza (puszka)',en:'Sweetcorn (tin)'},
+  p95:{pl:'Zupa pomidorowa',en:'Tomato soup'},p96:{pl:'Fasolka po bretońsku (puszka)',en:'Baked beans (tin)'},
+  p97:{pl:'Pesto (słoik)',en:'Pesto (jar)'},p98:{pl:'Suszone pomidory (słoik)',en:'Sun-dried tomatoes (jar)'},
+  p99:{pl:'Żurek',en:'Sour rye soup'},p100:{pl:'Gołąbki (puszka)',en:'Cabbage rolls (tin)'},
+  p101:{pl:'Flaki (puszka)',en:'Tripe soup (tin)'},p102:{pl:'Kapusta kiszona',en:'Sauerkraut'},
+  p103:{pl:'Klopsy (słoik)',en:'Meatballs in sauce (jar)'},p104:{pl:'Puree instant',en:'Instant mash'},
+  p105:{pl:'Kurczak curry (słoik)',en:'Chicken curry (jar)'},p106:{pl:'Sos carbonara (słoik)',en:'Carbonara sauce (jar)'},
+  p107:{pl:'Zupa gulaszowa (puszka)',en:'Goulash soup (tin)'},
+  p108:{pl:'Kiełbasa niemiecka (Bratwurst)',en:'German sausage (Bratwurst)'},p109:{pl:'Kapusta czerwona',en:'Red cabbage'},p110:{pl:'Precel',en:'Pretzel'},p111:{pl:'Musztarda miodowa',en:'Honey mustard'},
+  p112:{pl:'Klopsiki szwedzkie',en:'Swedish meatballs'},p113:{pl:'Sos śmietanowy do klopsików',en:'Cream sauce'},p114:{pl:'Chleb chrupki',en:'Crispbread'},p115:{pl:'Konfitura z borówek',en:'Blueberry jam'},
+  p116:{pl:'Pršut (szynka dalmatyńska)',en:'Prosciutto (Dalmatian ham)'},p117:{pl:'Paški sir (ser owczy)',en:'Paški sheep cheese'},p118:{pl:'Ćevapi (mięso mielone)',en:'Ćevapi (minced meat)'},p119:{pl:'Ajvar',en:'Ajvar'},
+  p120:{pl:'Prosciutto',en:'Prosciutto'},p121:{pl:'Mozzarella',en:'Mozzarella'},p122:{pl:'Oliwki',en:'Olives'},p123:{pl:'Ryż arborio',en:'Arborio rice'},
+  p124:{pl:'Croissanty',en:'Croissants'},p125:{pl:'Terrine (pasztet francuski)',en:'French terrine'},p126:{pl:'Ser pleśniowy (brie/camembert)',en:'Blue cheese (brie/camembert)'},p127:{pl:'Musztarda dijon',en:'Dijon mustard'},
+  p128:{pl:'Feta',en:'Feta'},p129:{pl:'Oliwki kalamata',en:'Kalamata olives'},p130:{pl:'Tzatziki',en:'Tzatziki'},p131:{pl:'Gyros (mięso)',en:'Gyros meat'},
+  p132:{pl:'Fasola czarna (puszka)',en:'Black beans (tin)'},p133:{pl:'Przyprawa jerk',en:'Jerk seasoning'},p134:{pl:'Mleczko kokosowe',en:'Coconut milk'},p135:{pl:'Banan (plantain)',en:'Plantain banana'},
+  p136:{pl:'Pasta curry (czerwone/zielone)',en:'Curry paste (red/green)'},p137:{pl:'Sos rybny',en:'Fish sauce'},p138:{pl:'Makaron ryżowy',en:'Rice noodles'},
+  p139:{pl:'Chorizo',en:'Chorizo'},p140:{pl:'Ryż paella',en:'Paella rice'},p141:{pl:'Szafran',en:'Saffron'},p142:{pl:'Papryka wędzona (pimentón)',en:'Smoked paprika (pimentón)'},
 };
 
 const CAT_NAMES={pl:{Pieczywo:'Pieczywo',Lodówka:'Lodówka',Warzywa:'Warzywa',Owoce:'Owoce',Suche:'Suche',Trwałe:'Trwałe',Przekąski:'Przekąski',Napoje:'Napoje',Dodatki:'Dodatki',Chemia:'Chemia',Higiena:'Higiena',Apteczka:'Apteczka',Grill:'Grill',Alkohol:'Alkohol'},
@@ -748,16 +1060,39 @@ let state={
   drinks:{gazowana:0,soki:0,cola:0,syrop:0},
   wege:0,laktoza:0,gluten:0,grill:false,alkohol:false,
   bought:{},skip:{},comments:{},customQty:{},prices:{},
-  zapasy:{},currentDay:1,list:[],expenses:[],transfersDone:{}
+  zapasy:{},currentDay:1,list:[],expenses:[],transfersDone:{},customProducts:[],menu:{},menuMode:false,
+  boughtBy:{},crewSeen:{}
 };
 function save(){
   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}
-  // Sync to Supabase if sharing
+  // Sync to shared session (debounced)
   if(typeof shareSessionId!=='undefined' && shareSessionId){
-    syncToSupabase();
+    scheduleSync();
   }
 }
 function load(){try{const d=localStorage.getItem(STORAGE_KEY);if(d)Object.assign(state,JSON.parse(d));}catch(e){}}
+
+// Rebuild user-added products (names/prices/list rows) from persisted state.customProducts.
+// Fixes: custom product names were only kept in the in-memory PROD_NAMES and were lost on
+// reload / trip-load. Now they live in state and are reconstructed here.
+function rebuildCustomProducts(){
+  if(!Array.isArray(state.customProducts))state.customProducts=[];
+  if(state.customProducts.length){
+    if(!CAT_NAMES.pl['Inne'])CAT_NAMES.pl['Inne']='Inne';
+    if(!CAT_NAMES.en['Inne'])CAT_NAMES.en['Inne']='Other';
+    if(!CAT_ICONS['Inne'])CAT_ICONS['Inne']='📝';
+  }
+  state.customProducts.forEach(cp=>{
+    if(cp.name)PROD_NAMES[cp.id]={pl:cp.name,en:cp.name};
+    if(cp.price!=null && state.prices[cp.id]==null)state.prices[cp.id]=cp.price;
+    if(Array.isArray(state.list) && !state.list.find(p=>p.id===cp.id)){
+      const prod={id:cp.id,kat:cp.kat,jedn:cp.jedn,qty:cp.qty};
+      const lastIdx=state.list.reduce((acc,p,i)=>p.kat===cp.kat?i:acc,-1);
+      if(lastIdx>=0)state.list.splice(lastIdx+1,0,prod);
+      else state.list.push(prod);
+    }
+  });
+}
 
 // Saved trips
 const TRIPS_KEY='armator_trips_v1';
@@ -788,13 +1123,13 @@ const CFG={
 
 const DEFAULT_PRICES={
   p01:4,p02:0.8,p03:2,p04:8,p05:6,p06:9,
-  p07:7,p08:60,p09:55,p10:50,p11:1.5,p12:4,p13:6,
+  p07:7,p08:75,p09:55,p10:50,p11:1.5,p12:4,p13:6,
   p14:3,p15:2,p16:2,p17:2,p18:3,p19:4,
   p20:3,p21:8,p22:12,
   p23:12,p24:20,p25:8,p26:8,p27:16,p28:20,
   p29:8,p30:7,p31:5,p32:9,p33:4,p34:8,
   p35:3,p36:12,p37:60,p38:7,
-  p39:80,p40:8,p41:5,
+  p39:120,p40:8,p41:5,
   p42:2,p43:4,p44:5,p45:4,p46:8,
   p47:4,p48:5,p49:40,p50:5,p51:5,
   p52:6,p53:7,p54:4,p55:8,p56:15,
@@ -802,6 +1137,14 @@ const DEFAULT_PRICES={
   p63:15,p64:12,p65:10,p66:8,p67:6,p68:8,
   p69:25,p70:35,p71:30,p72:20,p73:8,p74:60,p75:5,
   p76:4,p77:30,p78:60,
+  p79:3,
+  p80:8,p81:6,p82:9,p83:5,p84:9,p85:6,p86:7,p87:8,p88:9,p89:13,p90:9,p91:8,p92:14,p93:9,p94:5,
+  p95:7,p96:8,p97:13,p98:15,p99:8,p100:12,p101:11,p102:8,p103:13,p104:7,p105:14,p106:10,p107:9,
+  p108:28,p109:6,p110:3,p111:9,p112:14,p113:8,p114:7,p115:12,
+  p116:90,p117:70,p118:45,p119:10,p120:85,p121:45,p122:14,p123:8,
+  p124:4,p125:16,p126:80,p127:11,p128:40,p129:15,p130:9,p131:40,
+  p132:5,p133:8,p134:6,p135:6,p136:13,p137:12,p138:7,
+  p139:38,p140:9,p141:25,p142:6,
 };
 
 // ══════════════════════════════════════
@@ -809,26 +1152,26 @@ const DEFAULT_PRICES={
 // id,kat,jedn,norma,nOsob,nDni,opak,grupaS,dieta,fixedPerTrip
 // ══════════════════════════════════════
 const PRODUCTS=[
-  ['p01','Pieczywo','szt',0.30,1,1,1,'sniadanie','',false],
+  ['p01','Pieczywo','szt',0.25,1,1,1,'sniadanie','',false],
   ['p02','Pieczywo','szt',0.40,1,1,1,'sniadanie','',false],
-  ['p03','Pieczywo','szt',0.10,1,1,6,'szybki','gluten',false],
+  ['p03','Pieczywo','szt',0.20,1,1,6,'szybki','gluten',false],
   ['p04','Pieczywo','opak',1,0,0,1,'sniadanie','gluten',false],
   ['p05','Pieczywo','szt',0.25,1,1,1,'sniadanie','zamiennik_gluten',false],
   ['p06','Pieczywo','opak',1,0,0,1,'sniadanie','zamiennik_gluten',false],
   ['p07','Lodówka','kostka',1,4,5,1,'sniadanie','',false],
-  ['p08','Lodówka','g',20,1,1,150,'sniadanie','laktoza',false],
-  ['p09','Lodówka','g',25,1,1,150,'sniadanie','zamiennik_laktoza',false],
-  ['p10','Lodówka','g',25,1,1,100,'sniadanie','wege',false],
+  ['p08','Lodówka','g',30,1,1,150,'sniadanie','laktoza',false],
+  ['p09','Lodówka','g',30,1,1,150,'sniadanie','zamiennik_laktoza',false],
+  ['p10','Lodówka','g',40,1,1,100,'sniadanie','wege',false],
   ['p11','Lodówka','szt',0.25,1,1,1,'sniadanie','',false],
-  ['p12','Lodówka','l',0.50,2,3,1,'sniadanie','laktoza',false],
+  ['p12','Lodówka','l',0.35,2,3,1,'sniadanie','laktoza',false],
   ['p13','Lodówka','l',0.20,1,1,1,'sniadanie','zamiennik_laktoza',false],
   ['p14','Warzywa','kg',0.30,1,5,1,'gotowanie','',false],
-  ['p15','Warzywa','szt',0.33,1,3,1,'gotowanie','',false],
+  ['p15','Warzywa','szt',0.30,1,3,1,'gotowanie','',false],
   ['p16','Warzywa','szt',0.25,1,1,1,'gotowanie','',false],
-  ['p17','Warzywa','szt',0.25,1,2,1,'sniadanie','',false],
-  ['p18','Warzywa','szt',0.25,1,2,1,'sniadanie','',false],
-  ['p19','Warzywa','szt',0.25,1,3,1,'gotowanie','',false],
-  ['p20','Owoce','szt',0.30,1,1,1,'przekaski','',false],
+  ['p17','Warzywa','szt',0.20,1,2,1,'sniadanie','',false],
+  ['p18','Warzywa','szt',0.20,1,2,1,'sniadanie','',false],
+  ['p19','Warzywa','szt',0.20,1,3,1,'gotowanie','',false],
+  ['p20','Owoce','szt',0.20,1,1,1,'przekaski','',false],
   ['p21','Owoce','kg',0.10,1,2,1,'przekaski','',false],
   ['p22','Owoce','kg',0.05,1,2,1,'przekaski','',false],
   ['p23','Suche','g',50,1,2,500,'gotowanie','gluten',false],
@@ -836,9 +1179,9 @@ const PRODUCTS=[
   ['p25','Suche','g',50,1,2,400,'gotowanie','',false],
   ['p26','Suche','g',40,1,2,400,'gotowanie','',false],
   ['p27','Suche','g',50,1,2,250,'sniadanie','gluten',false],
-  ['p28','Suche','g',40,1,2,300,'sniadanie','gluten',false],
-  ['p29','Trwałe','szt',0.25,1,2,1,'szybki','wege',false],
-  ['p30','Trwałe','szt',0.25,1,3,1,'szybki','',false],
+  ['p28','Suche','g',50,1,2,300,'sniadanie','gluten',false],
+  ['p29','Trwałe','szt',0.30,1,2,1,'szybki','wege',false],
+  ['p30','Trwałe','szt',0.20,1,3,1,'szybki','',false],
   ['p31','Trwałe','szt',0.25,1,2,1,'szybki','zamiennik_wege',false],
   ['p32','Trwałe','słoik',0.75,4,2,1,'gotowanie','',false],
   ['p33','Trwałe','szt',1,2,3,1,'szybki','',false],
@@ -846,8 +1189,8 @@ const PRODUCTS=[
   ['p35','Przekąski','szt',1,2,3,1,'przekaski','',false],
   ['p36','Przekąski','opak',0.75,4,3,1,'przekaski','gluten',false],
   ['p37','Przekąski','g',7,1,1,150,'przekaski','',false],
-  ['p38','Przekąski','opak',0.50,4,2,1,'przekaski','',false],
-  ['p39','Napoje','g',150,4,5,250,'kuchnia','',false],
+  ['p38','Przekąski','opak',0.75,4,2,1,'przekaski','',false],
+  ['p39','Napoje','g',100,4,5,250,'kuchnia','',false],
   ['p40','Napoje','torebki',0.50,1,1,20,'kuchnia','',false],
   ['p41','Napoje','g',5,1,1,25,'kuchnia','',false],
   ['p42','Napoje','l',0,0,0,1,'kuchnia','',false], // woda pitna
@@ -857,7 +1200,7 @@ const PRODUCTS=[
   ['p46','Napoje','szt',0,0,0,1,'kuchnia','',false],// syrop slider
   ['p47','Dodatki','opak',1,0,0,1,'kuchnia','',false],
   ['p48','Dodatki','opak',1,0,0,1,'kuchnia','',false],
-  ['p49','Dodatki','l',0.50,4,7,1,'kuchnia','',false],
+  ['p49','Dodatki','l',0.20,4,7,1,'kuchnia','',false],
   ['p50','Dodatki','szt',1,0,0,1,'kuchnia','',false],
   ['p51','Dodatki','szt',1,0,0,1,'kuchnia','',false],
   ['p52','Chemia','opak',1,0,0,1,'kuchnia','',false],
@@ -887,7 +1230,258 @@ const PRODUCTS=[
   ['p76','Alkohol','szt',1,1,2,1,'kuchnia','',false],
   ['p77','Alkohol','but.',1,4,3,1,'kuchnia','',false],
   ['p78','Alkohol','but.',1,5,2,1,'kuchnia','',false],
+  ['p79','Lodówka','szt',0.25,1,1,1,'sniadanie','laktoza',false],
+  // —— Składniki tylko-menu (norma 0: nie pojawiają się w estymatorze, dodaje je tylko przepis) ——
+  ['p80','Lodówka','opak',0,1,1,1,'sniadanie','',false],
+  ['p81','Suche','opak',0,1,1,1,'sniadanie','',false],
+  ['p82','Dodatki','słoik',0,1,1,1,'sniadanie','',false],
+  ['p83','Trwałe','szt',0,1,1,1,'sniadanie','',false],
+  ['p84','Trwałe','słoik',0,1,1,1,'sniadanie','',false],
+  ['p85','Dodatki','opak',0,1,1,1,'sniadanie','',false],
+  ['p86','Lodówka','opak',0,1,1,1,'sniadanie','',false],
+  ['p87','Suche','opak',0,1,1,1,'sniadanie','',false],
+  ['p88','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p89','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p90','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p91','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p92','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p93','Dodatki','szt',0,1,1,1,'gotowanie','',false],
+  ['p94','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p95','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p96','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p97','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p98','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p99','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p100','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p101','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p102','Trwałe','opak',0,1,1,1,'gotowanie','',false],
+  ['p103','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p104','Suche','opak',0,1,1,1,'gotowanie','',false],
+  ['p105','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p106','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p107','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p108','Grill','kg',0,1,1,1,'gotowanie','',false],
+  ['p109','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p110','Pieczywo','szt',0,1,1,1,'sniadanie','',false],
+  ['p111','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p112','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p113','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p114','Pieczywo','opak',0,1,1,1,'sniadanie','',false],
+  ['p115','Dodatki','słoik',0,1,1,1,'sniadanie','',false],
+  ['p116','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p117','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p118','Grill','kg',0,1,1,1,'gotowanie','',false],
+  ['p119','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p120','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p121','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p122','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p123','Suche','g',0,1,1,1,'gotowanie','',false],
+  ['p124','Pieczywo','szt',0,1,1,1,'sniadanie','',false],
+  ['p125','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p126','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p127','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p128','Lodówka','g',0,1,1,1,'gotowanie','',false],
+  ['p129','Trwałe','słoik',0,1,1,1,'gotowanie','',false],
+  ['p130','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p131','Grill','kg',0,1,1,1,'gotowanie','',false],
+  ['p132','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p133','Dodatki','opak',0,1,1,1,'gotowanie','',false],
+  ['p134','Trwałe','szt',0,1,1,1,'gotowanie','',false],
+  ['p135','Owoce','kg',0,1,1,1,'gotowanie','',false],
+  ['p136','Dodatki','słoik',0,1,1,1,'gotowanie','',false],
+  ['p137','Dodatki','but.',0,1,1,1,'gotowanie','',false],
+  ['p138','Suche','g',0,1,1,1,'gotowanie','',false],
+  ['p139','Lodówka','kg',0,1,1,1,'gotowanie','',false],
+  ['p140','Suche','g',0,1,1,1,'gotowanie','',false],
+  ['p141','Dodatki','opak',0,1,1,1,'gotowanie','',false],
+  ['p142','Dodatki','opak',0,1,1,1,'gotowanie','',false],
 ];
+
+// ══════════════════════════════════════
+// MEAL PLANNER (Plan posiłków → auto-lista)
+// Recipes map ingredients to existing product IDs with per-person quantities
+// (in each product's own unit). meal: b=breakfast, l=lunch, d=dinner.
+// ══════════════════════════════════════
+const PROD_BY_ID={};PRODUCTS.forEach(p=>{PROD_BY_ID[p[0]]=p;});
+
+const RECIPES=[
+  // ŚNIADANIA / BREAKFAST
+  {id:'rb1',meal:'b',icon:'🥪',veg:false,name:{pl:'Kanapki',en:'Sandwiches'},ing:[['p01',0.2],['p08',50],['p10',50],['p16',0.25],['p17',0.15]]},
+  {id:'rb2',meal:'b',icon:'🍳',veg:true,name:{pl:'Jajecznica',en:'Scrambled eggs'},ing:[['p11',2],['p01',0.25],['p15',0.15]]},
+  {id:'rb3',meal:'b',icon:'🥣',veg:true,name:{pl:'Owsianka',en:'Oatmeal'},ing:[['p27',60],['p12',0.25],['p20',0.5]]},
+  {id:'rb4',meal:'b',icon:'🥛',veg:true,name:{pl:'Musli z mlekiem',en:'Muesli & milk'},ing:[['p28',60],['p12',0.25]]},
+  {id:'rb5',meal:'b',icon:'🥛',veg:true,name:{pl:'Jogurt z dodatkami',en:'Yoghurt bowl'},ing:[['p79',1],['p20',0.5],['p28',40]]},
+  // OBIADY / LUNCH (szybkie)
+  {id:'rl1',meal:'l',icon:'🍽️',veg:false,name:{pl:'Restauracja',en:'Restaurant'},ing:[]},
+  {id:'rl2',meal:'l',icon:'🥫',veg:false,name:{pl:'Gotowa zupka',en:'Instant soup'},ing:[['p33',1]]},
+  {id:'rl3',meal:'l',icon:'🌯',veg:false,name:{pl:'Tortille z hummusem i kurczakiem',en:'Hummus & chicken wraps'},ing:[['p03',2],['p34',0.25],['p18',0.25],['p17',0.15],['p70',0.15]]},
+  {id:'rl4',meal:'l',icon:'🥗',veg:false,name:{pl:'Sałatka z tuńczykiem',en:'Tuna salad'},ing:[['p30',0.4],['p16',0.4],['p17',0.2],['p02',1]]},
+  {id:'rl5',meal:'l',icon:'🫘',veg:true,name:{pl:'Fasolka na grzance',en:'Beans on toast'},ing:[['p31',0.45],['p02',1],['p15',0.15]]},
+  // KOLACJE / DINNER (gotowane)
+  {id:'rd1',meal:'d',icon:'🍝',veg:true,name:{pl:'Makaron z sosem',en:'Pasta with sauce'},ing:[['p23',90],['p32',0.35],['p08',25]]},
+  {id:'rd2',meal:'d',icon:'🍚',veg:true,name:{pl:'Ryż z warzywami',en:'Rice & vegetables'},ing:[['p25',80],['p19',0.3],['p18',0.3],['p15',0.2]]},
+  {id:'rd3',meal:'d',icon:'🍲',veg:false,name:{pl:'Kasza z gulaszem',en:'Groats & stew'},ing:[['p26',70],['p29',0.5],['p15',0.2]]},
+  {id:'rd4',meal:'d',icon:'🐟',veg:false,name:{pl:'Ziemniaki z rybą',en:'Potatoes & fish'},ing:[['p14',0.3],['p30',0.5],['p15',0.15]]},
+  {id:'rd5',meal:'d',icon:'🍛',veg:true,name:{pl:'Curry warzywne',en:'Vegetable curry'},ing:[['p25',80],['p31',0.3],['p19',0.3],['p16',0.5]]},
+  {id:'rd6',meal:'d',icon:'🔥',veg:false,name:{pl:'Grill',en:'BBQ'},ing:[['p70',0.2],['p69',0.2],['p72',40],['p73',0.2],['p75',0.35],['p01',0.25]]},
+  {id:'rd7',meal:'d',icon:'🍽️',veg:false,name:{pl:'Restauracja',en:'Restaurant'},ing:[]},
+  // ══ NOWE ŚNIADANIA ══
+  {id:'rb6',meal:'b',icon:'🥣',veg:true,name:{pl:'Owsianka błyskawiczna',en:'Instant oatmeal'},ing:[['p27',60],['p12',0.25]]},
+  {id:'rb7',meal:'b',icon:'🍳',veg:false,name:{pl:'Jajecznica z boczkiem/szynką',en:'Eggs with bacon/ham'},ing:[['p11',2],['p10',30]]},
+  {id:'rb8',meal:'b',icon:'🧀',veg:false,name:{pl:'Tosty z serem i szynką',en:'Cheese & ham toasties'},ing:[['p01',0.25],['p08',50],['p10',25]]},
+  {id:'rb9',meal:'b',icon:'🥛',veg:true,name:{pl:'Musli z jogurtem',en:'Muesli with yoghurt'},ing:[['p28',50],['p79',1]]},
+  {id:'rb10',meal:'b',icon:'🥞',veg:true,name:{pl:'Naleśniki',en:'Pancakes'},ing:[['p81',0.25],['p11',1],['p12',0.1],['p82',0.1]]},
+  {id:'rb11',meal:'b',icon:'🥪',veg:false,name:{pl:'Kanapki z pasztetem',en:'Pâté sandwiches'},ing:[['p01',0.3],['p83',0.4],['p84',0.15]]},
+  {id:'rb12',meal:'b',icon:'🍚',veg:true,name:{pl:'Ryż na mleku',en:'Rice pudding'},ing:[['p25',60],['p12',0.25],['p85',0.05]]},
+  {id:'rb13',meal:'b',icon:'🌯',veg:false,name:{pl:'Tortilla z jajkiem i serem',en:'Egg & cheese tortilla'},ing:[['p03',1],['p11',2],['p86',0.3]]},
+  {id:'rb14',meal:'b',icon:'🫓',veg:true,name:{pl:'Bułki z hummusem',en:'Rolls with hummus'},ing:[['p02',1.5],['p34',0.25],['p16',0.2]]},
+  {id:'rb15',meal:'b',icon:'🥣',veg:true,name:{pl:'Płatki kukurydziane z mlekiem',en:'Corn flakes & milk'},ing:[['p87',0.15],['p12',0.25]]},
+  // ══ NOWE OBIADY ══
+  {id:'rl6',meal:'l',icon:'🍝',veg:false,name:{pl:'Spaghetti bolognese',en:'Spaghetti bolognese'},ing:[['p23',90],['p88',0.4]]},
+  {id:'rl7',meal:'l',icon:'🍚',veg:false,name:{pl:'Pulpety ze słoika z ryżem',en:'Jarred meatballs with rice'},ing:[['p89',0.5],['p25',80]]},
+  {id:'rl9',meal:'l',icon:'🥣',veg:false,name:{pl:'Grochówka z kiełbasą',en:'Pea soup & sausage'},ing:[['p91',0.5],['p69',0.15]]},
+  {id:'rl10',meal:'l',icon:'🍲',veg:false,name:{pl:'Ryż z gulaszem',en:'Rice with goulash'},ing:[['p92',0.5],['p25',80]]},
+  {id:'rl11',meal:'l',icon:'🌯',veg:false,name:{pl:'Wrap z tuńczykiem',en:'Tuna wrap'},ing:[['p03',1],['p30',0.35],['p93',0.1],['p94',0.3]]},
+  {id:'rl12',meal:'l',icon:'🍅',veg:true,name:{pl:'Zupa pomidorowa z makaronem',en:'Tomato soup & pasta'},ing:[['p95',0.5],['p23',35]]},
+  {id:'rl13',meal:'l',icon:'🫘',veg:false,name:{pl:'Fasolka po bretońsku z chlebem',en:'Baked beans & bread'},ing:[['p96',0.5],['p01',0.25]]},
+  {id:'rl14',meal:'l',icon:'🌿',veg:true,name:{pl:'Makaron z pesto',en:'Pasta with pesto'},ing:[['p23',90],['p97',0.2],['p98',0.15]]},
+  {id:'rl15',meal:'l',icon:'🥣',veg:false,name:{pl:'Żurek z kiełbasą',en:'Sour rye soup & sausage'},ing:[['p99',0.5],['p69',0.15],['p11',1]]},
+  // ══ NOWE KOLACJE ══
+  {id:'rd8',meal:'d',icon:'🥫',veg:false,name:{pl:'Konserwa mięsna z chlebem',en:'Meat tin with bread'},ing:[['p29',0.5],['p01',0.3]]},
+  {id:'rd9',meal:'d',icon:'🥬',veg:false,name:{pl:'Gołąbki z chlebem',en:'Cabbage rolls & bread'},ing:[['p100',0.5],['p01',0.3]]},
+  {id:'rd10',meal:'d',icon:'🍲',veg:false,name:{pl:'Flaki z puszki',en:'Tripe soup'},ing:[['p101',0.5],['p01',0.3]]},
+  {id:'rd11',meal:'d',icon:'🌭',veg:false,name:{pl:'Kiełbasa z kapustą kiszoną',en:'Sausage & sauerkraut'},ing:[['p69',0.25],['p102',0.25]]},
+  {id:'rd12',meal:'d',icon:'🍖',veg:false,name:{pl:'Klopsy z puree instant',en:'Meatballs & instant mash'},ing:[['p103',0.5],['p104',0.3]]},
+  {id:'rd13',meal:'d',icon:'🍛',veg:false,name:{pl:'Curry z kurczakiem i ryżem',en:'Chicken curry & rice'},ing:[['p105',0.5],['p25',80]]},
+  {id:'rd14',meal:'d',icon:'🍝',veg:false,name:{pl:'Makaron carbonara',en:'Pasta carbonara'},ing:[['p23',90],['p106',0.4]]},
+  {id:'rd15',meal:'d',icon:'🧀',veg:true,name:{pl:'Zapiekanka z pieczarkami',en:'Mushroom bread bake'},ing:[['p01',0.35],['p90',0.25],['p08',30]]},
+  {id:'rd16',meal:'d',icon:'🍲',veg:false,name:{pl:'Zupa gulaszowa z chlebem',en:'Goulash soup & bread'},ing:[['p107',0.5],['p01',0.3]]},
+  {id:'rd17',meal:'d',icon:'🥗',veg:false,name:{pl:'Sałatka z tuńczykiem',en:'Tuna salad'},ing:[['p30',0.5],['p94',0.3],['p31',0.3],['p93',0.1]]},
+  // ══ KUCHNIE ŚWIATA ══
+  // —— NIEMIECKA ——
+  {id:'rb17',meal:'b',icon:'🥪',veg:false,name:{pl:'Bułka z szynką i musztardą miodową',en:'Ham roll with honey mustard'},ing:[['p02',1],['p10',25],['p111',0.1]]},
+  {id:'rb18',meal:'b',icon:'🥚',veg:true,name:{pl:'Jajka z chlebem po niemiecku',en:'Eggs & bread, German style'},ing:[['p11',2],['p01',0.3]]},
+  {id:'rl17',meal:'l',icon:'🍖',veg:false,name:{pl:'Sznycel z ziemniakami',en:'Schnitzel with potatoes'},ing:[['p70',0.2],['p14',0.25]]},
+  {id:'rd18',meal:'d',icon:'🌭',veg:false,name:{pl:'Bratwurst z kapustą czerwoną',en:'Bratwurst with red cabbage'},ing:[['p108',0.2],['p109',0.25],['p01',0.3]]},
+  {id:'rd20',meal:'d',icon:'🍛',veg:false,name:{pl:'Gulasz wołowy z kluskami',en:'Beef goulash with noodles'},ing:[['p92',0.5],['p23',80]]},
+  {id:'rd21',meal:'d',icon:'🍲',veg:false,name:{pl:'Kapusta czerwona z ziemniakami i kiełbasą',en:'Red cabbage, potatoes & sausage'},ing:[['p109',0.3],['p14',0.2],['p108',0.15]]},
+  // —— SZWEDZKA ——
+  {id:'rb20',meal:'b',icon:'🥞',veg:true,name:{pl:'Naleśniki z konfiturą z borówek',en:'Pancakes with blueberry jam'},ing:[['p81',0.25],['p11',1],['p115',0.15]]},
+  {id:'rb21',meal:'b',icon:'🫠',veg:true,name:{pl:'Jogurt z borówkami',en:'Yoghurt with blueberries'},ing:[['p79',1],['p115',0.1]]},
+  {id:'rl19',meal:'l',icon:'🍽️',veg:false,name:{pl:'Klopsiki szwedzkie z ziemniakami',en:'Swedish meatballs with potatoes'},ing:[['p112',0.5],['p113',0.2],['p14',0.2]]},
+  {id:'rd22',meal:'d',icon:'🍚',veg:false,name:{pl:'Klopsiki w sosie śmietanowym z ryżem',en:'Meatballs in cream sauce with rice'},ing:[['p112',0.5],['p113',0.2],['p25',80]]},
+  {id:'rd25',meal:'d',icon:'🧀',veg:false,name:{pl:'Zapiekanka ziemniaczana z klopsikami',en:'Potato bake with meatballs'},ing:[['p14',0.25],['p112',0.4],['p08',20]]},
+  // —— CHORWACKA ——
+  {id:'rb22',meal:'b',icon:'🥓',veg:false,name:{pl:'Pršut z serem owczym',en:'Pršut with sheep cheese'},ing:[['p116',120],['p117',150]]},
+  {id:'rb23',meal:'b',icon:'🫳',veg:true,name:{pl:'Bułki z ajvarem i serem',en:'Rolls with ajvar & cheese'},ing:[['p02',1],['p119',0.1],['p08',20]]},
+  {id:'rb24',meal:'b',icon:'🍳',veg:false,name:{pl:'Jajka z pršutem',en:'Eggs with pršut'},ing:[['p11',2],['p116',60]]},
+  {id:'rl23',meal:'l',icon:'🥗',veg:true,name:{pl:'Sałatka z serem owczym i pomidorem',en:'Sheep cheese & tomato salad'},ing:[['p117',150],['p16',0.5],['p17',0.25]]},
+  {id:'rl24',meal:'l',icon:'🍝',veg:true,name:{pl:'Makaron z ajvarem',en:'Pasta with ajvar'},ing:[['p23',90],['p119',0.2]]},
+  {id:'rd28',meal:'d',icon:'🍚',veg:true,name:{pl:'Ryż z ajvarem i serem owczym',en:'Rice with ajvar & sheep cheese'},ing:[['p25',80],['p119',0.2],['p117',100]]},
+  // —— WłOSKA ——
+  {id:'rb25',meal:'b',icon:'🥪',veg:false,name:{pl:'Bułki z prosciutto i mozzarellą',en:'Rolls with prosciutto & mozzarella'},ing:[['p02',1],['p120',100],['p121',150]]},
+  {id:'rb26',meal:'b',icon:'🍅',veg:true,name:{pl:'Tosty caprese',en:'Caprese toasts'},ing:[['p01',0.3],['p121',100],['p16',0.3]]},
+  {id:'rl25',meal:'l',icon:'🥗',veg:true,name:{pl:'Sałatka caprese z oliwkami',en:'Caprese salad with olives'},ing:[['p121',150],['p16',0.4],['p122',0.15]]},
+  {id:'rl26',meal:'l',icon:'🥙',veg:false,name:{pl:'Panini z prosciutto',en:'Panini with prosciutto'},ing:[['p02',1.5],['p120',120],['p121',100]]},
+  {id:'rl27',meal:'l',icon:'🍝',veg:true,name:{pl:'Makaron z oliwkami i pomidorem',en:'Pasta with olives & tomato'},ing:[['p23',90],['p122',0.15],['p16',0.35]]},
+  {id:'rd30',meal:'d',icon:'🍚',veg:true,name:{pl:'Risotto z pieczarkami',en:'Mushroom risotto'},ing:[['p123',80],['p72',200]]},
+  {id:'rd31',meal:'d',icon:'🍝',veg:true,name:{pl:'Makaron z mozzarellą i pomidorem',en:'Pasta with mozzarella & tomato'},ing:[['p23',90],['p121',100],['p16',0.35]]},
+  {id:'rd32',meal:'d',icon:'🧀',veg:false,name:{pl:'Zapiekanka z prosciutto i mozzarellą',en:'Prosciutto & mozzarella bake'},ing:[['p01',0.3],['p120',100],['p121',150]]},
+  {id:'rd33',meal:'d',icon:'🍚',veg:true,name:{pl:'Risotto z oliwkami',en:'Risotto with olives'},ing:[['p123',80],['p122',0.1]]},
+  // —— FRANCUSKA ——
+  {id:'rb28',meal:'b',icon:'🥐',veg:true,name:{pl:'Croissanty z masłem',en:'Croissants with butter'},ing:[['p124',1.5],['p07',0.1]]},
+  {id:'rb30',meal:'b',icon:'🍞',veg:true,name:{pl:'Tosty francuskie',en:'French toast'},ing:[['p01',0.3],['p11',1],['p12',0.15],['p85',0.02]]},
+  {id:'rl29',meal:'l',icon:'🥗',veg:true,name:{pl:'Sałatka z serem pleśniowym',en:'Blue cheese salad'},ing:[['p126',80],['p16',0.35],['p17',0.3]]},
+  {id:'rl30',meal:'l',icon:'🍲',veg:true,name:{pl:'Zupa cebulowa z chlebem',en:'Onion soup with bread'},ing:[['p15',0.3],['p01',0.3],['p08',20]]},
+  {id:'rd34',meal:'d',icon:'🍗',veg:false,name:{pl:'Kurczak w musztardzie dijon z ziemniakami',en:'Chicken in dijon mustard with potatoes'},ing:[['p70',0.2],['p127',0.1],['p14',0.25]]},
+  // —— GRECKA ——
+  {id:'rb31',meal:'b',icon:'🧀',veg:true,name:{pl:'Jogurt z fetą i oliwkami',en:'Yoghurt with feta & olives'},ing:[['p79',1],['p128',80],['p129',0.1]]},
+  {id:'rb32',meal:'b',icon:'🫳',veg:true,name:{pl:'Bułki z fetą i pomidorem',en:'Rolls with feta & tomato'},ing:[['p02',1],['p128',100],['p16',0.3]]},
+  {id:'rl31',meal:'l',icon:'🥗',veg:true,name:{pl:'Sałatka grecka',en:'Greek salad'},ing:[['p128',120],['p129',0.1],['p16',0.3],['p17',0.2]]},
+  {id:'rl32',meal:'l',icon:'🌯',veg:false,name:{pl:'Gyros w tortilli z tzatziki',en:'Gyros wrap with tzatziki'},ing:[['p131',0.25],['p03',1],['p130',0.15]]},
+  {id:'rl33',meal:'l',icon:'🍝',veg:true,name:{pl:'Makaron z fetą i oliwkami',en:'Pasta with feta & olives'},ing:[['p23',90],['p128',100],['p129',0.15]]},
+  {id:'rd39',meal:'d',icon:'🔥',veg:false,name:{pl:'Grillowany gyros z pieczarkami',en:'Grilled gyros with mushrooms'},ing:[['p131',0.3],['p72',200]]},
+  // —— KARAIBSKA ——
+  {id:'rb34',meal:'b',icon:'🥥',veg:true,name:{pl:'Owsianka kokosowa',en:'Coconut oatmeal'},ing:[['p27',60],['p134',0.2]]},
+  {id:'rb35',meal:'b',icon:'🍌',veg:true,name:{pl:'Smażony banan z chlebem',en:'Fried plantain with bread'},ing:[['p135',0.3],['p01',0.3]]},
+  {id:'rb36',meal:'b',icon:'🍳',veg:true,name:{pl:'Jajka z fasolą czarną',en:'Eggs with black beans'},ing:[['p11',2],['p132',0.25]]},
+  {id:'rl34',meal:'l',icon:'🍚',veg:true,name:{pl:'Ryż z fasolą czarną',en:'Rice with black beans'},ing:[['p25',80],['p132',0.3]]},
+  {id:'rl35',meal:'l',icon:'🍗',veg:false,name:{pl:'Kurczak jerk z ryżem',en:'Jerk chicken with rice'},ing:[['p70',0.25],['p133',0.05],['p25',80]]},
+  {id:'rd43',meal:'d',icon:'🐟',veg:false,name:{pl:'Ryba w mleczku kokosowym z ryżem',en:'Fish in coconut milk with rice'},ing:[['p30',0.35],['p134',0.25],['p25',80]]},
+  {id:'rd44',meal:'d',icon:'🫘',veg:true,name:{pl:'Fasola czarna z ryżem i cebulą',en:'Black beans with rice & onion'},ing:[['p132',0.3],['p25',80],['p15',0.2]]},
+  {id:'rd45',meal:'d',icon:'🍛',veg:false,name:{pl:'Curry karaibskie z kurczakiem',en:'Caribbean chicken curry'},ing:[['p70',0.25],['p134',0.25],['p133',0.05]]},
+  // —— TAJSKA ——
+  {id:'rb38',meal:'b',icon:'🍜',veg:true,name:{pl:'Makaron ryżowy z jajkiem',en:'Rice noodles with egg'},ing:[['p138',80],['p11',1]]},
+  {id:'rl37',meal:'l',icon:'🍛',veg:false,name:{pl:'Kurczak w curry tajskim z ryżem',en:'Thai curry chicken with rice'},ing:[['p70',0.25],['p136',0.3],['p25',80]]},
+  {id:'rl38',meal:'l',icon:'🍜',veg:true,name:{pl:'Makaron ryżowy z warzywami',en:'Rice noodles with vegetables'},ing:[['p138',80],['p19',0.3]]},
+  {id:'rl39',meal:'l',icon:'🍲',veg:true,name:{pl:'Zupa tajska z mleczkiem kokosowym',en:'Thai soup with coconut milk'},ing:[['p134',0.3],['p138',50]]},
+  {id:'rd46',meal:'d',icon:'🍛',veg:false,name:{pl:'Curry zielone z kurczakiem i ryżem',en:'Green curry chicken with rice'},ing:[['p70',0.25],['p136',0.3],['p25',80]]},
+  {id:'rd48',meal:'d',icon:'🍜',veg:false,name:{pl:'Makaron ryżowy z tuńczykiem',en:'Rice noodles with tuna'},ing:[['p138',80],['p30',0.35]]},
+  // —— HISZPAŃSKA ——
+  {id:'rb41',meal:'b',icon:'🍳',veg:false,name:{pl:'Jajka z chorizo',en:'Eggs with chorizo'},ing:[['p11',2],['p139',0.15]]},
+  {id:'rl42',meal:'l',icon:'🍲',veg:false,name:{pl:'Zupa z fasolą i chorizo',en:'Bean & chorizo soup'},ing:[['p31',0.5],['p139',0.15]]},
+  {id:'rd50',meal:'d',icon:'🥘',veg:true,name:{pl:'Paella z szafranem',en:'Saffron paella'},ing:[['p140',90],['p141',0.02],['p16',0.3]]},
+  {id:'rd51',meal:'d',icon:'🥘',veg:false,name:{pl:'Paella z chorizo i papryką',en:'Chorizo & paprika paella'},ing:[['p140',90],['p139',0.2],['p142',0.02]]},
+  {id:'rd53',meal:'d',icon:'🍚',veg:true,name:{pl:'Ryż z papryką wędzoną i cebulą',en:'Rice with smoked paprika & onion'},ing:[['p140',80],['p142',0.03],['p15',0.2]]},
+];
+const RECIPE_BY_ID={};RECIPES.forEach(r=>{RECIPE_BY_ID[r.id]=r;});
+
+// Food categories whose quantities the menu governs when menu-mode is ON.
+// Everything else (fruit, snacks, drinks, condiments, cleaning, hygiene,
+// first-aid, alcohol) always comes from the smart estimator.
+const MENU_OWNED_CATS=['Pieczywo','Lodówka','Warzywa','Suche','Trwałe','Grill'];
+
+function hasMenuPlanned(){
+  return Object.values(state.menu||{}).some(d=>d&&(d.b||d.l||d.d));
+}
+// Aggregate ingredients across all planned meals → {productId: rawQty}
+function calcMenuQty(){
+  const eaters=state.adults+state.children*0.7;
+  const mApetyt=CFG.apetyt[state.apetyt]||1;
+  const totals={};
+  Object.values(state.menu||{}).forEach(day=>{
+    if(!day)return;
+    ['b','l','d'].forEach(slot=>{
+      const r=day[slot]?RECIPE_BY_ID[day[slot]]:null;
+      if(!r)return;
+      r.ing.forEach(([pid,per])=>{totals[pid]=(totals[pid]||0)+per*eaters*mApetyt;});
+    });
+  });
+  return totals;
+}
+function roundPack(qty,opak){opak=opak||1;return Math.ceil(qty/opak)*opak;}
+
+// Build the shopping list. In menu-mode (toggle on + at least one meal planned),
+// food categories are driven by the meal plan; otherwise pure estimator.
+function buildList(){
+  const useMenu=state.menuMode&&hasMenuPlanned();
+  const mq=useMenu?calcMenuQty():null;
+  // Fallback share = fraction of days with NO meals planned at all. Days that
+  // have any dish planned are considered fully covered by the menu for staple
+  // categories (avoids double-counting: e.g. planning breakfast shouldn't also
+  // pull a lunch/dinner share of bread from the generic estimator for that day).
+  // Only completely unplanned days still draw their share from the estimator.
+  let fallback=0;
+  if(useMenu){
+    let emptyDays=0;
+    for(let d=1;d<=state.days;d++){
+      const day=state.menu[d];
+      if(!day||(!day.b&&!day.l&&!day.d))emptyDays++;
+    }
+    fallback=state.days>0?emptyDays/state.days:0;
+  }
+  return PRODUCTS.map(p=>{
+    let qty,fromMenu=false;
+    if(useMenu){
+      if(mq[p[0]]!=null){qty=roundPack(mq[p[0]]+calcQty(p)*fallback,p[6]);fromMenu=true;}
+      else if(MENU_OWNED_CATS.includes(p[1]))qty=roundPack(calcQty(p)*fallback,p[6]);
+      else qty=calcQty(p);
+    }else{
+      qty=calcQty(p);
+    }
+    return {id:p[0],kat:p[1],jedn:p[2],qty,fromMenu};
+  }).filter(p=>p.qty>0);
+}
 
 // ══════════════════════════════════════
 // ENGINE
@@ -897,7 +1491,8 @@ function calcQty(p){
   const ekw=state.adults+state.children*0.7;
   const dni=state.days;
   if(fixedPerTrip) return 1;
-  if(id==='p42'){return Math.ceil(ekw*dni*(CFG.wodaNorma[state.rejon]||2.0));}
+  const mLearn=(typeof NORM_FACTORS!=='undefined'&&NORM_FACTORS[id])?NORM_FACTORS[id]:1;
+  if(id==='p42'){return Math.ceil(ekw*dni*(CFG.wodaNorma[state.rejon]||2.0)*mLearn);}
   if(id==='p43') return state.drinks.gazowana>0?Math.ceil(state.drinks.gazowana*ekw*dni):0;
   if(id==='p44') return state.drinks.soki>0?Math.ceil(state.drinks.soki*ekw*dni):0;
   if(id==='p45') return state.drinks.cola>0?Math.ceil(state.drinks.cola*ekw*dni):0;
@@ -919,6 +1514,7 @@ function calcQty(p){
   else if(dieta==='zamiennik_laktoza') qty*=Math.min(1,state.laktoza/ekw);
   else if(dieta==='gluten') qty*=Math.max(0,1-state.gluten/ekw);
   else if(dieta==='zamiennik_gluten') qty*=Math.min(1,state.gluten/ekw);
+  qty*=mLearn; // learned correction from past-trip analytics (feature #4)
   if(qty<=0) return 0;
   return Math.ceil(qty/opak)*opak;
 }
@@ -996,6 +1592,9 @@ function applyLang(){
   el('cfg-extras').textContent=L.cfgExtras;el('cfg-grill').textContent=L.cfgGrill;
   el('cfg-alc').textContent=L.cfgAlc;el('cfg-alc-sub').textContent=L.cfgAlcSub;
   el('btn-generate').textContent=L.btnGenerate;
+  document.querySelectorAll('.tbl-menu').forEach(s=>{s.textContent=L.tabMenu;});
+  if(el('menu-label'))el('menu-label').textContent=L.menuLabel;
+  if(el('screen-menu')&&el('screen-menu').classList.contains('active'))renderMenu();
   ['tab-lista','tab-lista-z','tab-lista-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabLista;});
   ['tab-zapasy','tab-zapasy-z','tab-zapasy-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabZapasy;});
   ['tab-koszty','tab-koszty-z','tab-koszty-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabKoszt;});
@@ -1014,6 +1613,8 @@ function applyLang(){
   if(el('add-modal-cancel'))el('add-modal-cancel').textContent=L.addModalCancel;
   if(el('add-modal-confirm'))el('add-modal-confirm').textContent=L.addModalConfirm;
   if(el('saved-trips-title'))el('saved-trips-title').textContent=L.savedTripsTitle;
+  if(el('cfg-save-boat'))el('cfg-save-boat').textContent='⚓ '+(state.lang==='en'?'Save as boat profile':'Zapisz jako profil łodzi');
+  if(el('tpl-label'))el('tpl-label').textContent=L.tplLabel;
   if(el('save-modal-title'))el('save-modal-title').textContent=L.saveTripTitle;
   if(el('save-modal-input'))el('save-modal-input').placeholder=L.saveTripPlaceholder;
   if(el('save-modal-cancel'))el('save-modal-cancel').textContent=L.saveTripCancel;
@@ -1081,6 +1682,8 @@ function showScreen(name){
   if(name==='splash')renderSavedTrips();
   if(name==='config')renderSavedTrips();
   if(name==='rozliczenie')renderRozliczenie();
+  if(name==='menu')renderMenu();
+  if(name==='analiza')renderAnaliza();
   // Update tab-bar active state
   ['lista','zapasy','koszty'].forEach(tab=>{
     ['tb'].forEach(suffix=>{
@@ -1119,8 +1722,9 @@ function updateDrink(drink,val){
 // GENERATE
 // ══════════════════════════════════════
 function generateList(){
-  state.list=PRODUCTS.map(p=>({id:p[0],kat:p[1],jedn:p[2],qty:calcQty(p)})).filter(p=>p.qty>0);
+  state.list=buildList();
   state.bought={};state.skip={};state.comments={};state.customQty={};
+  rebuildCustomProducts(); // keep user-added products after regenerating the list
   const ekw=state.adults+state.children*0.7;
   const adultsStr=state.lang==='pl'?`${state.adults} ${state.adults===1?'dorosły':'dorosłych'}`:`${state.adults} ${state.adults===1?'adult':'adults'}`;
   const daysStr=state.lang==='pl'?`${state.days} ${state.days===1?'dzień':'dni'}`:`${state.days} ${state.days===1?'day':'days'}`;
@@ -1147,20 +1751,30 @@ function renderLista(){
     const comment=state.comments[p.id]||'';
     const customQ=state.customQty[p.id]??p.qty;
     html+=`<div class="product-row ${bought?'bought':''} ${skip?'skip':''}" id="row-${p.id}">
-      <div style="flex:1;min-width:0"><div class="prod-name">${pn(p.id)}</div>${comment?`<div class="prod-comment">💬 ${comment}</div>`:''}</div>
+      <div style="flex:1;min-width:0"><div class="prod-name">${pn(p.id)}${p.fromMenu?' <span class="menu-badge" title="z menu">🍽️</span>':''}</div>${comment?`<div class="prod-comment">💬 ${comment}</div>`:''}${(bought&&state.boughtBy&&state.boughtBy[p.id])?`<div class="bought-by">✓ ${state.boughtBy[p.id]}</div>`:''}</div>
       <div class="prod-qty-wrap">${isReadonly?`<span class="prod-qty-input" style="display:inline-block;pointer-events:none;opacity:0.6">${customQ}</span>`:`<input class="prod-qty-input" type="number" min="0" step="${p.jedn==='g'?50:p.jedn==='kg'?0.1:1}" value="${customQ}" onchange="setCustomQty('${p.id}',this.value)">`}<span class="prod-qty-unit">${tu(p.jedn)}</span></div>
       <div class="prod-actions">
         <button class="prod-comment-btn ${comment?'has-comment':''}" onclick="openModal('${p.id}')">💬</button>
-        <button class="prod-skip-btn" onclick="toggleSkip('${p.id}')">${skip?'✗':'–'}</button>
+        ${(!isReadonly && p.id.startsWith('custom_'))?`<button class="prod-skip-btn" style="color:var(--red);border-color:rgba(255,71,87,0.4)" onclick="deleteCustomProduct('${p.id}')" title="Usuń">🗑</button>`:`<button class="prod-skip-btn" onclick="toggleSkip('${p.id}')">${skip?'✗':'–'}</button>`}
         <button class="prod-check" onclick="toggleBought('${p.id}')">${bought?'✓':''}</button>
       </div>
     </div>`;
   });
   el('lista-content').innerHTML=html;
   updateProgress();updateCostBar();
+  if(typeof renderCrewBar==='function')renderCrewBar();
 }
 
-function toggleBought(id){state.bought[id]=!state.bought[id];if(state.bought[id])state.skip[id]=false;renderLista();save();}
+function toggleBought(id){
+  state.bought[id]=!state.bought[id];
+  if(state.bought[id]){
+    state.skip[id]=false;
+    if(typeof shareSessionId!=='undefined' && shareSessionId){if(!state.boughtBy)state.boughtBy={};state.boughtBy[id]=myCrewName();}
+  }else{
+    if(state.boughtBy)delete state.boughtBy[id];
+  }
+  renderLista();save();
+}
 function toggleSkip(id){state.skip[id]=!state.skip[id];if(state.skip[id])state.bought[id]=false;renderLista();save();}
 function setCustomQty(id,val){const n=parseFloat(val);if(!isNaN(n)&&n>=0){state.customQty[id]=n;updateProgress();updateCostBar();save();}}
 function updateProgress(){
@@ -1211,6 +1825,104 @@ function confirmSaveTrip(){
 el('save-modal').addEventListener('click',function(e){if(e.target===this)closeSaveModal();});
 
 // ══════════════════════════════════════
+// MEAL PLANNER UI
+// ══════════════════════════════════════
+let _pickDay=null,_pickSlot=null;
+function rn(r){return (r.name&&(r.name[state.lang]||r.name.pl))||'';}
+function renderMenu(){
+  if(!state.menu)state.menu={};
+  const L=t();
+  const meta=el('lista-meta')?el('lista-meta').textContent:'';
+  if(el('menu-meta'))el('menu-meta').textContent=meta;
+  if(el('menu-mode-toggle'))el('menu-mode-toggle').classList.toggle('on',!!state.menuMode);
+  if(el('menu-intro-title'))el('menu-intro-title').textContent=L.menuIntroTitle;
+  if(el('menu-intro-sub'))el('menu-intro-sub').textContent=L.menuIntroSub;
+  if(el('menu-apply-btn'))el('menu-apply-btn').textContent=L.menuApply;
+  const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+  let html='';
+  for(let d=1;d<=state.days;d++){
+    const day=state.menu[d]||{};
+    html+=`<div class="menu-day"><div class="menu-day-head"><span class="menu-day-num">${d}</span><span class="menu-day-label">${cap(L.dayLabel)} ${d}</span></div>`;
+    [['b',L.mealB],['l',L.mealL],['d',L.mealD]].forEach(([s,mealName])=>{
+      const r=day[s]?RECIPE_BY_ID[day[s]]:null;
+      if(r){
+        html+=`<div class="menu-slot"><span class="menu-slot-meal">${mealName}</span><div class="menu-slot-pick" onclick="openRecipeModal(${d},'${s}')"><span class="menu-slot-icon">${r.icon}</span><span class="menu-slot-name">${rn(r)}</span></div><button class="menu-slot-clear" onclick="clearSlot(${d},'${s}')" title="${L.recipeClear}">✕</button></div>`;
+      }else{
+        html+=`<div class="menu-slot"><span class="menu-slot-meal">${mealName}</span><div class="menu-slot-pick empty" onclick="openRecipeModal(${d},'${s}')">${L.pickEmpty}</div></div>`;
+      }
+    });
+    html+='</div>';
+  }
+  if(el('menu-days'))el('menu-days').innerHTML=html;
+  const cnt=Object.keys(calcMenuQty()).length;
+  let planned=0;
+  Object.values(state.menu||{}).forEach(d=>{if(d){['b','l','d'].forEach(s=>{if(d[s])planned++;});}});
+  if(el('menu-summary-txt')){
+    el('menu-summary-txt').innerHTML=state.menuMode?(planned>0?L.menuSummaryOn(cnt,planned):L.menuSummaryEmpty):L.menuSummaryOff;
+  }
+}
+function openRecipeModal(day,slot){
+  _pickDay=day;_pickSlot=slot;
+  const L=t();
+  const list=RECIPES.filter(r=>r.meal===slot);
+  let html='';
+  list.forEach(r=>{
+    const ingNames=r.ing.length?r.ing.slice(0,4).map(([pid])=>pn(pid)).join(', '):(state.lang==='en'?'🏖️ Eating ashore — nothing to buy':'🏖️ Jecie na lądzie — nic do kupienia');
+    html+=`<button class="recipe-card" onclick="pickRecipe('${r.id}')"><span class="recipe-card-icon">${r.icon}</span><div class="recipe-card-body"><div class="recipe-card-name">${rn(r)}${r.veg?`<span class="recipe-veg">${state.lang==='en'?'veg':'wege'}</span>`:''}</div><div class="recipe-card-ing">${ingNames}</div></div></button>`;
+  });
+  if(el('recipe-list'))el('recipe-list').innerHTML=html;
+  const mealName=slot==='b'?L.mealB:slot==='l'?L.mealL:L.mealD;
+  if(el('recipe-modal-title'))el('recipe-modal-title').textContent=`${mealName} · ${cap0(L.dayLabel)} ${day}`;
+  if(el('recipe-clear-btn'))el('recipe-clear-btn').textContent=L.recipeClear;
+  if(el('recipe-cancel-btn'))el('recipe-cancel-btn').textContent=L.recipeClose;
+  el('recipe-modal').classList.remove('hidden');
+}
+function cap0(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+function closeRecipeModal(){el('recipe-modal').classList.add('hidden');}
+function pickRecipe(rid){
+  if(!state.menu[_pickDay])state.menu[_pickDay]={};
+  state.menu[_pickDay][_pickSlot]=rid;
+  // First planned dish auto-enables menu-driven list (so the list reacts immediately)
+  if(!state.menuMode)state.menuMode=true;
+  closeRecipeModal();
+  rebuildListFromMenu();
+  renderMenu();save();
+}
+function clearSlot(day,slot){
+  if(state.menu[day]){delete state.menu[day][slot];if(!state.menu[day].b&&!state.menu[day].l&&!state.menu[day].d)delete state.menu[day];}
+  if(state.menuMode)rebuildListFromMenu();
+  renderMenu();save();
+}
+function clearCurrentSlot(){if(_pickDay!=null&&_pickSlot)clearSlot(_pickDay,_pickSlot);closeRecipeModal();}
+function toggleMenuMode(){
+  state.menuMode=!state.menuMode;
+  if(el('menu-mode-toggle'))el('menu-mode-toggle').classList.toggle('on',state.menuMode);
+  rebuildListFromMenu(); // switch list between menu-driven and estimator
+  renderMenu();save();
+}
+// Live rebuild that preserves manual edits (qty/comments) and only drops bought
+// flags for items that no longer exist. Used whenever the plan or mode changes.
+function rebuildListFromMenu(){
+  const newList=buildList();
+  const survive=new Set(newList.map(p=>p.id));
+  Object.keys(state.bought).forEach(id=>{if(!survive.has(id))delete state.bought[id];});
+  state.list=newList;
+  rebuildCustomProducts();
+  if(el('screen-lista'))renderLista();
+  if(el('screen-zapasy'))renderZapasy();
+}
+function applyMenuToList(){
+  if(state.menuMode&&!hasMenuPlanned()){
+    alert(state.lang==='pl'?'Najpierw zaplanuj przynajmniej jeden posiłek.':'Plan at least one meal first.');
+    return;
+  }
+  rebuildListFromMenu();
+  save();
+  showScreen('lista');
+}
+if(el('recipe-modal'))el('recipe-modal').addEventListener('click',function(e){if(e.target===this)closeRecipeModal();});
+
+// ══════════════════════════════════════
 // ADD CUSTOM PRODUCT
 // ══════════════════════════════════════
 let _addModalKat='Inne';
@@ -1235,26 +1947,27 @@ function confirmAddProduct(){
   if(!name)return;
   const qty=parseFloat(el('add-modal-qty').value)||1;
   const unit=el('add-modal-unit').value.trim()||'szt';
-  // Generate unique custom id
   const id='custom_'+Date.now();
-  const product={id,kat:_addModalKat,jedn:unit,qty};
-  // Add to PROD_NAMES
-  PROD_NAMES[id]={pl:name,en:name};
-  // Add to CAT_NAMES if not exists
-  if(!CAT_NAMES.pl['Inne'])CAT_NAMES.pl['Inne']='Inne';
-  if(!CAT_NAMES.en['Inne'])CAT_NAMES.en['Inne']='Other';
-  if(!CAT_ICONS['Inne'])CAT_ICONS['Inne']='📝';
-  // Insert after last item of same category
-  const lastCatIdx=state.list.reduce((acc,p,i)=>p.kat===_addModalKat?i:acc,-1);
-  if(lastCatIdx>=0) state.list.splice(lastCatIdx+1,0,product);
-  else state.list.push(product);
+  if(!Array.isArray(state.customProducts))state.customProducts=[];
+  // Persist in state so it survives reload, trip-save and sharing
+  state.customProducts.push({id,kat:_addModalKat,jedn:unit,qty,name});
+  rebuildCustomProducts();
   closeAddModal();
   renderLista();
   save();
 }
+
+function deleteCustomProduct(id){
+  if(Array.isArray(state.customProducts)) state.customProducts=state.customProducts.filter(c=>c.id!==id);
+  if(Array.isArray(state.list)) state.list=state.list.filter(p=>p.id!==id);
+  delete state.customQty[id];delete state.bought[id];delete state.skip[id];delete state.comments[id];delete state.prices[id];
+  renderLista();save();
+}
 el('add-product-modal').addEventListener('click',function(e){if(e.target===this)closeAddModal();});
 
 function renderSavedTrips(){
+  renderBoats();
+  renderAnalizaTeaser();
   const trips=loadTrips();
   const L=t();
   // Splash screen
@@ -1293,6 +2006,8 @@ function loadTrip(id){
   const trip=trips.find(t=>t.id===id);
   if(!trip)return;
   Object.assign(state,trip.state);
+  state.customProducts=Array.isArray(trip.state.customProducts)?JSON.parse(JSON.stringify(trip.state.customProducts)):[];
+  rebuildCustomProducts();
   save();
   // restore UI
   restoreUI();
@@ -1307,6 +2022,303 @@ function deleteTrip(e,id){
   e.stopPropagation();
   const trips=loadTrips().filter(t=>t.id!==id);
   saveTrips(trips);renderSavedTrips();
+}
+
+// ══════════════════════════════════════
+// BOAT PROFILES (reusable trip configuration)
+// ══════════════════════════════════════
+const BOATS_KEY='armator_boats_v1';
+const BOAT_FIELDS=['adults','children','sklep','rejon','styl','apetyt','drinks','wege','laktoza','gluten','grill','alkohol'];
+function loadBoats(){try{return JSON.parse(localStorage.getItem(BOATS_KEY)||'[]');}catch(e){return[];}}
+function saveBoats(b){try{localStorage.setItem(BOATS_KEY,JSON.stringify(b));}catch(e){}}
+
+function saveBoatProfile(){
+  const L=t();
+  if(el('boat-modal-title'))el('boat-modal-title').textContent=L.boatModalTitle;
+  if(el('boat-modal-sub'))el('boat-modal-sub').textContent=L.boatModalSub;
+  if(el('boat-modal-input'))el('boat-modal-input').placeholder=L.boatModalPlaceholder;
+  if(el('boat-modal-cancel'))el('boat-modal-cancel').textContent=L.modalCancel;
+  if(el('boat-modal-confirm'))el('boat-modal-confirm').textContent=L.modalSave;
+  el('boat-modal').classList.remove('hidden');
+  el('boat-modal-input').value='';
+  setTimeout(()=>el('boat-modal-input').focus(),100);
+}
+function closeBoatModal(){el('boat-modal').classList.add('hidden');}
+function confirmSaveBoat(){
+  const name=el('boat-modal-input').value.trim();
+  if(!name)return;
+  const cfg={};BOAT_FIELDS.forEach(f=>{cfg[f]=JSON.parse(JSON.stringify(state[f]));});
+  const boats=loadBoats();
+  boats.unshift({id:Date.now(),name,cfg});
+  if(boats.length>15)boats.pop();
+  saveBoats(boats);
+  closeBoatModal();
+  renderBoats();
+}
+function applyBoat(id){
+  const boat=loadBoats().find(b=>b.id===id);
+  if(!boat)return;
+  BOAT_FIELDS.forEach(f=>{if(boat.cfg[f]!==undefined)state[f]=JSON.parse(JSON.stringify(boat.cfg[f]));});
+  save();restoreUI();
+  showScreen('config');
+}
+function deleteBoat(e,id){
+  e.stopPropagation();
+  saveBoats(loadBoats().filter(b=>b.id!==id));
+  renderBoats();
+}
+function renderAnalizaTeaser(){
+  const sec=el('analiza-splash'); if(!sec)return;
+  const L=t(); const trips=loadTrips();
+  if(trips.length<1){sec.style.display='none';return;}
+  sec.style.display='block';
+  if(el('analiza-splash-title'))el('analiza-splash-title').textContent=L.analizaSplashTitle;
+  if(el('analiza-splash-name'))el('analiza-splash-name').textContent=L.analizaSplashName;
+  const data=analyzeAllTrips();
+  const active=Object.keys(NORM_FACTORS).filter(id=>NORM_FACTORS[id]&&NORM_FACTORS[id]!==1).length;
+  if(el('analiza-splash-meta'))el('analiza-splash-meta').textContent=L.analizaSplashMeta(trips.length,data.proposals.length,active);
+}
+function renderBoats(){
+  const boats=loadBoats();const L=t();const section=el('boats-section');
+  if(!section)return;
+  if(el('boats-title'))el('boats-title').textContent=L.boatsTitle;
+  if(boats.length===0){section.style.display='none';return;}
+  section.style.display='block';
+  el('boats-list').innerHTML=boats.map(b=>{
+    const crew=b.cfg.adults+(b.cfg.children?'+'+b.cfg.children:'');
+    const meta=`${crew} ${L.crewUnit} · ${b.cfg.rejon}`;
+    return `<div class="boat-tile" onclick="applyBoat(${b.id})"><span class="boat-icon">⚓</span><div class="boat-info"><div class="boat-name">${b.name}</div><div class="boat-meta">${meta}</div></div><button class="boat-del" onclick="deleteBoat(event,${b.id})">×</button></div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// SUPPLY TEMPLATES (reusable product sets)
+// ══════════════════════════════════════
+const TPL_KEY='armator_templates_v1';
+let _pendingTpl=null;
+function loadTemplates(){try{return JSON.parse(localStorage.getItem(TPL_KEY)||'[]');}catch(e){return[];}}
+function saveTemplates(t){try{localStorage.setItem(TPL_KEY,JSON.stringify(t));}catch(e){}}
+
+function openTemplatesModal(){
+  const L=t();
+  if(el('tpl-modal-title'))el('tpl-modal-title').textContent=L.tplModalTitle;
+  if(el('tpl-save-current'))el('tpl-save-current').textContent=L.tplSaveCurrent;
+  if(el('tpl-modal-close'))el('tpl-modal-close').textContent=L.tplClose;
+  renderTemplatesModal();
+  el('templates-modal').classList.remove('hidden');
+}
+function closeTemplatesModal(){el('templates-modal').classList.add('hidden');}
+function renderTemplatesModal(){
+  const tpls=loadTemplates();const L=t();const box=el('tpl-list');
+  if(!box)return;
+  if(tpls.length===0){box.innerHTML=`<div class="tpl-empty">${L.tplEmpty}</div>`;return;}
+  box.innerHTML=tpls.map(tp=>{
+    const n=tp.items?tp.items.length:0;
+    const menuTag=tp.hasMenu?`<span class="tpl-menu-tag">🍽️ ${L.tplMenuTag}</span>`:'';
+    return `<div class="tpl-tile" onclick="askApplyTemplate(${tp.id})"><div class="tpl-info"><div class="tpl-name">${tp.name}${menuTag}</div><div class="tpl-meta">${n} ${L.tplItems}</div></div><button class="boat-del" onclick="deleteTemplate(event,${tp.id})">×</button></div>`;
+  }).join('');
+}
+function saveCurrentAsTemplate(){
+  if(!state.list||!state.list.length){alert(state.lang==='pl'?'Brak listy do zapisania. Najpierw wygeneruj listę.':'No list to save. Generate a list first.');return;}
+  const name=prompt(state.lang==='pl'?'Nazwa szablonu:':'Template name:',state.lang==='pl'?'Stała baza':'Standard base');
+  if(!name||!name.trim())return;
+  const items=state.list.map(p=>({id:p.id,kat:p.kat,jedn:p.jedn,qty:state.customQty[p.id]??p.qty}));
+  const hasMenu=hasMenuPlanned();
+  const tpls=loadTemplates();
+  tpls.unshift({
+    id:Date.now(),name:name.trim(),items,
+    customProducts:JSON.parse(JSON.stringify(state.customProducts||[])),
+    menu:hasMenu?JSON.parse(JSON.stringify(state.menu)):null,
+    menuMode:hasMenu?state.menuMode:false,
+    hasMenu
+  });
+  if(tpls.length>25)tpls.pop();
+  saveTemplates(tpls);
+  renderTemplatesModal();
+}
+function askApplyTemplate(id){
+  _pendingTpl=id;
+  const L=t();
+  if(el('tpl-choice-title'))el('tpl-choice-title').textContent=L.tplChoiceTitle;
+  if(el('tpl-choice-sub'))el('tpl-choice-sub').textContent=L.tplChoiceSub;
+  if(el('choice-add-lbl'))el('choice-add-lbl').textContent=L.choiceAddLbl;
+  if(el('choice-add-sub'))el('choice-add-sub').textContent=L.choiceAddSub;
+  if(el('choice-rep-lbl'))el('choice-rep-lbl').textContent=L.choiceRepLbl;
+  if(el('choice-rep-sub'))el('choice-rep-sub').textContent=L.choiceRepSub;
+  if(el('tpl-choice-cancel'))el('tpl-choice-cancel').textContent=L.modalCancel;
+  el('tpl-choice-modal').classList.remove('hidden');
+}
+function closeTplChoice(){el('tpl-choice-modal').classList.add('hidden');_pendingTpl=null;}
+function applyTemplateChoice(mode){
+  const tpl=loadTemplates().find(x=>x.id===_pendingTpl);
+  if(!tpl){closeTplChoice();return;}
+  // restore custom product definitions from the template
+  if(Array.isArray(tpl.customProducts)&&tpl.customProducts.length){
+    if(!Array.isArray(state.customProducts))state.customProducts=[];
+    tpl.customProducts.forEach(cp=>{if(!state.customProducts.find(c=>c.id===cp.id))state.customProducts.push(JSON.parse(JSON.stringify(cp)));});
+  }
+  if(mode==='replace'){
+    state.list=tpl.items.map(it=>({id:it.id,kat:it.kat,jedn:it.jedn,qty:it.qty}));
+    state.bought={};state.skip={};state.customQty={};
+    if(tpl.hasMenu&&tpl.menu){state.menu=JSON.parse(JSON.stringify(tpl.menu));state.menuMode=!!tpl.menuMode;}
+  }else{ // add / merge
+    tpl.items.forEach(it=>{
+      const ex=state.list.find(p=>p.id===it.id);
+      if(ex){const cur=state.customQty[it.id]??ex.qty;state.customQty[it.id]=cur+it.qty;}
+      else{state.list.push({id:it.id,kat:it.kat,jedn:it.jedn,qty:it.qty});}
+    });
+  }
+  rebuildCustomProducts();
+  closeTplChoice();closeTemplatesModal();
+  renderLista();renderZapasy();save();
+  showScreen('lista');
+}
+function deleteTemplate(e,id){
+  e.stopPropagation();
+  saveTemplates(loadTemplates().filter(x=>x.id!==id));
+  renderTemplatesModal();
+}
+[el('boat-modal'),el('templates-modal'),el('tpl-choice-modal')].forEach(m=>{if(m)m.addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});});
+
+// ══════════════════════════════════════
+// ANALYTICS — learning norms from past trips (feature #4)
+// No manual debrief: signal comes from check-offs (skip), manual qty edits,
+// and the day-by-day inventory (zapasy) recorded during each saved trip.
+// ══════════════════════════════════════
+const NORM_KEY='armator_norms_v1';
+function loadNormFactors(){try{return JSON.parse(localStorage.getItem(NORM_KEY)||'{}');}catch(e){return{};}}
+function saveNormFactors(f){try{localStorage.setItem(NORM_KEY,JSON.stringify(f));}catch(e){}}
+let NORM_FACTORS=loadNormFactors();
+
+// planOnDay against a trip's own day count (saved trips may differ from current)
+function planOnDayTrip(qty,day,days){if(!qty||!days)return 0;return Math.round(qty*(days-day+1)/days);}
+
+// Derive per-product signals from one saved trip's state.
+function analyzeTrip(S){
+  const out={}; if(!S||!Array.isArray(S.list))return out;
+  const days=S.days||1;
+  const z=S.zapasy||{}; const dayKeys=Object.keys(z).map(k=>parseInt(k.slice(1))).filter(n=>!isNaN(n));
+  const lastZDay=dayKeys.length?Math.max(...dayKeys):null;
+  S.list.forEach(p=>{
+    const id=p.id; const norm=p.qty||0; const bought=(S.customQty&&S.customQty[id]!=null)?S.customQty[id]:norm;
+    if(!bought||bought<=0)return;
+    let leftoverRatio=null, shortage=false, manual=null, skipped=false;
+    if(S.skip&&S.skip[id]) skipped=true; // explicit “don’t need”
+    if(S.customQty&&S.customQty[id]!=null&&norm>0){const r=S.customQty[id]/norm; if(r<0.85)manual='down'; else if(r>1.15)manual='up';}
+    if(lastZDay!=null){
+      const left=z['d'+lastZDay]&&z['d'+lastZDay][id]; 
+      if(left!=null){
+        const plannedEnd=planOnDayTrip(bought,days,days);
+        if(left>bought*0.18 && left>plannedEnd) leftoverRatio=left/bought;
+      }
+      for(const dk of dayKeys.sort((a,b)=>a-b)){
+        if(dk>=days)break;
+        const v=z['d'+dk]&&z['d'+dk][id];
+        if(v===0&&planOnDayTrip(bought,dk,days)>=1){shortage=true;break;}
+      }
+    }
+    out[id]={leftoverRatio,shortage,manual,skipped,bought};
+  });
+  return out;
+}
+
+function analyzeAllTrips(){
+  const trips=loadTrips();
+  const agg={};
+  trips.forEach(tr=>{
+    const sig=analyzeTrip(tr.state);
+    Object.keys(sig).forEach(id=>{
+      const s=sig[id]; if(!agg[id])agg[id]={trips:0,leftoverN:0,leftoverSum:0,shortageN:0,skipN:0,downN:0,upN:0,boughtSum:0};
+      const a=agg[id]; a.trips++; a.boughtSum+=s.bought;
+      if(s.leftoverRatio!=null){a.leftoverN++; a.leftoverSum+=s.leftoverRatio;}
+      if(s.shortage)a.shortageN++;
+      if(s.skipped)a.skipN++;
+      if(s.manual==='down')a.downN++;
+      if(s.manual==='up')a.upN++;
+    });
+  });
+  const proposals=[];
+  Object.keys(agg).forEach(id=>{
+    const a=agg[id];
+    const overSignals=a.leftoverN+a.skipN+a.downN;
+    const underSignals=a.shortageN+a.upN;
+    let factor=1, reason=null;
+    if(underSignals>overSignals && underSignals>0){
+      const strength=Math.min(0.5, 0.12*a.shortageN + 0.10*a.upN);
+      factor=1+Math.max(0.1,strength); reason='under';
+    }else if(overSignals>0 && overSignals>=underSignals){
+      const avgLeft=a.leftoverN?a.leftoverSum/a.leftoverN:0;
+      const strength=Math.min(0.45, avgLeft*0.7 + 0.12*a.skipN + 0.08*a.downN);
+      if(strength>=0.1){factor=1-strength; reason='over';}
+    }
+    factor=Math.round(factor*20)/20;
+    const current=NORM_FACTORS[id]||1;
+    if(reason && Math.abs(factor-current)>=0.05){
+      proposals.push({id,factor,current,reason,evidence:a});
+    }
+  });
+  const leftovers=Object.keys(agg).map(id=>({id,n:agg[id].leftoverN,amt:agg[id].leftoverSum})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n||b.amt-a.amt).slice(0,6);
+  const shortages=Object.keys(agg).map(id=>({id,n:agg[id].shortageN+agg[id].upN})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,6);
+  const frequent=Object.keys(agg).map(id=>({id,n:agg[id].trips})).sort((a,b)=>b.n-a.n).slice(0,8);
+  const dishCount={};
+  trips.forEach(tr=>{const m=tr.state&&tr.state.menu; if(m)Object.values(m).forEach(d=>{if(d)['b','l','d'].forEach(s=>{if(d[s])dishCount[d[s]]=(dishCount[d[s]]||0)+1;});});});
+  const dishes=Object.keys(dishCount).map(rid=>({rid,n:dishCount[rid]})).sort((a,b)=>b.n-a.n).slice(0,6);
+  return {tripCount:trips.length, proposals, leftovers, shortages, frequent, dishes};
+}
+
+function applyProposal(id,factor){NORM_FACTORS[id]=factor; saveNormFactors(NORM_FACTORS); renderAnaliza();}
+function dismissProposal(id){NORM_FACTORS[id]=NORM_FACTORS[id]||1; saveNormFactors(NORM_FACTORS); renderAnaliza();}
+function applyAllProposals(){const data=analyzeAllTrips(); data.proposals.forEach(pr=>{NORM_FACTORS[pr.id]=pr.factor;}); saveNormFactors(NORM_FACTORS); renderAnaliza();}
+function resetNormFactors(){if(!confirm(state.lang==='pl'?'Wyzerować wszystkie wyuczone korekty norm?':'Reset all learned norm corrections?'))return; NORM_FACTORS={}; saveNormFactors(NORM_FACTORS); renderAnaliza();}
+
+function rnameDish(rid){const r=RECIPE_BY_ID[rid]; return r?(r.icon+' '+rn(r)):rid;}
+function renderAnaliza(){
+  const L=t();
+  if(el('analiza-title'))el('analiza-title').textContent=L.analizaTitle;
+  const data=analyzeAllTrips();
+  const box=el('analiza-content'); if(!box)return;
+  if(data.tripCount<1){
+    box.innerHTML=`<div class="analiza-empty">${L.analizaEmpty}</div>`; return;
+  }
+  let html='';
+  // learning banner
+  const activeCount=Object.keys(NORM_FACTORS).filter(id=>NORM_FACTORS[id]&&NORM_FACTORS[id]!==1).length;
+  html+=`<div class="analiza-intro"><div class="analiza-intro-t">${L.analizaIntroT}</div><div class="analiza-intro-s">${L.analizaIntroS(data.tripCount)}</div>${activeCount>0?`<div class="analiza-active">✓ ${L.analizaActive(activeCount)} · <span class="analiza-reset" onclick="resetNormFactors()">${L.analizaReset}</span></div>`:''}</div>`;
+  // proposals (semi-auto)
+  if(data.proposals.length){
+    html+=`<div class="analiza-sec"><div class="analiza-sec-h"><span>🧠 ${L.analizaProposals}</span><button class="analiza-applyall" onclick="applyAllProposals()">${L.analizaApplyAll}</button></div>`;
+    data.proposals.forEach(pr=>{
+      const dir=pr.factor>pr.current?'up':'down';
+      const pct=Math.round(Math.abs(pr.factor-1)*100);
+      const txt=pr.reason==='under'?L.analizaBuyMore(pct):L.analizaBuyLess(pct);
+      html+=`<div class="prop-row"><div class="prop-info"><div class="prop-name">${pn(pr.id)}</div><div class="prop-sub ${dir}">${dir==='up'?'▲':'▼'} ${txt}</div></div><div class="prop-actions"><button class="prop-btn dismiss" onclick="dismissProposal('${pr.id}')">${L.analizaIgnore}</button><button class="prop-btn apply" onclick="applyProposal('${pr.id}',${pr.factor})">${L.analizaApply}</button></div></div>`;
+    });
+    html+='</div>';
+  }
+  // metrics: leftovers
+  if(data.leftovers.length){
+    html+=`<div class="analiza-sec"><div class="analiza-sec-h"><span>💸 ${L.analizaLeftovers}</span></div>`;
+    html+='<div class="metric-chips">'+data.leftovers.map(x=>`<div class="metric-chip over">${pn(x.id)} <b>×${x.n}</b></div>`).join('')+'</div></div>';
+  }
+  // shortages
+  if(data.shortages.length){
+    html+=`<div class="analiza-sec"><div class="analiza-sec-h"><span>⚠️ ${L.analizaShortages}</span></div>`;
+    html+='<div class="metric-chips">'+data.shortages.map(x=>`<div class="metric-chip under">${pn(x.id)} <b>×${x.n}</b></div>`).join('')+'</div></div>';
+  }
+  // frequent products
+  if(data.frequent.length){
+    html+=`<div class="analiza-sec"><div class="analiza-sec-h"><span>⭐ ${L.analizaFrequent}</span></div>`;
+    html+='<div class="metric-chips">'+data.frequent.map(x=>`<div class="metric-chip">${pn(x.id)} <b>×${x.n}</b></div>`).join('')+'</div></div>';
+  }
+  // frequent dishes
+  if(data.dishes.length){
+    html+=`<div class="analiza-sec"><div class="analiza-sec-h"><span>🍽️ ${L.analizaDishes}</span></div>`;
+    html+='<div class="metric-chips">'+data.dishes.map(x=>`<div class="metric-chip">${rnameDish(x.rid)} <b>×${x.n}</b></div>`).join('')+'</div></div>';
+  }
+  if(!data.proposals.length){
+    html+=`<div class="analiza-note">${L.analizaNoProps}</div>`;
+  }
+  box.innerHTML=html;
 }
 
 // ══════════════════════════════════════
@@ -1801,60 +2813,110 @@ function renderRozliczenie(){
 // ══════════════════════════════════════
 const SUPA_URL = 'https://vdjtmngdbjacomfreuai.supabase.co';
 const SUPA_KEY = 'sb_publishable_MxOwlMKpkJMdylQBEyDWpg_o1izs4KO';
-const supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+// Offline-safe init: if the Supabase CDN script failed to load (e.g. first run offline at sea),
+// keep the whole app working — sharing simply stays unavailable until back online.
+let supa = null;
+try{
+  if(window.supabase && window.supabase.createClient){
+    supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+  }else{
+    console.warn('Supabase library unavailable — sharing disabled (offline?).');
+  }
+}catch(e){ console.warn('Supabase init failed:', e); }
 
 // Generate random 8-char ID
 function genId(){
   return Math.random().toString(36).substring(2,10);
 }
 
-// Share state — are we in readonly mode?
+// Share state
 let shareSessionId = null;
-let isReadonly = false; // always false now - full collaborative
+let isReadonly = false;
 let realtimeChannel = null;
+let _shareRole = null; // 'owner' | 'guest'
+let _syncTimer = null;
+
+function persistShare(){
+  try{
+    if(shareSessionId) localStorage.setItem('armator_share', JSON.stringify({sessionId:shareSessionId, role:_shareRole}));
+    else localStorage.removeItem('armator_share');
+  }catch(e){}
+}
+
+// Small sync-status badge — only visible while in a shared session
+function setSyncStatus(kind){
+  let badge=el('sync-status');
+  if(!badge){
+    badge=document.createElement('div');badge.id='sync-status';
+    badge.style.cssText='position:fixed;top:58px;right:8px;z-index:120;font-size:11px;font-family:Syne,sans-serif;font-weight:700;padding:4px 11px;border-radius:20px;pointer-events:none;transition:opacity .3s;box-shadow:0 2px 12px rgba(0,0,0,0.3);';
+    document.body.appendChild(badge);
+  }
+  if(!shareSessionId){badge.style.display='none';return;}
+  badge.style.display='block';
+  const isEN=state.lang==='en';
+  const map={
+    syncing:{t:isEN?'Syncing…':'Synchronizacja…',bg:'rgba(240,165,0,0.18)',c:'#f0a500'},
+    synced:{t:isEN?'Synced ✓':'Zsynchronizowano ✓',bg:'rgba(0,200,150,0.18)',c:'#00c896'},
+    received:{t:isEN?'Updated ✓':'Zaktualizowano ✓',bg:'rgba(0,212,255,0.18)',c:'#00d4ff'},
+    offline:{t:isEN?'Offline — saved locally':'Offline — zapis lokalny',bg:'rgba(255,71,87,0.18)',c:'#ff4757'}
+  };
+  const m=map[kind]||map.synced;
+  badge.textContent=m.t;badge.style.background=m.bg;badge.style.color=m.c;
+}
+
+// Debounced sync — avoids a DB write + broadcast on every keystroke/tap
+function scheduleSync(){
+  if(!shareSessionId||!supa)return;
+  setSyncStatus('syncing');
+  clearTimeout(_syncTimer);
+  _syncTimer=setTimeout(doSync,400);
+}
+async function doSync(){
+  if(!shareSessionId||!supa)return;
+  broadcastState();
+  if(_shareRole==='owner'){
+    try{
+      await supa.from('sessions').update({state:JSON.parse(JSON.stringify(state))}).eq('id',shareSessionId);
+      setSyncStatus('synced');
+    }catch(err){console.error('Sync error:',err);setSyncStatus('offline');}
+  }else{
+    setSyncStatus('synced');
+  }
+}
+
+function showShareUI(url){
+  const bar=el('share-readonly-bar');
+  if(bar){bar.classList.add('visible');bar.textContent=isReadonly?t().shareReadonly:(t().shareOwner||t().shareReadonly);}
+  const container=el('share-link-container');const linkText=el('share-link-text');
+  if(container)container.style.display='block';
+  if(linkText)linkText.textContent=url;
+  setSyncStatus('synced');
+  renderCrewBar();
+}
 
 async function shareList(){
-  if(!isPro()){
-    showProUpgradeScreen();
+  if(!isPro()){ showProUpgradeScreen(); return; }
+  if(!supa){
+    alert(state.lang==='pl' ? 'Udostępnianie wymaga połączenia z internetem.' : 'Sharing requires an internet connection.');
     return;
   }
-  const L = t();
   const btn = el('btn-share');
   if(btn){ btn.disabled=true; }
-
   try{
-    // Generate unique session ID
     const sessionId = genId();
     const shareState = JSON.parse(JSON.stringify(state));
-    shareState.bought = {}; // Reset bought for shared view
-    // Save custom product names so guests see them correctly
-    const customNames = {};
-    state.list.filter(p=>p.id.startsWith('custom_')).forEach(p=>{
-      if(PROD_NAMES[p.id]) customNames[p.id] = PROD_NAMES[p.id];
-    });
-    shareState.customProductNames = customNames;
-
-    const { error } = await supa
-      .from('sessions')
-      .insert({ id: sessionId, state: shareState });
-
+    const { error } = await supa.from('sessions').insert({ id: sessionId, state: shareState });
     if(error) throw error;
 
     shareSessionId = sessionId;
+    _shareRole = 'owner';
+    isReadonly = false;
+    persistShare();
+
     const shareUrl = `${window.location.origin}${window.location.pathname}?s=${sessionId}`;
-
-    // Show link
-    const container = el('share-link-container');
-    const linkText = el('share-link-text');
-    if(container){ container.style.display='block'; }
-    if(linkText){ linkText.textContent = shareUrl; }
-
-    // Start realtime sync
+    showShareUI(shareUrl);
     startRealtimeSync(sessionId);
-
-    // Auto copy
     copyShareLink();
-
   } catch(err){
     console.error('Share error:', err);
     alert(state.lang==='pl' ? 'Błąd udostępniania. Spróbuj ponownie.' : 'Share error. Please try again.');
@@ -1879,58 +2941,119 @@ function copyShareLink(){
   }
 }
 
-// Save to Supabase when in share mode
-async function syncToSupabase(){
-  if(!shareSessionId || isReadonly) return;
-  // Broadcast for real-time (fast)
-  broadcastState();
-  // Also persist to DB (for new joiners)
-  try{
-    await supa
-      .from('sessions')
-      .update({ state: JSON.parse(JSON.stringify(state)) })
-      .eq('id', shareSessionId);
-  } catch(err){
-    console.error('Sync error:', err);
-  }
-}
-
 // Start realtime subscription
 let _isBroadcasting = false; // prevent echo
 
-function startRealtimeSync(sessionId){
-  if(realtimeChannel){ realtimeChannel.unsubscribe(); }
+// ══════════════════════════════════════
+// CREW IDENTITY + PRESENCE (feature #3)
+// ══════════════════════════════════════
+const CREW_NAME_KEY='armator_crew_name';
+const CREW_COLORS=['#00d4ff','#f0a500','#00c896','#ff6b9d','#a78bfa','#ff8c42'];
+let _onlineCrew={}, _heartbeat=null, _crewNameCb=null;
+function getCrewName(){try{return localStorage.getItem(CREW_NAME_KEY)||'';}catch(e){return'';}}
+function myCrewName(){return getCrewName()||(state.lang==='pl'?'Gość':'Guest');}
+function ensureCrewName(cb){
+  if(getCrewName()){cb&&cb();return;}
+  _crewNameCb=cb;const L=t();
+  if(el('name-modal-title'))el('name-modal-title').textContent=L.nameModalTitle;
+  if(el('name-modal-sub'))el('name-modal-sub').textContent=L.nameModalSub;
+  if(el('name-modal-input'))el('name-modal-input').placeholder=L.nameModalPlaceholder;
+  if(el('name-modal-confirm'))el('name-modal-confirm').textContent=L.nameModalConfirm;
+  el('name-modal').classList.remove('hidden');
+  el('name-modal-input').value='';
+  setTimeout(()=>{const i=el('name-modal-input');if(i)i.focus();},100);
+}
+function confirmCrewName(){
+  const n=el('name-modal-input').value.trim();
+  if(!n)return;
+  try{localStorage.setItem(CREW_NAME_KEY,n);}catch(e){}
+  el('name-modal').classList.add('hidden');
+  const cb=_crewNameCb;_crewNameCb=null;cb&&cb();
+}
+function crewColor(name){let h=0;for(let i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))>>>0;return CREW_COLORS[h%CREW_COLORS.length];}
+function crewInitials(name){const p=name.trim().split(/\s+/);return((p[0]||'')[0]||'').toUpperCase()+(p[1]?(p[1][0]||'').toUpperCase():'');}
+function crewTimeAgo(ts){const L=t();const s=Math.floor((Date.now()-ts)/1000);if(s<60)return L.agoNow;const m=Math.floor(s/60);if(m<60)return m+' '+L.agoMin;const h=Math.floor(m/60);if(h<24)return h+' '+L.agoHour;return Math.floor(h/24)+' '+L.agoDay;}
+function renderCrewBar(){
+  const bar=el('crew-bar');if(!bar)return;
+  if(typeof shareSessionId==='undefined'||!shareSessionId){bar.classList.remove('visible');return;}
+  const online=_onlineCrew||{};const seen=state.crewSeen||{};
+  const names=[...new Set([...Object.keys(online),...Object.keys(seen)])];
+  if(names.length===0){bar.classList.remove('visible');return;}
+  bar.classList.add('visible');
+  const L=t();
+  names.sort((a,b)=>(online[b]?1:0)-(online[a]?1:0));
+  bar.innerHTML=`<span class="crew-bar-lbl">${L.crewOnline}</span>`+names.map(n=>{
+    const isOn=!!online[n];const col=crewColor(n);
+    const right=isOn?'<span class="crew-online-dot"></span>':`<span class="crew-seen">${seen[n]?crewTimeAgo(seen[n]):''}</span>`;
+    return `<div class="crew-ava" style="${isOn?'':'opacity:0.55'}"><div class="crew-dot" style="background:${col}">${crewInitials(n)}</div><span class="crew-name-lbl">${n}</span>${right}</div>`;
+  }).join('');
+}
+function updatePresence(){
+  if(!realtimeChannel)return;
+  let ps={};try{ps=realtimeChannel.presenceState();}catch(e){return;}
+  const online={};
+  Object.values(ps).forEach(arr=>arr.forEach(m=>{if(m&&m.name)online[m.name]=m.at||Date.now();}));
+  _onlineCrew=online;
+  if(!state.crewSeen)state.crewSeen={};
+  Object.keys(online).forEach(n=>{state.crewSeen[n]=Date.now();});
+  renderCrewBar();
+}
+function startHeartbeat(){
+  stopHeartbeat();
+  _heartbeat=setInterval(()=>{
+    if(!realtimeChannel)return;
+    const n=myCrewName();
+    if(!state.crewSeen)state.crewSeen={};
+    state.crewSeen[n]=Date.now();
+    realtimeChannel.track({name:n,at:Date.now()}).catch(()=>{});
+    renderCrewBar();
+  },25000);
+}
+function stopHeartbeat(){if(_heartbeat){clearInterval(_heartbeat);_heartbeat=null;}}
 
+function startRealtimeSync(sessionId){ ensureCrewName(()=>_startRealtimeSync(sessionId)); }
+function _startRealtimeSync(sessionId){
+  if(!supa) return;
+  if(realtimeChannel){ try{stopHeartbeat();realtimeChannel.unsubscribe();}catch(e){} }
+  const myName=myCrewName();
   realtimeChannel = supa
-    .channel('room:' + sessionId)
+    .channel('room:' + sessionId, { config: { presence: { key: myName } } })
     .on('broadcast', { event: 'state_update' }, (payload) => {
       if(_isBroadcasting) return; // ignore own echo
-      const remoteState = payload.payload;
-      state.bought = remoteState.bought || {};
-      state.skip = remoteState.skip || {};
-      state.comments = remoteState.comments || {};
-      state.customQty = remoteState.customQty || {};
-      if(remoteState.customProducts && remoteState.customProducts.length>0){
-        remoteState.customProducts.forEach(cp=>{
-          // Always update name regardless of whether product is in list
-          if(cp.name) PROD_NAMES[cp.id]=cp.name;
-          if(!state.list.find(p=>p.id===cp.id)){
-            const lastIdx=state.list.reduce((acc,p,i)=>p.kat===cp.kat?i:acc,-1);
-            const prod={id:cp.id,kat:cp.kat,jedn:cp.jedn,qty:cp.qty};
-            if(lastIdx>=0) state.list.splice(lastIdx+1,0,prod);
-            else state.list.push(prod);
-          }
-        });
-      }
-      // sync expenses
-      if(remoteState.expenses) state.expenses = remoteState.expenses;
+      const r = payload.payload || {};
+      state.bought = r.bought || {};
+      state.skip = r.skip || {};
+      state.comments = r.comments || {};
+      state.customQty = r.customQty || {};
+      if(r.zapasy) state.zapasy = r.zapasy;
+      if(r.transfersDone) state.transfersDone = r.transfersDone;
+      if(r.prices) state.prices = r.prices;
+      if(Array.isArray(r.customProducts)){ state.customProducts = r.customProducts; rebuildCustomProducts(); }
+      if(r.expenses) state.expenses = r.expenses;
+      if(r.boughtBy) state.boughtBy = r.boughtBy;
+      if(r.crewSeen){ state.crewSeen = Object.assign(state.crewSeen||{}, r.crewSeen); }
+      // persist locally WITHOUT re-broadcasting (avoid echo loop)
+      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
       renderLista();
       updateProgress();
       updateCostBar();
+      renderCrewBar();
+      if(el('screen-zapasy').classList.contains('active')) renderZapasy();
+      if(el('screen-koszty').classList.contains('active')) renderKoszty();
       if(el('screen-rozliczenie').classList.contains('active')) renderRozliczenie();
+      setSyncStatus('received');
+      setTimeout(()=>setSyncStatus('synced'), 1200);
     })
-    .subscribe((status) => {
+    .on('presence', { event: 'sync' }, () => updatePresence())
+    .on('presence', { event: 'join' }, () => updatePresence())
+    .on('presence', { event: 'leave' }, () => updatePresence())
+    .subscribe(async (status) => {
       console.log('Realtime status:', status, 'session:', sessionId);
+      if(status==='SUBSCRIBED'){
+        setSyncStatus('synced');
+        try{ await realtimeChannel.track({ name: myName, at: Date.now() }); }catch(e){}
+        startHeartbeat();
+      }
     });
 }
 
@@ -1946,22 +3069,22 @@ async function broadcastState(){
         skip: state.skip,
         comments: state.comments,
         customQty: state.customQty,
-        customProducts: state.list
-          .filter(p=>p.id.startsWith('custom_'))
-          .map(p=>({id:p.id,kat:p.kat,jedn:p.jedn,qty:p.qty,name:PROD_NAMES[p.id]})),
-        expenses: state.expenses||[]
+        customProducts: state.customProducts || [],
+        expenses: state.expenses || [],
+        zapasy: state.zapasy || {},
+        transfersDone: state.transfersDone || {},
+        prices: state.prices || {},
+        boughtBy: state.boughtBy || {},
+        crewSeen: state.crewSeen || {}
       }
     });
   }catch(err){ console.log('Broadcast error:', err); }
-  finally{ setTimeout(()=>{ _isBroadcasting = false; }, 100); }
+  finally{ setTimeout(()=>{ _isBroadcasting = false; }, 120); }
 }
 
-// Load session from URL param
-async function loadFromUrl(){
-  const params = new URLSearchParams(window.location.search);
-  const sessionId = params.get('s');
-  if(!sessionId) return false;
-
+// Load a shared session by id (used by both URL param and reconnect-after-reload)
+async function loadSessionById(sessionId, asGuest){
+  if(!supa) return false;
   try{
     const { data, error } = await supa
       .from('sessions')
@@ -1969,37 +3092,25 @@ async function loadFromUrl(){
       .eq('id', sessionId)
       .single();
 
-    if(error || !data) {
-      alert(state.lang==='pl' ? 'Nie znaleziono listy.' : 'List not found.');
+    if(error || !data){
+      if(asGuest) alert(state.lang==='pl' ? 'Nie znaleziono listy.' : 'List not found.');
       return false;
     }
 
-    // Load shared state
-    const sharedState = data.state;
+    const sharedState = data.state || {};
     Object.assign(state, sharedState);
     state.bought = sharedState.bought || {};
-    // Restore custom product names
-    if(sharedState.customProductNames){
-      Object.entries(sharedState.customProductNames).forEach(([id, name])=>{
-        PROD_NAMES[id] = name;
-      });
-    }
+    state.customProducts = Array.isArray(sharedState.customProducts) ? sharedState.customProducts : [];
+    rebuildCustomProducts();
+
     shareSessionId = sessionId;
+    _shareRole = 'guest';
     isReadonly = !isPro(); // PRO = pełna edycja, Free = tylko odhaczanie
+    persistShare();
 
-    // Show collaborative bar
-    const bar = el('share-readonly-bar');
-    if(bar){ bar.classList.add('visible'); }
-
-    // Show share link so guest can also share further
-    const container = el('share-link-container');
-    const linkText = el('share-link-text');
-    if(container){ container.style.display='block'; }
-    if(linkText){ linkText.textContent = window.location.href; }
-
-    // Start bidirectional sync
+    const shareUrl = `${window.location.origin}${window.location.pathname}?s=${sessionId}`;
+    showShareUI(shareUrl);
     startRealtimeSync(sessionId);
-
     return true;
   } catch(err){
     console.error('Load share error:', err);
@@ -2007,7 +3118,33 @@ async function loadFromUrl(){
   }
 }
 
-// save() already syncs to Supabase (see save() function above)
+async function loadFromUrl(){
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('s');
+  if(!sessionId) return false;
+  return await loadSessionById(sessionId, true);
+}
+
+// Reconnect to a previously created/joined session after a page reload
+async function reconnectShare(){
+  let saved=null;
+  try{ saved = JSON.parse(localStorage.getItem('armator_share')||'null'); }catch(e){}
+  if(!saved || !saved.sessionId || !supa) return false;
+  if(saved.role==='guest'){
+    return await loadSessionById(saved.sessionId, false);
+  }
+  // owner: resume own session — local state is the source of truth
+  shareSessionId = saved.sessionId;
+  _shareRole = 'owner';
+  isReadonly = false;
+  const shareUrl = `${window.location.origin}${window.location.pathname}?s=${saved.sessionId}`;
+  showShareUI(shareUrl);
+  startRealtimeSync(saved.sessionId);
+  scheduleSync(); // push current local state back up to the session
+  return false; // keep the current screen/state
+}
+
+// save() triggers a debounced scheduleSync() when in a shared session (see save() above)
 
 // ══════════════════════════════════════
 // PWA + SERVICE WORKER
@@ -2038,11 +3175,13 @@ if(isIOS&&!isInStandalone){const h=el('ios-hint');if(h)h.style.display='block';}
 // INIT
 // ══════════════════════════════════════
 load();
+rebuildCustomProducts();
 restoreUI();
 
-// Check if opened via share link - runs after all functions defined
+// Check if opened via share link / reconnect to a previous session - runs after all functions defined
 window.addEventListener('DOMContentLoaded', async () => {
-  const loaded = await loadFromUrl();
+  let loaded = await loadFromUrl();
+  if(!loaded){ await reconnectShare(); }
   if(loaded) {
     restoreUI();
     renderLista();

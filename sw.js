@@ -1,6 +1,6 @@
 // Armator.PRO Service Worker
 // WAŻNE: zmień CACHE_VERSION przy każdym deploymencie
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = `armator-${CACHE_VERSION}`;
 
 const ASSETS = [
@@ -8,11 +8,18 @@ const ASSETS = [
   '/manifest.json',
 ];
 
+// External libs cached so the app keeps working offline at sea (best-effort)
+const EXTERNAL = [
+  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js',
+];
+
 // Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS).catch(err => console.log('Cache partial:', err));
+      return cache.addAll(ASSETS)
+        .then(() => cache.addAll(EXTERNAL).catch(err => console.log('External cache skipped:', err)))
+        .catch(err => console.log('Cache partial:', err));
     })
   );
   // Aktywuj natychmiast bez czekania na zamknięcie starych kart
