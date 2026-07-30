@@ -1456,32 +1456,32 @@ function roundPack(qty,opak){opak=opak||1;return Math.ceil(qty/opak)*opak;}
 function buildList(){
   const useMenu=state.menuMode&&hasMenuPlanned();
   const mq=useMenu?calcMenuQty():null;
-  // Fallback share = fraction of days with NO meals planned at all. Days that
-  // have any dish planned are considered fully covered by the menu for staple
-  // categories (avoids double-counting: e.g. planning breakfast shouldn't also
-  // pull a lunch/dinner share of bread from the generic estimator for that day).
-  // Only completely unplanned days still draw their share from the estimator.
-  let fallback=0;
+  // Two independent fallback tracks, since staple categories split roughly
+  // along breakfast vs. lunch/dinner (products carry a grupaS tag telling
+  // which). A day only counts as "covered" for a track if it has a REAL
+  // (non-restaurant) dish in the relevant slot(s) — so e.g. planning
+  // breakfast every day + "Restauracja" for dinner still pulls lunch/dinner
+  // staples (potatoes, rice, canned goods...) from the estimator, instead of
+  // silently zeroing them out.
+  let fallbackB=0, fallbackLD=0;
   if(useMenu){
-    let emptyDays=0;
+    const isReal=(day,slot)=>{const r=day&&day[slot]?RECIPE_BY_ID[day[slot]]:null;return !!(r&&r.ing.length>0);};
+    let emptyB=0, uncoveredLD=0, totalLD=0;
     for(let d=1;d<=state.days;d++){
       const day=state.menu[d];
-      // A "Restauracja" pick has zero ingredients — it shouldn't count as
-      // covering the day (no groceries come from it), so days with only
-      // restaurant meals (or nothing) still fall back to the estimator.
-      const hasRealDish = day && ['b','l','d'].some(s=>{
-        const r=day[s]?RECIPE_BY_ID[day[s]]:null;
-        return r && r.ing.length>0;
-      });
-      if(!hasRealDish)emptyDays++;
+      if(!isReal(day,'b'))emptyB++;
+      ['l','d'].forEach(s=>{totalLD++; if(!isReal(day,s))uncoveredLD++;});
     }
-    fallback=state.days>0?emptyDays/state.days:0;
+    fallbackB=state.days>0?emptyB/state.days:0;
+    fallbackLD=totalLD>0?uncoveredLD/totalLD:0;
   }
+  function fallbackFor(grupaS){ return grupaS==='sniadanie' ? fallbackB : fallbackLD; }
   return PRODUCTS.map(p=>{
     let qty,fromMenu=false;
     if(useMenu){
-      if(mq[p[0]]!=null){qty=roundPack(mq[p[0]]+calcQty(p)*fallback,p[6]);fromMenu=true;}
-      else if(MENU_OWNED_CATS.includes(p[1]))qty=roundPack(calcQty(p)*fallback,p[6]);
+      const fb=fallbackFor(p[7]);
+      if(mq[p[0]]!=null){qty=roundPack(mq[p[0]]+calcQty(p)*fb,p[6]);fromMenu=true;}
+      else if(MENU_OWNED_CATS.includes(p[1]))qty=roundPack(calcQty(p)*fb,p[6]);
       else qty=calcQty(p);
     }else{
       qty=calcQty(p);
