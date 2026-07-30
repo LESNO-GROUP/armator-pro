@@ -1466,7 +1466,14 @@ function buildList(){
     let emptyDays=0;
     for(let d=1;d<=state.days;d++){
       const day=state.menu[d];
-      if(!day||(!day.b&&!day.l&&!day.d))emptyDays++;
+      // A "Restauracja" pick has zero ingredients — it shouldn't count as
+      // covering the day (no groceries come from it), so days with only
+      // restaurant meals (or nothing) still fall back to the estimator.
+      const hasRealDish = day && ['b','l','d'].some(s=>{
+        const r=day[s]?RECIPE_BY_ID[day[s]]:null;
+        return r && r.ing.length>0;
+      });
+      if(!hasRealDish)emptyDays++;
     }
     fallback=state.days>0?emptyDays/state.days:0;
   }
