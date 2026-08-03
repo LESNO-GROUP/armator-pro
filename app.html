@@ -3531,9 +3531,22 @@ window.addEventListener('beforeinstallprompt',e=>{
   const b=el('pwa-banner');if(b)b.style.display='flex';
 });
 function installPWA(){
-  if(!deferredPrompt)return;
-  deferredPrompt.prompt();
-  deferredPrompt.userChoice.then(()=>{deferredPrompt=null;const b=el('pwa-banner');if(b)b.style.display='none';});
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(()=>{deferredPrompt=null;const b=el('pwa-banner');if(b)b.style.display='none';updateInstallButton();});
+    return;
+  }
+  // No native prompt available: iOS Safari never fires it, and Chrome/Android
+  // won't fire it again once installed or once criteria aren't (re)met.
+  const isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone===true;
+  if(isStandalone){
+    alert(state.lang==='en'?'Already installed ✓':'Aplikacja jest już zainstalowana ✓');
+    return;
+  }
+  const msg = isIOS
+    ? (state.lang==='en' ? 'Tap the Share icon in Safari, then "Add to Home Screen".' : 'Stuknij ikonę Udostępnij w Safari, potem „Dodaj do ekranu głównego”.')
+    : (state.lang==='en' ? 'Use your browser menu (⋮) → "Install app" / "Add to Home Screen".' : 'Użyj menu przeglądarki (⋮) → „Zainstaluj aplikację” / „Dodaj do ekranu głównego”.');
+  alert(msg);
 }
 // iOS hint
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)&&!window.MSStream;
