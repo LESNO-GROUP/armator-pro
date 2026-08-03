@@ -349,6 +349,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .crew-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:800;color:var(--navy);flex-shrink:0;}
 .crew-name-lbl{font-size:12px;font-weight:600;}
 .crew-seen{font-size:10px;color:var(--muted);}
+.crew-remove{font-size:14px;color:var(--muted);cursor:pointer;padding:0 2px;line-height:1;}
+.crew-remove:hover{color:var(--red);}
 .crew-online-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 2px rgba(0,200,150,0.2);}
 .bought-by{font-size:10px;color:var(--green);margin-top:2px;display:flex;align-items:center;gap:3px;}
 /* ANALIZA (#4) */
@@ -3320,10 +3322,20 @@ function confirmCrewName(){
 function crewColor(name){let h=0;for(let i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))>>>0;return CREW_COLORS[h%CREW_COLORS.length];}
 function crewInitials(name){const p=name.trim().split(/\s+/);return((p[0]||'')[0]||'').toUpperCase()+(p[1]?(p[1][0]||'').toUpperCase():'');}
 function crewTimeAgo(ts){const L=t();const s=Math.floor((Date.now()-ts)/1000);if(s<60)return L.agoNow;const m=Math.floor(s/60);if(m<60)return m+' '+L.agoMin;const h=Math.floor(m/60);if(h<24)return h+' '+L.agoHour;return Math.floor(h/24)+' '+L.agoDay;}
+function forgetCrewMember(name){
+  if(_onlineCrew&&_onlineCrew[name])return; // can't remove someone currently online
+  if(state.crewSeen)delete state.crewSeen[name];
+  save();
+  renderCrewBar();
+  if(shareSessionId && typeof broadcastState==='function') broadcastState();
+}
 function renderCrewBar(){
   const bar=el('crew-bar');if(!bar)return;
   if(typeof shareSessionId==='undefined'||!shareSessionId){bar.classList.remove('visible');return;}
-  const online=_onlineCrew||{};const seen=state.crewSeen||{};
+  const online=_onlineCrew||{};let seen=state.crewSeen||{};
+  const STALE_MS=24*60*60*1000;
+  const now=Date.now();
+  Object.keys(seen).forEach(n=>{if(!online[n]&&now-(seen[n]||0)>STALE_MS)delete seen[n];});
   const names=[...new Set([...Object.keys(online),...Object.keys(seen)])];
   if(names.length===0){bar.classList.remove('visible');return;}
   bar.classList.add('visible');
@@ -3331,7 +3343,7 @@ function renderCrewBar(){
   names.sort((a,b)=>(online[b]?1:0)-(online[a]?1:0));
   bar.innerHTML=`<span class="crew-bar-lbl">${L.crewOnline}</span>`+names.map(n=>{
     const isOn=!!online[n];const col=crewColor(n);
-    const right=isOn?'<span class="crew-online-dot"></span>':`<span class="crew-seen">${seen[n]?crewTimeAgo(seen[n]):''}</span>`;
+    const right=isOn?'<span class="crew-online-dot"></span>':`<span class="crew-seen">${seen[n]?crewTimeAgo(seen[n]):''}</span>${n!==myCrewName()?`<span class="crew-remove" onclick="forgetCrewMember('${n.replace(/'/g,"\\'")}')" title="Usuń z listy załogi">×</span>`:''}`;
     return `<div class="crew-ava" style="${isOn?'':'opacity:0.55'}"><div class="crew-dot" style="background:${col}">${crewInitials(n)}</div><span class="crew-name-lbl">${n}</span>${right}</div>`;
   }).join('');
 }
