@@ -381,6 +381,27 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .metric-chip.under{border-color:rgba(255,71,87,0.35);}
 .metric-chip.under b{color:var(--red);}
 .analiza-note{font-size:12px;color:var(--muted);text-align:center;padding:8px 12px;line-height:1.5;}
+/* ACCOUNT ICON + KONTO SCREEN */
+.acct-btn{background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;font-size:15px;padding:5px 9px;border-radius:20px;transition:all .2s;line-height:1;}
+.acct-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.acct-btn-splash{position:absolute;top:16px;right:16px;}
+.konto-body{padding:16px 20px 32px;flex:1;overflow-y:auto;}
+.konto-sec{margin-bottom:26px;}
+.konto-sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.konto-sec-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--cyan-dim);}
+.konto-sec-sub{font-size:12px;color:var(--muted);margin:-4px 0 10px;line-height:1.5;}
+.konto-empty{font-size:12.5px;color:var(--muted);padding:12px 2px;line-height:1.5;}
+.konto-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 17px;}
+.konto-row-btn{width:100%;display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 15px;cursor:pointer;transition:all .2s;text-align:left;margin-bottom:8px;}
+.konto-row-btn:hover{border-color:var(--cyan);}
+.konto-row-icon{font-size:20px;flex-shrink:0;}
+.konto-row-txt{flex:1;min-width:0;}
+.konto-row-title{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:600;}
+.konto-row-sub{font-size:11.5px;color:var(--muted);margin-top:1px;}
+.export-btn{font-family:'Syne',sans-serif;font-size:12.5px;font-weight:700;padding:10px 16px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--white);cursor:pointer;transition:all .2s;}
+.export-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.export-btn.primary{background:var(--cyan);color:var(--navy);border-color:var(--cyan);}
+.export-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
 /* Hide old inline tabs from top-bar on mobile */
 @media(max-width:600px){
   .top-actions .btn-tab{display:none;}
@@ -417,6 +438,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
   <div class="splash-credit"><span data-lang="pl">armatorpro.com</span><span data-lang="en" style="display:none">armatorpro.com</span></div>
   <a href="https://armatorpro.com" style="margin-top:12px;font-size:11px;color:rgba(0,212,255,0.4);text-decoration:none;">← armatorpro.com</a>
+  <button class="acct-btn acct-btn-splash" onclick="showScreen('konto')" title="Konto">👤</button>
   <div class="pro-activated-bar" id="pro-status-bar" style="display:none;margin-top:12px;"><span>✓</span><span id="pro-status-text">PRO aktywowane</span></div>
   <button onclick="showProUpgradeScreen()" style="margin-top:8px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;" id="btn-get-pro">Uzyskaj PRO →</button>
 
@@ -454,6 +476,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="top-bar">
     <button class="btn-back" onclick="showScreen('splash')">←</button>
     <div class="logo">⚓ <span>ARMATOR</span>.PRO</div>
+    <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
     <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-config">EN</button>
   </div>
   <div class="config-body">
@@ -542,6 +566,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="btn-back" onclick="showScreen('config')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="lista-meta"></div></div>
     <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
       <button class="btn-tab active" onclick="showScreen('lista')" id="tab-lista">Lista</button>
       <button class="btn-tab" onclick="showScreen('zapasy')" id="tab-zapasy">Zapasy</button>
       <button class="btn-tab" onclick="showScreen('koszty')" id="tab-koszty">Koszt</button>
@@ -586,6 +611,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="btn-back" onclick="showScreen('lista')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="zapasy-meta"></div></div>
     <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
       <button class="btn-tab" onclick="showScreen('lista')" id="tab-lista-z">Lista</button>
       <button class="btn-tab active" onclick="showScreen('zapasy')" id="tab-zapasy-z">Zapasy</button>
       <button class="btn-tab" onclick="showScreen('koszty')" id="tab-koszty-z">Koszt</button>
@@ -604,6 +630,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="btn-back" onclick="showScreen('lista')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div></div>
     <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
       <button class="btn-tab" onclick="showScreen('lista')" id="tab-lista-k">Lista</button>
       <button class="btn-tab" onclick="showScreen('zapasy')" id="tab-zapasy-k">Zapasy</button>
       <button class="btn-tab active" onclick="showScreen('koszty')" id="tab-koszty-k">Koszt</button>
@@ -626,6 +653,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="btn-back" onclick="showScreen('lista')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="menu-meta"></div></div>
     <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
       <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-menu">EN</button>
     </div>
   </div>
@@ -687,9 +715,78 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="top-bar">
     <button class="btn-back" onclick="showScreen('splash')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div><div class="top-meta" id="analiza-title">Analiza rejsów</div></div>
-    <div class="top-actions"><button class="lang-btn" onclick="toggleLang()">EN</button></div>
+    <div class="top-actions"><button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button><button class="lang-btn" onclick="toggleLang()">EN</button></div>
   </div>
   <div class="analiza-body" id="analiza-content"></div>
+</div>
+
+<!-- KONTO (hub: łodzie, szablony, rejsy, analiza, ustawienia) -->
+<div id="screen-konto" class="screen">
+  <div class="top-bar">
+    <button class="btn-back" onclick="showScreen('splash')">←</button>
+    <div class="logo">⚓ <span>ARMATOR</span>.PRO</div>
+    <div class="top-actions"><button class="lang-btn" onclick="toggleLang()" id="lang-toggle-konto">EN</button></div>
+  </div>
+  <div class="konto-body">
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-pro-title">Konto</span></div>
+      <div class="pro-activated-bar" id="konto-pro-bar" style="display:none;"><span>✓</span><span>PRO aktywowane</span></div>
+      <button onclick="showProUpgradeScreen()" style="margin-top:6px;background:none;border:none;font-size:12px;color:var(--muted);cursor:pointer;text-decoration:underline;" id="konto-get-pro">Uzyskaj PRO →</button>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-install-title">Zainstaluj aplikację</span></div>
+      <button class="konto-row-btn" onclick="installPWA()" id="konto-install-btn">
+        <span class="konto-row-icon">⚓</span>
+        <div class="konto-row-txt"><div class="konto-row-title" id="konto-install-name">Dodaj do ekranu głównego</div><div class="konto-row-sub" id="konto-install-sub">Działa offline, uruchamiasz jednym dotknięciem</div></div>
+      </button>
+      <div id="konto-ios-hint" style="display:none;font-size:12px;color:var(--muted);line-height:1.6;padding:0 2px;"></div>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-boats-title">Moje łodzie</span></div>
+      <div id="konto-boats-list"></div>
+      <div class="konto-empty" id="konto-boats-empty" style="display:none;">Zapisz konfigurację rejsu jako profil łodzi, żeby wracać do niej jednym kliknięciem.</div>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-tpl-title">Szablony zapasów</span></div>
+      <div id="konto-templates-list"></div>
+      <div class="konto-empty" id="konto-templates-empty" style="display:none;">Zapisz listę zakupów jako szablon z ekranu Listy, żeby użyć jej ponownie.</div>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-trips-title">Zapisane rejsy</span></div>
+      <div id="konto-trips-list"></div>
+      <div class="konto-empty" id="konto-trips-empty" style="display:none;">Zapisz rejs z ekranu Listy, żeby wrócić do niego później.</div>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-analiza-title">Analiza rejsów</span></div>
+      <button class="konto-row-btn" onclick="showScreen('analiza')">
+        <span class="konto-row-icon">📊</span>
+        <div class="konto-row-txt"><div class="konto-row-title" id="konto-analiza-name">Czego nauczył się planer</div><div class="konto-row-sub" id="konto-analiza-sub"></div></div>
+        <span style="color:var(--cyan);font-size:18px">→</span>
+      </button>
+    </div>
+
+    <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-data-title">Twoje dane</span></div>
+      <div class="konto-sec-sub" id="konto-data-sub">Eksportuj wszystko (łodzie, szablony, rejsy, wyuczone normy) do pliku — przenieś na inne urządzenie albo zrób kopię zapasową.</div>
+      <div class="export-row">
+        <button class="export-btn primary" onclick="exportAllDataJSON()" id="konto-export-btn">⬇ Eksportuj wszystko (JSON)</button>
+        <button class="export-btn" onclick="el('konto-import-file').click()" id="konto-import-btn">⬆ Importuj (JSON)</button>
+        <input type="file" id="konto-import-file" accept="application/json" style="display:none" onchange="importAllDataJSON(this.files[0])">
+      </div>
+      <div class="konto-sec-sub" style="margin-top:14px" id="konto-data-sub2">Bieżącą listę zakupów wyeksportujesz do PDF lub CSV z ekranu Listy / Koszty.</div>
+      <div class="export-row">
+        <button class="export-btn" onclick="exportListCSV()" id="konto-csv-btn">⬇ Bieżąca lista (CSV)</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-bar"><button class="tab-bar-btn" onclick="showScreen('lista')">📋 <span class="tbl-lista">Lista</span></button><button class="tab-bar-btn" onclick="showScreen('zapasy')">📦 <span class="tbl-zapasy">Zapasy</span></button><button class="tab-bar-btn" onclick="showScreen('koszty')">💰 <span class="tbl-koszty">Koszty</span></button><button class="tab-bar-btn" onclick="showScreen('menu')">🍽️ <span class="tbl-menu">Menu</span></button><button class="tab-bar-btn" onclick="showScreen('rozliczenie')">🤝 <span class="tbl-rozl">Rozlicz</span></button></div>
 </div>
 
 <!-- MODAL imię załoganta -->
@@ -767,6 +864,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="btn-back" onclick="showScreen('lista')">←</button>
     <div><div class="logo">⚓ <span>ARMATOR</span>.PRO</div></div>
     <div class="top-actions">
+      <button class="acct-btn" onclick="showScreen('konto')" title="Konto">👤</button>
       <button class="lang-btn" onclick="toggleLang()" id="lang-toggle-rozl">EN</button>
     </div>
   </div>
@@ -929,6 +1027,14 @@ const T={
     menuSummaryEmpty:'Zaplanuj posiłki, aby lista liczyła tylko ich składniki',
     menuSummaryOff:'Tryb szacunków — lista z norm dla całej załogi. Zaplanuj posiłek, aby liczyć dokładnie z menu.',
     recipeModalTitle:'Wybierz danie',recipeClear:'Wyczyść',recipeClose:'Zamknij',
+    kontoTitle:'Konto',kontoInstall:'Zainstaluj aplikację',kontoInstallName:'Dodaj do ekranu głównego',kontoInstallSub:'Działa offline, uruchamiasz jednym dotknięciem',
+    kontoTemplates:'Szablony zapasów',kontoTrips:'Zapisane rejsy',
+    kontoData:'Twoje dane',kontoDataSub:'Eksportuj wszystko (łodzie, szablony, rejsy, wyuczone normy) do pliku — przenieś na inne urządzenie albo zrób kopię zapasową.',
+    kontoDataSub2:'Bieżącą listę zakupów wyeksportujesz do PDF lub CSV z ekranu Listy / Koszty.',
+    kontoExportAll:'Eksportuj wszystko (JSON)',kontoImportAll:'Importuj (JSON)',kontoExportCsv:'Bieżąca lista (CSV)',
+    kontoBoatsEmpty:'Zapisz konfigurację rejsu jako profil łodzi, żeby wracać do niej jednym kliknięciem.',
+    kontoTplEmpty:'Zapisz listę zakupów jako szablon z ekranu Listy, żeby użyć jej ponownie.',
+    kontoTripsEmpty:'Zapisz rejs z ekranu Listy, żeby wrócić do niego później.',
   },
   en:{
     splashTagline:'Stop guessing what to buy. Set your trip parameters — get an exact shopping list.',
@@ -992,6 +1098,14 @@ const T={
     menuSummaryEmpty:'Plan meals so the list only counts their ingredients',
     menuSummaryOff:'Estimate mode — list from crew norms. Plan a meal to drive it exactly from the menu.',
     recipeModalTitle:'Pick a dish',recipeClear:'Clear',recipeClose:'Close',
+    kontoTitle:'Account',kontoInstall:'Install the app',kontoInstallName:'Add to home screen',kontoInstallSub:'Works offline, launches with one tap',
+    kontoTemplates:'Supply templates',kontoTrips:'Saved trips',
+    kontoData:'Your data',kontoDataSub:'Export everything (boats, templates, trips, learned norms) to a file — move to another device or make a backup.',
+    kontoDataSub2:'Export the current shopping list to PDF or CSV from the List / Cost screen.',
+    kontoExportAll:'Export everything (JSON)',kontoImportAll:'Import (JSON)',kontoExportCsv:'Current list (CSV)',
+    kontoBoatsEmpty:'Save a trip configuration as a boat profile to return to it in one tap.',
+    kontoTplEmpty:'Save a shopping list as a template from the List screen to reuse it.',
+    kontoTripsEmpty:'Save a trip from the List screen to come back to it later.',
   }
 };
 
@@ -1576,7 +1690,7 @@ function applyLang(){
     }
   });
   const toggleLabel=state.lang==='pl'?'EN':'PL';
-  ['lang-toggle-config','lang-toggle-lista'].forEach(id=>{const b=el(id);if(b)b.textContent=toggleLabel;});
+  ['lang-toggle-config','lang-toggle-lista','lang-toggle-konto'].forEach(id=>{const b=el(id);if(b)b.textContent=toggleLabel;});
   ['lang-pl','lang-en'].forEach(id=>{const b=el(id);if(!b)return;const a=id==='lang-'+state.lang;b.style.borderColor=a?'var(--cyan)':'';b.style.color=a?'var(--cyan)':'';});
   el('splash-tagline').textContent=L.splashTagline;
   el('btn-start').textContent=L.btnStart;
@@ -1602,6 +1716,7 @@ function applyLang(){
   document.querySelectorAll('.tbl-menu').forEach(s=>{s.textContent=L.tabMenu;});
   if(el('menu-label'))el('menu-label').textContent=L.menuLabel;
   if(el('screen-menu')&&el('screen-menu').classList.contains('active'))renderMenu();
+  if(el('screen-konto')&&el('screen-konto').classList.contains('active'))renderKonto();
   ['tab-lista','tab-lista-z','tab-lista-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabLista;});
   ['tab-zapasy','tab-zapasy-z','tab-zapasy-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabZapasy;});
   ['tab-koszty','tab-koszty-z','tab-koszty-k'].forEach(id=>{const b=el(id);if(b)b.textContent=L.tabKoszt;});
@@ -1691,6 +1806,7 @@ function showScreen(name){
   if(name==='rozliczenie')renderRozliczenie();
   if(name==='menu')renderMenu();
   if(name==='analiza')renderAnaliza();
+  if(name==='konto')renderKonto();
   // Update tab-bar active state
   ['lista','zapasy','koszty'].forEach(tab=>{
     ['tb'].forEach(suffix=>{
@@ -1991,6 +2107,16 @@ function renderSavedTrips(){
         </div>`).join('');
     }
   }
+  // Konto screen
+  if(el('konto-trips-list')){
+    if(el('konto-trips-title'))el('konto-trips-title').textContent=L.kontoTrips;
+    el('konto-trips-list').innerHTML=trips.map(trip=>`
+      <div class="saved-trip-item" onclick="loadTrip(${trip.id})">
+        <div><div class="saved-trip-name">${trip.name}</div><div class="saved-trip-meta">${trip.date} · ${trip.state.adults} os · ${trip.state.days} dni</div></div>
+        <button class="saved-trip-del" onclick="deleteTrip(event,${trip.id})">×</button>
+      </div>`).join('');
+    if(el('konto-trips-empty'))el('konto-trips-empty').style.display=trips.length?'none':'block';
+  }
   // Config screen
   const cfgSection=el('config-saved-section');
   if(cfgSection){
@@ -2084,18 +2210,134 @@ function renderAnalizaTeaser(){
   const data=analyzeAllTrips();
   const active=Object.keys(NORM_FACTORS).filter(id=>NORM_FACTORS[id]&&NORM_FACTORS[id]!==1).length;
   if(el('analiza-splash-meta'))el('analiza-splash-meta').textContent=L.analizaSplashMeta(trips.length,data.proposals.length,active);
+  if(el('konto-analiza-sub'))el('konto-analiza-sub').textContent=trips.length?L.analizaSplashMeta(trips.length,data.proposals.length,active):L.analizaEmpty;
 }
 function renderBoats(){
-  const boats=loadBoats();const L=t();const section=el('boats-section');
-  if(!section)return;
+  const boats=loadBoats();const L=t();
+  const targets=[{listId:'boats-list',sectionId:'boats-section',emptyId:null},{listId:'konto-boats-list',sectionId:null,emptyId:'konto-boats-empty'}];
   if(el('boats-title'))el('boats-title').textContent=L.boatsTitle;
-  if(boats.length===0){section.style.display='none';return;}
-  section.style.display='block';
-  el('boats-list').innerHTML=boats.map(b=>{
+  if(el('konto-boats-title'))el('konto-boats-title').textContent=L.boatsTitle;
+  const html=boats.map(b=>{
     const crew=b.cfg.adults+(b.cfg.children?'+'+b.cfg.children:'');
     const meta=`${crew} ${L.crewUnit} · ${b.cfg.rejon}`;
     return `<div class="boat-tile" onclick="applyBoat(${b.id})"><span class="boat-icon">⚓</span><div class="boat-info"><div class="boat-name">${b.name}</div><div class="boat-meta">${meta}</div></div><button class="boat-del" onclick="deleteBoat(event,${b.id})">×</button></div>`;
   }).join('');
+  targets.forEach(tg=>{
+    const list=el(tg.listId); if(!list)return;
+    list.innerHTML=html;
+    if(tg.sectionId){const sec=el(tg.sectionId); if(sec)sec.style.display=boats.length?'block':'none';}
+    if(tg.emptyId){const e2=el(tg.emptyId); if(e2)e2.style.display=boats.length?'none':'block';}
+  });
+}
+
+// ══════════════════════════════════════
+// KONTO (hub) — point 1-4 from user feedback
+// ══════════════════════════════════════
+function renderKonto(){
+  const L=t();
+  if(el('konto-pro-title'))el('konto-pro-title').textContent=L.kontoTitle;
+  if(el('konto-install-title'))el('konto-install-title').textContent=L.kontoInstall;
+  if(el('konto-install-name'))el('konto-install-name').textContent=L.kontoInstallName;
+  if(el('konto-install-sub'))el('konto-install-sub').textContent=L.kontoInstallSub;
+  if(el('konto-tpl-title'))el('konto-tpl-title').textContent=L.kontoTemplates;
+  if(el('konto-trips-title'))el('konto-trips-title').textContent=L.kontoTrips;
+  if(el('konto-analiza-title'))el('konto-analiza-title').textContent=L.analizaSplashTitle;
+  if(el('konto-analiza-name'))el('konto-analiza-name').textContent=L.analizaSplashName;
+  if(el('konto-data-title'))el('konto-data-title').textContent=L.kontoData;
+  if(el('konto-data-sub'))el('konto-data-sub').textContent=L.kontoDataSub;
+  if(el('konto-data-sub2'))el('konto-data-sub2').textContent=L.kontoDataSub2;
+  if(el('konto-export-btn'))el('konto-export-btn').textContent='⬇ '+L.kontoExportAll;
+  if(el('konto-import-btn'))el('konto-import-btn').textContent='⬆ '+L.kontoImportAll;
+  if(el('konto-csv-btn'))el('konto-csv-btn').textContent='⬇ '+L.kontoExportCsv;
+  if(el('konto-get-pro'))el('konto-get-pro').textContent=state.lang==='en'?'Get PRO →':'Uzyskaj PRO →';
+  if(el('konto-boats-empty'))el('konto-boats-empty').textContent=L.kontoBoatsEmpty;
+  if(el('konto-templates-empty'))el('konto-templates-empty').textContent=L.kontoTplEmpty;
+  if(el('konto-trips-empty'))el('konto-trips-empty').textContent=L.kontoTripsEmpty;
+  renderProStatus();
+  renderBoats();
+  renderTemplatesInto('konto-templates-list','konto-templates-empty');
+  renderSavedTrips();
+  renderAnalizaTeaser();
+  updateInstallButton();
+}
+
+function updateInstallButton(){
+  const isStandalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone===true;
+  const btn=el('konto-install-btn');
+  const hint=el('konto-ios-hint');
+  if(isStandalone){
+    if(btn){btn.style.opacity='0.55';btn.style.pointerEvents='none';}
+    if(el('konto-install-sub'))el('konto-install-sub').textContent=state.lang==='en'?'Already installed ✓':'Już zainstalowana ✓';
+    if(hint)hint.style.display='none';
+    return;
+  }
+  if(btn){btn.style.opacity='1';btn.style.pointerEvents='auto';}
+  if(isIOS && hint){
+    hint.style.display='block';
+    hint.textContent = state.lang==='en'
+      ? 'On iPhone/iPad: tap the Share icon in Safari, then "Add to Home Screen".'
+      : 'Na iPhone/iPad: stuknij ikonę Udostępnij w Safari, potem „Dodaj do ekranu głównego”.';
+  } else if(hint){
+    hint.style.display = deferredPrompt ? 'none' : 'block';
+    if(!deferredPrompt) hint.textContent = state.lang==='en'
+      ? 'Use your browser menu → "Install app" / "Add to Home Screen".'
+      : 'Użyj menu przeglądarki → „Zainstaluj aplikację” / „Dodaj do ekranu głównego”.';
+  }
+}
+
+// ── Export / import everything (boats, templates, trips, learned norms) ──
+function exportAllDataJSON(){
+  const payload={
+    exportedAt:new Date().toISOString(),
+    app:'Armator.PRO', version:1,
+    boats:loadBoats(), templates:loadTemplates(), trips:loadTrips(), normFactors:NORM_FACTORS
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='armator-dane-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function importAllDataJSON(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    let data;
+    try{ data=JSON.parse(reader.result); }catch(e){
+      alert(state.lang==='pl'?'Nieprawidłowy plik.':'Invalid file.'); return;
+    }
+    const msg=state.lang==='pl'
+      ? 'To dodało załadowane łodzie/szablony/rejsy do obecnych na tym urządzeniu (bez nadpisywania). Kontynuować?'
+      : 'This will add the imported boats/templates/trips to what\'s already on this device (nothing overwritten). Continue?';
+    if(!confirm(msg))return;
+    if(Array.isArray(data.boats)){ const cur=loadBoats(); saveBoats([...data.boats.filter(b=>!cur.find(c=>c.id===b.id)),...cur]); }
+    if(Array.isArray(data.templates)){ const cur=loadTemplates(); saveTemplates([...data.templates.filter(b=>!cur.find(c=>c.id===b.id)),...cur]); }
+    if(Array.isArray(data.trips)){ const cur=loadTrips(); saveTrips([...data.trips.filter(b=>!cur.find(c=>c.id===b.id)),...cur]); }
+    if(data.normFactors && typeof data.normFactors==='object'){ NORM_FACTORS=Object.assign({},data.normFactors,NORM_FACTORS); saveNormFactors(NORM_FACTORS); }
+    renderKonto();
+    alert(state.lang==='pl'?'Zaimportowano.':'Imported.');
+  };
+  reader.readAsText(file);
+}
+function exportListCSV(){
+  if(!state.list||!state.list.length){
+    alert(state.lang==='pl'?'Brak listy do eksportu. Najpierw wygeneruj listę.':'No list to export. Generate one first.');
+    return;
+  }
+  const rows=[['Kategoria','Produkt','Ilość','Jednostka','Kupione']];
+  state.list.forEach(p=>{
+    const qty=state.customQty[p.id]??p.qty;
+    rows.push([p.kat, pn(p.id), qty, p.jedn, state.bought[p.id]?'TAK':'']);
+  });
+  const esc=v=>{v=String(v==null?'':v);return /[",;\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  const csv='\uFEFF'+rows.map(r=>r.map(esc).join(';')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='lista-zakupow.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
 }
 
 // ══════════════════════════════════════
@@ -2115,10 +2357,16 @@ function openTemplatesModal(){
   el('templates-modal').classList.remove('hidden');
 }
 function closeTemplatesModal(){el('templates-modal').classList.add('hidden');}
-function renderTemplatesModal(){
-  const tpls=loadTemplates();const L=t();const box=el('tpl-list');
+function renderTemplatesModal(){ renderTemplatesInto('tpl-list','tpl-empty'); }
+function renderTemplatesInto(listId, emptyId){
+  const tpls=loadTemplates();const L=t();const box=el(listId);
   if(!box)return;
-  if(tpls.length===0){box.innerHTML=`<div class="tpl-empty">${L.tplEmpty}</div>`;return;}
+  if(tpls.length===0){
+    box.innerHTML=emptyId?'':`<div class="tpl-empty">${L.tplEmpty}</div>`;
+    if(emptyId && el(emptyId))el(emptyId).style.display='block';
+    return;
+  }
+  if(emptyId && el(emptyId))el(emptyId).style.display='none';
   box.innerHTML=tpls.map(tp=>{
     const n=tp.items?tp.items.length:0;
     const menuTag=tp.hasMenu?`<span class="tpl-menu-tag">🍽️ ${L.tplMenuTag}</span>`:'';
@@ -2184,6 +2432,7 @@ function deleteTemplate(e,id){
   e.stopPropagation();
   saveTemplates(loadTemplates().filter(x=>x.id!==id));
   renderTemplatesModal();
+  if(el('konto-templates-list'))renderTemplatesInto('konto-templates-list','konto-templates-empty');
 }
 [el('boat-modal'),el('templates-modal'),el('tpl-choice-modal')].forEach(m=>{if(m)m.addEventListener('click',function(e){if(e.target===this)this.classList.add('hidden');});});
 
@@ -2598,13 +2847,17 @@ function submitLicenseKey(){
 
 function renderProStatus(){
   const bar = el('pro-status-bar');
-  if(!bar) return;
-  if(isPro()){
-    bar.innerHTML = `<span>✓</span> <span id="pro-status-text">${state.lang==='en'?'PRO activated':'PRO aktywowane'}</span>`;
-    bar.style.display = 'flex';
-  } else {
-    bar.style.display = 'none';
+  const kbar = el('konto-pro-bar');
+  const txt = state.lang==='en'?'PRO activated':'PRO aktywowane';
+  if(bar){
+    if(isPro()){ bar.innerHTML = `<span>✓</span> <span id="pro-status-text">${txt}</span>`; bar.style.display = 'flex'; }
+    else bar.style.display = 'none';
   }
+  if(kbar){
+    if(isPro()){ kbar.innerHTML = `<span>✓</span><span>${txt}</span>`; kbar.style.display = 'flex'; }
+    else kbar.style.display = 'none';
+  }
+  if(el('konto-get-pro'))el('konto-get-pro').style.display=isPro()?'none':'inline';
 }
 
 
