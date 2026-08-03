@@ -430,7 +430,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
   </div>
   <div class="splash-tagline" id="splash-tagline">Koniec z kupowaniem na oko. Podaj parametry rejsu — dostaniesz dokładną listę zakupów.</div>
-  <button class="btn-primary" onclick="showScreen('config')" id="btn-start">Zaplanuj rejs</button>
+  <button class="btn-primary" onclick="startNewTrip()" id="btn-start">Zaplanuj rejs</button>
   <div class="splash-stats">
     <div><div class="stat-val cyan">70+</div><div class="stat-label" id="stat-products">produktów</div></div>
     <div><div class="stat-val amber">60</div><div class="stat-label" id="stat-time">sek do listy</div></div>
@@ -773,6 +773,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
 
     <div class="konto-sec">
+      <div class="konto-sec-h"><span class="konto-sec-title" id="konto-reset-title">Reset rejsu</span></div>
+      <div class="konto-sec-sub" id="konto-reset-sub">Wraca do domyślnej załogi/dni i rozłącza udostępnianie. Użyj Szablonów / Zapisanych rejsów, żeby wrócić do poprzedniej konfiguracji.</div>
+      <button class="export-btn" onclick="resetCrewAndSharing()" id="konto-reset-btn" style="color:var(--red);border-color:rgba(255,71,87,0.4)">↻ Resetuj załogę i udostępnianie</button>
+    </div>
+
+    <div class="konto-sec">
       <div class="konto-sec-h"><span class="konto-sec-title" id="konto-data-title">Twoje dane</span></div>
       <div class="konto-sec-sub" id="konto-data-sub">Eksportuj wszystko (łodzie, szablony, rejsy, wyuczone normy) do pliku — przenieś na inne urządzenie albo zrób kopię zapasową.</div>
       <div class="export-row">
@@ -1036,6 +1042,7 @@ const T={
     kontoBoatsEmpty:'Zapisz konfigurację rejsu jako profil łodzi, żeby wracać do niej jednym kliknięciem.',
     kontoTplEmpty:'Zapisz listę zakupów jako szablon z ekranu Listy, żeby użyć jej ponownie.',
     kontoTripsEmpty:'Zapisz rejs z ekranu Listy, żeby wrócić do niego później.',
+    kontoResetTitle:'Reset rejsu',kontoResetSub:'Wraca do domyślnej załogi/dni i rozłącza udostępnianie. Użyj Szablonów / Zapisanych rejsów, żeby wrócić do poprzedniej konfiguracji.',kontoResetBtn:'Resetuj załogę i udostępnianie',
   },
   en:{
     splashTagline:'Stop guessing what to buy. Set your trip parameters — get an exact shopping list.',
@@ -1107,6 +1114,7 @@ const T={
     kontoBoatsEmpty:'Save a trip configuration as a boat profile to return to it in one tap.',
     kontoTplEmpty:'Save a shopping list as a template from the List screen to reuse it.',
     kontoTripsEmpty:'Save a trip from the List screen to come back to it later.',
+    kontoResetTitle:'Reset trip',kontoResetSub:'Reverts to default crew/days and disconnects sharing. Use Templates / Saved trips to return to a previous configuration.',kontoResetBtn:'Reset crew & sharing',
   }
 };
 
@@ -1186,6 +1194,35 @@ function save(){
   }
 }
 function load(){try{const d=localStorage.getItem(STORAGE_KEY);if(d)Object.assign(state,JSON.parse(d));}catch(e){}}
+// Reset trip-specific config to defaults (crew, days, region, diets...) so a
+// fresh "Zaplanuj rejs" doesn't silently carry over the previous trip's crew.
+// Keeps app-level data (trips, boats, templates, norms, lang, custom products).
+function startNewTrip(){
+  leaveShare();
+  Object.assign(state,{
+    adults:4,children:0,days:5,
+    sklep:'Port co 2 dni',rejon:'Bałtyk',
+    styl:'Raczej jemy na jachcie',apetyt:'Normalnie',
+    drinks:{gazowana:0,soki:0,cola:0,syrop:0},
+    wege:0,laktoza:0,gluten:0,grill:false,alkohol:false,
+    bought:{},skip:{},comments:{},customQty:{},
+    zapasy:{},currentDay:1,list:[],expenses:[],transfersDone:{},menu:{},menuMode:false,
+    boughtBy:{}
+  });
+  save();
+  restoreUI();
+  showScreen('config');
+}
+
+// Reset crew/config + drop sharing, but stay on the current screen/list
+// (unlike startNewTrip, which also jumps to a blank Config screen).
+function resetCrewAndSharing(){
+  const msg = state.lang==='pl'
+    ? 'To zresetuje załogę, dni i ustawienia rejsu do domyślnych oraz rozłączy udostępnianie. Lista zakupów zostanie wyczyszczona. Kontynuować?'
+    : 'This resets crew, days and trip settings to defaults and disconnects sharing. The shopping list will be cleared. Continue?';
+  if(!confirm(msg))return;
+  startNewTrip();
+}
 
 // Rebuild user-added products (names/prices/list rows) from persisted state.customProducts.
 // Fixes: custom product names were only kept in the in-memory PROD_NAMES and were lost on
@@ -2246,6 +2283,9 @@ function renderKonto(){
   if(el('konto-analiza-name'))el('konto-analiza-name').textContent=L.analizaSplashName;
   if(el('konto-data-title'))el('konto-data-title').textContent=L.kontoData;
   if(el('konto-data-sub'))el('konto-data-sub').textContent=L.kontoDataSub;
+  if(el('konto-reset-title'))el('konto-reset-title').textContent=L.kontoResetTitle;
+  if(el('konto-reset-sub'))el('konto-reset-sub').textContent=L.kontoResetSub;
+  if(el('konto-reset-btn'))el('konto-reset-btn').textContent='\u21bb '+L.kontoResetBtn;
   if(el('konto-data-sub2'))el('konto-data-sub2').textContent=L.kontoDataSub2;
   if(el('konto-export-btn'))el('konto-export-btn').textContent='⬇ '+L.kontoExportAll;
   if(el('konto-import-btn'))el('konto-import-btn').textContent='⬆ '+L.kontoImportAll;
@@ -3152,6 +3192,18 @@ function showShareUI(url){
   if(container)container.style.display='block';
   if(linkText)linkText.textContent=url;
   setSyncStatus('synced');
+  renderCrewBar();
+}
+
+// Disconnect from the current shared session (if any) — stops realtime sync,
+// forgets the reconnect pointer, hides all share UI. Local list/config untouched.
+function leaveShare(){
+  if(realtimeChannel){ try{ stopHeartbeat(); realtimeChannel.unsubscribe(); }catch(e){} realtimeChannel=null; }
+  shareSessionId=null; _shareRole=null; isReadonly=false; _onlineCrew={};
+  persistShare();
+  const bar=el('share-readonly-bar'); if(bar)bar.classList.remove('visible');
+  const container=el('share-link-container'); if(container)container.style.display='none';
+  const badge=el('sync-status'); if(badge)badge.style.display='none';
   renderCrewBar();
 }
 
