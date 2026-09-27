@@ -1,11 +1,13 @@
 // Armator.PRO Service Worker
 // WAŻNE: zmień CACHE_VERSION przy każdym deploymencie
-const CACHE_VERSION = 'v7';
+const CACHE_VERSION = 'v8';
 const CACHE_NAME = `armator-${CACHE_VERSION}`;
 
 const ASSETS = [
   '/app.html',
   '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
 ];
 
 // External libs cached so the app keeps working offline at sea (best-effort)
@@ -60,11 +62,21 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Dla reszty: cache first
+  // Dla reszty: cache first + zapis do cache (czcionki, ikony, biblioteki) — żeby działało offline na morzu
+  const url = new URL(event.request.url);
+  const cacheable = url.origin === self.location.origin ||
+    url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com' ||
+    url.hostname === 'cdn.jsdelivr.net';
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
-      return fetch(event.request).catch(() => {
+      return fetch(event.request).then(response => {
+        if (cacheable && response && (response.ok || response.type === 'opaque')) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => {
         if (event.request.mode === 'navigate') return caches.match('/app.html');
       });
     })
