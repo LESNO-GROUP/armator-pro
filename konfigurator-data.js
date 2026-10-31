@@ -230,7 +230,8 @@ const SLIDING_PROFILES = [
   {id:'ergo',      name:'ERGO',              desc:'Ramowy z wpuszczanym uchwytem ERGO',                       price:310, brand:'GTV ERGO',    fillable:true,  divisible:false, image:'assets/akcesoria/sliding-ergo.png'},
   {id:'loca',      name:'LOCA',              desc:'Ramowy z wpuszczanym uchwytem LOCA',                       price:290, brand:'GTV LOCA',    fillable:true,  divisible:false, image:'assets/akcesoria/sliding-loca.png'},
   {id:'dzielony',  name:'Ramowy dzielony',   desc:'Podział poziomy na 2–3 pasy z różnymi wypełnieniami',      price:400, brand:'GTV',         fillable:true,  divisible:true},
-  {id:'bezramowy', name:'Bezramowy',         desc:'Front bez ramki aluminiowej, krawędź ABS (tylko płyta)',   price:360, brand:'GTV',         fillable:false, divisible:false},
+  {id:'bezramowy', name:'Bezramowy',         desc:'Front bez ramki aluminiowej, krawędź ABS (tylko płyta)',   price:150, brand:'GTV',         fillable:false, divisible:false},
+  {id:'overline',  name:'System Overline',   desc:'Drzwi nakładane, przesuwane przed korpusem — tor górny i dolny na wieńcach', price:360, brand:'Overline', fillable:false, divisible:false},
 ];
 
 const SLIDING_COLORS = [
@@ -325,7 +326,7 @@ const HANDLES = [
 const PRICING = {
   // Material handled per-decor (cena Kronospan zł/m² na pozycji)
   hdfPerSqm:       22,        // zł / m² pleców HDF 3 mm
-  laborPerSqm:     50,        // zł / m² zużytej płyty (z odpadem)
+  laborPerSqm:      0,        // robocizna wyłączona
   cuttingPerMb:   2.5,        // zł / mb cięcia
   edgingPerMb:      5,        // zł / mb obrzeża + oklejania
   cuttingPerSqm:    5,        // ~mb cięcia na m² płyty (heurystyka)

@@ -359,7 +359,7 @@ function buildCutList(){
 }
 
 // ────────────────────────────────────────────────────────────
-//  PRICING — silnik kosztorysu (brutto)
+//  PRICING — silnik kosztorysu (cena końcowa)
 //  Składowe:
 //   1. Materiał (płyta) — cena Kronospan / m² × (1 + odpad)
 //   2. Cięcie — m² płyty × cuttingPerSqm × cuttingPerMb
@@ -492,9 +492,10 @@ function priceBreakdown(){
   }
 
   const subtotal = materialCost + cuttingCost + edgingCost + laborCost + designCost + backCost + accCost + hardwareCost;
-  const total = Math.max(PRICING.minOrder || 0, Math.round(subtotal));
-  const vat = PRICING.vat || 0.23;
-  const netto = Math.round(total / (1+vat));
+  // cena końcowa = kwota netto (subtotal / 1,23)
+  const vat = 0;
+  const netto = Math.max(PRICING.minOrder || 0, Math.round(subtotal / 1.23));
+  const total = netto;
 
   return {
     // surowe pola
@@ -2042,6 +2043,7 @@ function renderSlidingBlock(){
     ergo:`<svg viewBox="0 0 30 30" fill="none"><rect x="4" y="3" width="22" height="24" stroke="#1a1a17" stroke-width="1.3"/><rect x="6" y="5" width="18" height="20" fill="#1a1a17" opacity=".05"/><rect x="13" y="11" width="4" height="8" fill="#1a1a17"/></svg>`,
     loca:`<svg viewBox="0 0 30 30" fill="none"><rect x="4" y="3" width="22" height="24" stroke="#1a1a17" stroke-width="1.3"/><rect x="6" y="5" width="18" height="20" fill="#1a1a17" opacity=".05"/><circle cx="15" cy="15" r="3.2" fill="#1a1a17"/></svg>`,
     dzielony:`<svg viewBox="0 0 30 30" fill="none"><rect x="4" y="3" width="22" height="24" stroke="#1a1a17" stroke-width="1.3"/><line x1="4" y1="11" x2="26" y2="11" stroke="#1a1a17" stroke-width="1.3"/><line x1="4" y1="19" x2="26" y2="19" stroke="#1a1a17" stroke-width="1.3"/></svg>`,
+    overline:`<svg viewBox="0 0 30 30" fill="none"><rect x="3" y="3" width="24" height="3" fill="#1a1a17" opacity=".7"/><rect x="5" y="7" width="20" height="20" fill="#1a1a17" opacity=".1"/><rect x="3" y="27" width="24" height="1.5" fill="#1a1a17" opacity=".7"/></svg>`,
     bezramowy:`<svg viewBox="0 0 30 30" fill="none"><rect x="5" y="3" width="20" height="24" fill="#1a1a17" opacity=".1"/><line x1="5" y1="3" x2="5" y2="27" stroke="#1a1a17" stroke-width=".5" opacity=".4"/><line x1="25" y1="3" x2="25" y2="27" stroke="#1a1a17" stroke-width=".5" opacity=".4"/></svg>`,
   };
 
@@ -2668,7 +2670,7 @@ function renderPreview(){
     let doors = '';
     const prof = STATE.slidingProfile;
     // rim width per system: novo 1mm, caro/nero/ergo/loca ~3mm, dzielony 3mm, bezramowy 0.5
-    const rimW = prof==='novo' ? 1.5 : prof==='bezramowy' ? 0.6 : 3;
+    const rimW = prof==='novo' ? 1.5 : (prof==='bezramowy' || prof==='overline') ? 0.6 : 3;
     // mirror gradient defs added once
     const fillFor = (fid) => {
       if(fid==='lustro') return `url(#mirrorG)`;
@@ -3711,8 +3713,7 @@ function buildSpecHTML(refNo){
     </table>
   </td></tr>
 
-  <tr><td style="padding:10px 12px;background:#1a1a17;color:#f5f1e8;font-weight:500">CENA NETTO</td><td style="padding:10px 12px;background:#1a1a17;color:#f5f1e8;font-family:'JetBrains Mono',monospace">${fmtZL(p.total_net)}</td></tr>
-  <tr><td style="padding:10px 12px;background:#1a1a17;color:#b8915a;font-weight:500">CENA BRUTTO (VAT ${Math.round(p.vat_rate*100)}%)</td><td style="padding:10px 12px;background:#1a1a17;color:#b8915a;font-family:'JetBrains Mono',monospace;font-size:16px">${fmtZL(p.total_gross)}</td></tr>
+  <tr><td style="padding:10px 12px;background:#1a1a17;color:#b8915a;font-weight:500">CENA</td><td style="padding:10px 12px;background:#1a1a17;color:#b8915a;font-family:'JetBrains Mono',monospace;font-size:16px">${fmtZL(p.total_gross)}</td></tr>
 
   <tr><td colspan="2" style="padding-top:14px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;color:#6a6a62">
@@ -4007,8 +4008,7 @@ function renderSummary(){
     </div>
 
     <div class="sum-total">
-      <div class="sum-vat-line"><span>Netto (bez VAT)</span><span class="mono">${fmtPrice(pb.netto)}</span></div>
-      <div class="sum-brutto-line"><span class="k">Cena brutto (z VAT ${Math.round(pb.vat*100)}%)</span><span class="v">${fmtPrice(price)}</span></div>
+      <div class="sum-brutto-line"><span class="k">Cena orientacyjna</span><span class="v">${fmtPrice(price)}</span></div>
     </div>
   `;
 }
@@ -4021,7 +4021,7 @@ function updatePrice(){
   el.classList.add('updating');
   const p = computePrice();
   setTimeout(()=>{
-    el.innerHTML = fmtPrice(p) + ' <em>brutto</em>';
+    el.innerHTML = fmtPrice(p);
     el.classList.remove('updating');
   },120);
 }
