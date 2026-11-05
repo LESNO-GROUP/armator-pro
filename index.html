@@ -405,6 +405,43 @@
   .stamp-cta{margin-top:.75rem}
   @media(max-width:760px){.brand-stamp{padding:4.5rem 1.25rem 5rem}.stamp-logo{height:140px}.stamp-line{font-size:1.2rem}}
 
+  /* ── OPINIE ── */
+  .reviews{border-top:1px solid var(--line)}
+  .rv-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.5rem;align-items:start}
+  @media(max-width:900px){.rv-wrap{grid-template-columns:1fr}}
+  .rv-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+  .rv-card{background:var(--card,#fbf9f4);border:1px solid var(--line);border-radius:2px;padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:.8rem}
+  .rv-card-stars{color:var(--accent);letter-spacing:.15em;font-size:.95rem}
+  .rv-card-text{font-size:.98rem;line-height:1.6;color:var(--ink-2);text-wrap:pretty}
+  .rv-card-who{margin-top:auto;display:flex;flex-direction:column;gap:.15rem;padding-top:.8rem;border-top:1px solid var(--line)}
+  .rv-card-name{font-family:var(--ff-serif);font-size:1.15rem}
+  .rv-card-meta{font-family:var(--ff-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute)}
+  .rv-empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:2px;padding:2.5rem 2rem}
+  .rv-empty-t{font-family:var(--ff-serif);font-size:1.6rem;line-height:1.15;margin-bottom:.6rem}
+  .rv-empty p{color:var(--ink-mute);max-width:52ch;line-height:1.6}
+  .rv-form{background:var(--ink);color:var(--paper);border-radius:2px;padding:2rem;display:flex;flex-direction:column;gap:1rem}
+  .rv-form-t{font-family:var(--ff-serif);font-size:1.6rem;line-height:1.1}
+  .rv-form label{display:flex;flex-direction:column;gap:.35rem;font-size:.78rem;color:rgba(245,241,232,.7)}
+  .rv-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+  .rv-form input[type=text],.rv-form input[type=email],.rv-form select,.rv-form textarea{background:rgba(245,241,232,.06);border:1px solid rgba(245,241,232,.2);border-radius:2px;padding:.65rem .75rem;color:var(--paper);font:inherit;font-size:.92rem}
+  .rv-form select option{color:var(--ink)}
+  .rv-form textarea{resize:vertical;min-height:110px}
+  .rv-form input:focus,.rv-form select:focus,.rv-form textarea:focus{outline:none;border-color:var(--accent)}
+  .rv-opt{opacity:.6}
+  .rv-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .rv-stars{display:flex;gap:.2rem}
+  .rv-stars button{background:none;border:none;font-size:1.8rem;line-height:1;color:rgba(245,241,232,.25);cursor:pointer;padding:0 .1rem;transition:color .1s}
+  .rv-stars button.on{color:var(--accent)}
+  .rv-form label.rv-consent{flex-direction:row;align-items:flex-start;gap:.55rem;font-size:.78rem;line-height:1.45}
+  .rv-consent input{margin-top:.15rem;accent-color:var(--accent)}
+  .rv-submit{background:var(--accent);color:var(--ink);border:none;border-radius:2px;padding:.9rem 1.2rem;font-weight:600;font-size:.92rem;cursor:pointer;transition:background .15s}
+  .rv-submit:hover{background:var(--paper)}
+  .rv-submit:disabled{opacity:.6;cursor:wait}
+  .rv-msg{font-size:.85rem;min-height:1.2em}
+  .rv-msg.ok{color:#c9d8a8}
+  .rv-msg.err{color:#f0b9a0}
+  .rv-note{font-size:.72rem;color:rgba(245,241,232,.5);line-height:1.5}
+
   /* ── COOKIE BANNER ── */
   .cookie-bar{
     position:fixed;left:1.25rem;right:1.25rem;bottom:1.25rem;z-index:80;
@@ -434,6 +471,7 @@
       <a href="#proces">Jak to działa</a>
       <a href="#kategorie">Realizacje</a>
       <a href="#system">System</a>
+      <a href="#opinie">Opinie</a>
       <a href="#faq">Pytania</a>
     </div>
     <a href="konfigurator.html" class="nav-cta">
@@ -665,6 +703,42 @@
   </div>
 </section>
 
+<!-- OPINIE -->
+<section class="reviews" id="opinie">
+  <div class="sec-head">
+    <div class="sec-label">Opinie · Klienci</div>
+    <h2>Co mówią <em>po montażu.</em></h2>
+  </div>
+  <div class="rv-wrap">
+    <div class="rv-list" id="rvList">
+      <div class="rv-empty" id="rvEmpty">
+        <div class="rv-empty-t">Pierwsze opinie dopiero się zbierają.</div>
+        <p>Złożyłeś mebel od nas? Napisz, jak poszło — z montażem, z wymiarami, z jakością płyty. Pomożesz kolejnym osobom podjąć decyzję.</p>
+      </div>
+    </div>
+    <form class="rv-form" id="rvForm" novalidate>
+      <div class="rv-form-t">Dodaj swoją opinię</div>
+      <div class="rv-stars" role="radiogroup" aria-label="Ocena">
+        <button type="button" data-v="1" aria-label="1 na 5">★</button><button type="button" data-v="2" aria-label="2 na 5">★</button><button type="button" data-v="3" aria-label="3 na 5">★</button><button type="button" data-v="4" aria-label="4 na 5">★</button><button type="button" data-v="5" aria-label="5 na 5">★</button>
+      </div>
+      <div class="rv-row">
+        <label>Imię<input type="text" name="name" maxlength="40" required placeholder="np. Anna"/></label>
+        <label>Miejscowość<input type="text" name="city" maxlength="40" placeholder="np. Kraków"/></label>
+      </div>
+      <label>Co zamówiłeś
+        <select name="type"><option value="">— wybierz —</option><option>Szafa wnękowa</option><option>Garderoba</option><option>Regał / biblioteczka</option><option>Zabudowa łazienkowa</option><option>Projekt nietypowy</option></select>
+      </label>
+      <label>Twoja opinia<textarea name="text" rows="5" maxlength="1200" required placeholder="Jak przebiegło zamówienie i montaż? Co się sprawdziło, co byś zmienił?"></textarea></label>
+      <label>E-mail <span class="rv-opt">(nie publikujemy — tylko do kontaktu)</span><input type="email" name="email" maxlength="80" placeholder="opcjonalnie"/></label>
+      <input type="text" name="website" class="rv-hp" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+      <label class="rv-consent"><input type="checkbox" name="consent" required/> <span>Zgadzam się na publikację opinii z imieniem i miejscowością na zabudujto.pl.</span></label>
+      <button type="submit" class="rv-submit">Wyślij opinię</button>
+      <div class="rv-msg" id="rvMsg" role="status"></div>
+      <p class="rv-note">Każdą opinię czytamy przed publikacją — pojawi się na stronie po weryfikacji.</p>
+    </form>
+  </div>
+</section>
+
 <!-- SUPPLIERS -->
 <section class="suppliers">
   <div class="sec-head">
@@ -715,7 +789,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-idx mono">5</span><span>Czy mogę zamówić tylko pojedyncze formatki?</span><span class="faq-q-plus">+</span></div>
-      <div class="faq-a">Tak. Minimalna wartość zamówienia <strong>250 zł brutto</strong>. Cięcie, obrzeże, wszystko — wpisujesz wymiary i potrzeby w uwagach.</div>
+      <div class="faq-a">Tak. Minimalna wartość zamówienia <strong>250 zł</strong>. Cięcie, obrzeże, wszystko — wpisujesz wymiary i potrzeby w uwagach.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q"><span class="faq-q-idx mono">6</span><span>Czy wycena z konfiguratora jest wiążąca?</span><span class="faq-q-plus">+</span></div>
@@ -769,6 +843,7 @@
       <ul>
         <li><a href="#proces">Jak to działa</a></li>
         <li><a href="#system">System DIY</a></li>
+        <li><a href="#opinie">Opinie</a></li>
         <li><a href="#faq">Pytania</a></li>
         <li><a href="konfigurator.html">Konfigurator</a></li>
       </ul>
@@ -803,6 +878,70 @@
     it.addEventListener('click',()=>it.classList.toggle('open'));
   });
 </script>
+<script>
+(function(){
+  // ── wyświetlanie zatwierdzonych opinii z opinie.json ──
+  const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  fetch('opinie.json?v=' + Date.now()).then(r=>r.ok?r.json():[]).then(list=>{
+    if(!Array.isArray(list) || !list.length) return;
+    const box = document.getElementById('rvList');
+    box.innerHTML = list.map(o=>`<article class="rv-card">
+      <div class="rv-card-stars" aria-label="${o.rating||5} na 5">${'★'.repeat(Math.max(1,Math.min(5,o.rating||5)))}</div>
+      <p class="rv-card-text">${esc(o.text)}</p>
+      <div class="rv-card-who"><span class="rv-card-name">${esc(o.name)}</span><span class="rv-card-meta">${[o.city,o.type,o.date].filter(Boolean).map(esc).join(' · ')}</span></div>
+    </article>`).join('');
+  }).catch(()=>{});
+
+  // ── formularz ──
+  const f = document.getElementById('rvForm'); if(!f) return;
+  const msg = document.getElementById('rvMsg');
+  let rating = 0;
+  const stars = f.querySelectorAll('.rv-stars button');
+  const paint = v => stars.forEach(b=>b.classList.toggle('on', +b.dataset.v <= v));
+  stars.forEach(b=>{
+    b.addEventListener('click', ()=>{ rating = +b.dataset.v; paint(rating); });
+    b.addEventListener('mouseenter', ()=>paint(+b.dataset.v));
+  });
+  f.querySelector('.rv-stars').addEventListener('mouseleave', ()=>paint(rating));
+
+  f.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(f).entries());
+    if(d.website) return;                                   // honeypot
+    const set = (t,c)=>{ msg.textContent = t; msg.className = 'rv-msg ' + (c||''); };
+    if(!rating) return set('Zaznacz ocenę (gwiazdki).', 'err');
+    if(!d.name || !d.name.trim()) return set('Podaj imię.', 'err');
+    if(!d.text || d.text.trim().length < 15) return set('Napisz choć kilka zdań (min. 15 znaków).', 'err');
+    if(!f.consent.checked) return set('Zaznacz zgodę na publikację.', 'err');
+    const date = new Date().toLocaleDateString('pl-PL',{month:'long',year:'numeric'});
+    const entry = {name:d.name.trim(), city:(d.city||'').trim(), type:d.type||'', rating, text:d.text.trim(), date};
+    const html = `<h2 style="font-family:Georgia,serif;font-weight:400">Nowa opinia do moderacji</h2>
+      <p style="font-size:20px;color:#b8915a;margin:0">${'★'.repeat(rating)}${'☆'.repeat(5-rating)}</p>
+      <p><strong>${esc(entry.name)}</strong>${entry.city?' · '+esc(entry.city):''}${entry.type?' · '+esc(entry.type):''}</p>
+      <blockquote style="border-left:3px solid #b8915a;margin:12px 0;padding:6px 14px;font-size:15px;line-height:1.6">${esc(entry.text).replace(/\n/g,'<br>')}</blockquote>
+      <p>E-mail: ${d.email?esc(d.email):'—'}</p>
+      <p style="font-size:13px;color:#6a6a62">Aby opublikować: dopisz poniższy wpis do pliku <code>opinie.json</code> na GitHub (wewnątrz nawiasów [ ], wpisy oddzielone przecinkiem).</p>
+      <pre style="background:#f5f1e8;padding:12px;font-size:12px;white-space:pre-wrap">${esc(JSON.stringify(entry, null, 2))}</pre>`;
+    const fd = new FormData();
+    fd.append('ref', 'OPINIA-' + Date.now());
+    fd.append('subject', `Nowa opinia (${rating}/5) — ${entry.name}`);
+    fd.append('html', html);
+    fd.append('name', entry.name);
+    if(d.email) fd.append('email', d.email);
+    const btn = f.querySelector('.rv-submit');
+    btn.disabled = true; set('Wysyłanie…');
+    try{
+      const r = await fetch('/api/send', {method:'POST', body:fd});
+      if(!r.ok) throw new Error(r.status);
+      f.reset(); rating = 0; paint(0);
+      set('Dziękujemy! Opinia pojawi się na stronie po weryfikacji.', 'ok');
+    }catch(err){
+      set('Nie udało się wysłać. Spróbuj ponownie lub napisz na kontakt@zabudujto.pl.', 'err');
+    }finally{ btn.disabled = false; }
+  });
+})();
+</script>
+
 <!-- COOKIE BANNER -->
 <div class="cookie-bar" id="cookieBar">
   <div class="cookie-text">
