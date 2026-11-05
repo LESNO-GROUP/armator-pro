@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armator.PRO — Dokumentacja</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a1628;--card:#0f2038;--border:#1e3a5f;--cyan:#00d4ff;--cyan-dim:#0099bb;--amber:#f0a500;--green:#00c896;--red:#ff4757;--white:#eaf2ff;--muted:#7a93b5;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.55;padding:40px 20px;}
+  .wrap{max-width:980px;margin:0 auto;}
+  h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;}
+  .sub{color:var(--muted);font-size:14px;margin-top:6px;}
+  .toc{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 8px;}
+  .toc a{font-size:12px;font-family:'Syne',sans-serif;font-weight:700;color:var(--cyan);text-decoration:none;border:1px solid var(--border);padding:6px 12px;border-radius:20px;}
+  .toc a:hover{border-color:var(--cyan);}
+  h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin:42px 0 6px;border-left:3px solid var(--cyan);padding-left:12px;scroll-margin-top:20px;}
+  h3{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--cyan-dim);text-transform:uppercase;letter-spacing:0.07em;margin:22px 0 8px;}
+  p.note{color:var(--muted);font-size:13px;margin:6px 0 4px;}
+  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:13.5px;}
+  th{text-align:left;font-family:'Syne',sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);padding:7px 9px;border-bottom:1px solid var(--border);}
+  td{padding:7px 9px;border-bottom:1px solid rgba(30,58,95,0.5);}
+  .dish{font-family:'Syne',sans-serif;font-weight:600;}
+  .ing{color:var(--muted);font-size:12px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+  @media (max-width:700px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;}
+  .card b{color:var(--cyan);font-family:'Syne',sans-serif;font-size:13px;display:block;margin-bottom:3px;}
+  .card span{font-size:12.5px;color:var(--muted);}
+  .feat-list li{margin-bottom:7px;font-size:13.5px;}
+  .feat-list li b{color:var(--white);}
+  .feat-list{padding-left:18px;}
+  .newf{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-top:12px;}
+  .newf h4{font-family:'Syne',sans-serif;font-size:15px;color:var(--amber);margin-bottom:6px;}
+  .newf ul{padding-left:18px;margin-top:6px;}
+  .newf li{font-size:13px;margin-bottom:5px;}
+  .steps{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-top:10px;}
+  .steps ol{padding-left:20px;}
+  .steps li{margin-bottom:10px;font-size:13.5px;}
+  .steps code{background:rgba(0,212,255,0.1);color:var(--cyan);padding:1px 6px;border-radius:4px;font-size:12.5px;}
+  .pill{display:inline-block;font-size:10px;font-family:'Syne',sans-serif;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;background:rgba(0,200,150,0.15);color:var(--green);}
+  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚓ Armator.PRO — Dokumentacja</h1>
+  <div class="sub">Pełna lista posiłków, funkcjonalności, propozycje nowych funkcji i instrukcja testowania offline.</div>
+  <div class="toc">
+    <a href="#posilki">1 · Posiłki</a>
+    <a href="#funkcje">2 · Funkcjonalności</a>
+    <a href="#nowe">3 · Nowe funkcje</a>
+    <a href="#test">4 · Testowanie offline</a>
+  </div>
+
+  <!-- 1. POSIŁKI -->
+  <h2 id="posilki">1 · Pełna lista posiłków <span style="font-family:'DM Sans';font-weight:400;font-size:13px;color:var(--muted)">— 47 dań, po korektach z ostatniego przeglądu</span></h2>
+
+  <h3>🥣 Śniadania (15)</h3>
+  <table>
+    <thead><tr><th>Danie</th><th>Główne składniki</th></tr></thead>
+    <tbody>
+      <tr><td class="dish">Kanapki</td><td class="ing">chleb, ser żółty, wędlina 30g, pomidor, ogórek</td></tr>
+      <tr><td class="dish">Jajecznica</td><td class="ing">jajka ×2, chleb, cebula</td></tr>
+      <tr><td class="dish">Owsianka</td><td class="ing">płatki 60g, mleko, owoc</td></tr>
+      <tr><td class="dish">Musli z mlekiem</td><td class="ing">musli 60g, mleko</td></tr>
+      <tr><td class="dish">Jogurt z dodatkami</td><td class="ing">jogurt, owoc, musli 40g</td></tr>
+      <tr><td class="dish">Owsianka błyskawiczna</td><td class="ing">płatki 60g, mleko</td></tr>
+      <tr><td class="dish">Jajecznica z parówkami</td><td class="ing">jajka ×2, parówki (0,25 opak)</td></tr>
+      <tr><td class="dish">Tosty z serem żółtym</td><td class="ing">chleb, ser 40g</td></tr>
+      <tr><td class="dish">Musli z jogurtem</td><td class="ing">musli 50g, jogurt</td></tr>
+      <tr><td class="dish">Naleśniki w proszku</td><td class="ing">mieszanka (0,25), jajka, mleko, dżem (0,1)</td></tr>
+      <tr><td class="dish">Kanapki z pasztetem</td><td class="ing">chleb, pasztet 0,4, ogórek kiszony</td></tr>
+      <tr><td class="dish">Ryż na mleku</td><td class="ing">ryż 60g, mleko, cynamon</td></tr>
+      <tr><td class="dish">Tortilla z jajkiem i serem</td><td class="ing">tortilla, jajka ×2, ser topiony</td></tr>
+      <tr><td class="dish">Bułki z hummusem</td><td class="ing">bułki 1,5, hummus, pomidor</td></tr>
+      <tr><td class="dish">Płatki kukurydziane z mlekiem</td><td class="ing">płatki (0,15 opak), mleko</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🍝 Obiady (15)</h3>
+  <table>
+    <thead><tr><th>Danie</th><th>Główne składniki</th></tr></thead>
+    <tbody>
+      <tr><td class="dish">Kanapki w drogę</td><td class="ing">bułki, ser, wędlina, ogórek</td></tr>
+      <tr><td class="dish">Zupa z puszki</td><td class="ing">zupa 0,5, bułka</td></tr>
+      <tr><td class="dish">Tortille z hummusem</td><td class="ing">tortilla, hummus, pomidor, ogórek</td></tr>
+      <tr><td class="dish">Sałatka z tuńczykiem</td><td class="ing">tuńczyk, pomidor, ogórek, bułka</td></tr>
+      <tr><td class="dish">Fasolka na grzance</td><td class="ing">fasolka 0,5, chleb</td></tr>
+      <tr><td class="dish">Spaghetti bolognese</td><td class="ing">makaron 90g, sos bolognese 0,4</td></tr>
+      <tr><td class="dish">Pulpety z ryżem</td><td class="ing">pulpety 0,5, ryż 80g</td></tr>
+      <tr><td class="dish">Makaron z sosem pieczarkowym</td><td class="ing">makaron 90g, sos 0,4</td></tr>
+      <tr><td class="dish">Grochówka z kiełbasą</td><td class="ing">grochówka 0,5, kiełbasa 0,15kg</td></tr>
+      <tr><td class="dish">Ryż z gulaszem</td><td class="ing">gulasz 0,5, ryż 80g</td></tr>
+      <tr><td class="dish">Wrap z tuńczykiem</td><td class="ing">tortilla, tuńczyk, majonez, kukurydza</td></tr>
+      <tr><td class="dish">Zupa pomidorowa z makaronem</td><td class="ing">zupa 0,5, makaron 30g</td></tr>
+      <tr><td class="dish">Fasolka po bretońsku z chlebem</td><td class="ing">fasolka 0,6, chleb</td></tr>
+      <tr><td class="dish">Makaron z pesto</td><td class="ing">makaron 90g, pesto, suszone pomidory</td></tr>
+      <tr><td class="dish">Żurek z kiełbasą</td><td class="ing">żurek 0,5, kiełbasa 0,15kg, jajko</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🔥 Kolacje (17, w tym Grill i Restauracja)</h3>
+  <table>
+    <thead><tr><th>Danie</th><th>Główne składniki</th></tr></thead>
+    <tbody>
+      <tr><td class="dish">Makaron z sosem</td><td class="ing">makaron 90g, sos pomidorowy, chleb</td></tr>
+      <tr><td class="dish">Ryż z warzywami</td><td class="ing">ryż 80g, warzywa, cebula</td></tr>
+      <tr><td class="dish">Kasza z gulaszem</td><td class="ing">kasza 70g, konserwa 0,5, cebula</td></tr>
+      <tr><td class="dish">Ziemniaki z rybą</td><td class="ing">ziemniaki 0,25kg, ryba 0,5, cebula</td></tr>
+      <tr><td class="dish">Curry warzywne</td><td class="ing">ryż 80g, fasolka, warzywa, pomidor</td></tr>
+      <tr><td class="dish">Grill</td><td class="ing">mięso 0,2kg, kiełbasa 0,15kg, pieczarki, sos, chleb</td></tr>
+      <tr><td class="dish">Restauracja</td><td class="ing">— bez zakupów —</td></tr>
+      <tr><td class="dish">Konserwa mięsna z chlebem</td><td class="ing">konserwa 0,5, chleb</td></tr>
+      <tr><td class="dish">Gołąbki z chlebem</td><td class="ing">gołąbki 0,6, chleb</td></tr>
+      <tr><td class="dish">Flaki z puszki</td><td class="ing">flaki 0,6, chleb</td></tr>
+      <tr><td class="dish">Kiełbasa z kapustą kiszoną</td><td class="ing">kiełbasa 0,25kg, kapusta 0,25</td></tr>
+      <tr><td class="dish">Klopsy z puree instant</td><td class="ing">klopsy 0,5, puree 0,3</td></tr>
+      <tr><td class="dish">Curry z kurczakiem i ryżem</td><td class="ing">kurczak curry 0,5, ryż 80g</td></tr>
+      <tr><td class="dish">Makaron carbonara</td><td class="ing">makaron 90g, sos carbonara 0,4</td></tr>
+      <tr><td class="dish">Zapiekanka z pieczarkami</td><td class="ing">chleb 0,5, sos pieczarkowy, ser</td></tr>
+      <tr><td class="dish">Zupa gulaszowa z chlebem</td><td class="ing">zupa gulaszowa 0,6, chleb</td></tr>
+      <tr><td class="dish">Sałatka z tuńczykiem</td><td class="ing">tuńczyk, kukurydza, fasolka, majonez</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Wszystkie ilości <b style="color:var(--white)">na osobę</b>, skalowane liczbą załogi + apetytem (×0,85–1,3). Restauracja = 0 zakupów (jecie na lądzie).</p>
+
+  <!-- 2. FUNKCJONALNOŚCI -->
+  <h2 id="funkcje">2 · Pełna lista funkcjonalności</h2>
+
+  <h3>Rdzeń planera</h3>
+  <ul class="feat-list">
+    <li><b>Konfiguracja rejsu</b> — załoga (dorośli/dzieci), dni, rejon, dostęp do sklepów, styl gotowania, apetyt, napoje, diety (wege/laktoza/gluten), grill, alkohol.</li>
+    <li><b>Generowanie listy</b> — silnik liczący ~107 produktów z normami/mnożnikami.</li>
+    <li><b>Lista zakupów</b> — odhaczanie, komentarze, edycja ilości, pomijanie, dodawanie własnych produktów.</li>
+    <li><b>Zapasy (kontrola dzień-po-dniu)</b> — ile zostało z każdego produktu na dany dzień rejsu.</li>
+    <li><b>Koszty</b> — szacowany koszt listy, edytowalne ceny per produkt, walut PLN/EUR wg regionu.</li>
+    <li><b>Rozliczenie wydatków</b> — dzielenie kosztów między załogę.</li>
+    <li><b>Zapisane rejsy</b> — pełny snapshot konfiguracji + listy do wczytania później.</li>
+    <li><b>PWA</b> — instalowalna jak apka, działa offline, dane w pamięci urządzenia.</li>
+  </ul>
+
+  <h3>Współdzielenie (Supabase realtime)</h3>
+  <ul class="feat-list">
+    <li><b>Udostępnij listę</b> — link, po którym załoga widzi i edytuje wspólną listę na żywo.</li>
+    <li><b>Reconnect</b> — powrót do własnej sesji po odświeżeniu/restarcie apki.</li>
+    <li><b>Obecność załogi</b> — kto jest online + „ostatnio widziany".</li>
+    <li><b>Atrybucja</b> — „✓ Kuba" przy odhaczonym produkcie.</li>
+    <li><b>Wskaźnik synchronizacji</b> — Synchronizacja… / Zsynchronizowano / Offline.</li>
+  </ul>
+
+  <h3>Plan posiłków <span class="pill">PRO #1</span></h3>
+  <ul class="feat-list">
+    <li>47 dań (śniadanie/obiad/kolacja) przypisywanych do dni rejsu.</li>
+    <li>Wybór dania automatycznie przełącza listę na tryb menu — kupujesz tylko realne składniki.</li>
+    <li>Niezaplanowane posiłki nie dodają jedzenia; reszta (owoce, napoje, chemia) dalej z estymatora.</li>
+  </ul>
+
+  <h3>Profile łodzi + szablony <span class="pill">PRO #2</span></h3>
+  <ul class="feat-list">
+    <li><b>Profile łodzi</b> — zapisana konfiguracja załogi/regionu/stylu, jeden klik = gotowy rejs.</li>
+    <li><b>Szablony zapasów</b> — zapisana lista (+ menu), zastosowanie z wyborem dodaj/zastąp.</li>
+  </ul>
+
+  <h3>Współpraca załogi <span class="pill">PRO #3</span></h3>
+  <ul class="feat-list">
+    <li>Imię przy dołączeniu, kolorowy awatar, pasek obecności.</li>
+    <li>Subtelny ślad „kto odhaczył".</li>
+  </ul>
+
+  <h3>Analityka <span class="pill">PRO #4</span></h3>
+  <ul class="feat-list">
+    <li>Silnik uczący się z historii rejsów (zapasy/skip/korekty) — bez ręcznego wpisywania.</li>
+    <li>Półautomatyczne propozycje korekt norm (zatwierdzasz/ignorujesz).</li>
+    <li>Metryki: co zostaje, co brakuje, najczęstsze produkty i dania.</li>
+  </ul>
+
+  <!-- 3. NOWE FUNKCJE -->
+  <h2 id="nowe">3 · Rozpisane nowe funkcje <span style="font-family:'DM Sans';font-weight:400;font-size:13px;color:var(--muted)">— z przeglądu norm, do Twojej decyzji</span></h2>
+
+  <div class="newf">
+    <h4>🎛️ Edycja ilości przepisu wprost w apce</h4>
+    <p style="font-size:13px">Dziś kalibracja dań idzie przez mnie (kod). Ta funkcja daje Ci panel w samej apce: otwierasz danie, widzisz listę składników z gramaturą/ilością na osobę, zmieniasz liczbę — lista przelicza się natychmiast.</p>
+    <ul>
+      <li><b>Gdzie:</b> mały ✎ przy każdym daniu w oknie wyboru, albo osobny „Edytor przepisów" w ustawieniach.</li>
+      <li><b>Zakres:</b> zmiana ilości istniejących składników; dodanie/usunięcie składnika w drugiej iteracji.</li>
+      <li><b>Zysk:</b> domykasz pętlę testowania sam, bez podsyłania mi poprawek.</li>
+    </ul>
+  </div>
+
+  <div class="newf">
+    <h4>🌱 Przepisy świadome diet</h4>
+    <p style="font-size:13px">Dania filtrowane/podmieniane wg diet ustawionych w konfiguracji rejsu (masz już wege/laktoza/gluten w estymatorze).</p>
+    <ul>
+      <li><b>Filtr w wyborze dania:</b> pokazuj tylko dania spełniające aktywne diety (albo oznacz ⚠️ przy niespełniających).</li>
+      <li><b>Automatyczna podmiana składnika:</b> np. makaron → bezglutenowy, mleko → roślinne — tak jak już robi estymator dla staplów.</li>
+      <li><b>Koszt:</b> średni, bo diety są już w systemie — to głównie mapowanie przepis→dieta.</li>
+    </ul>
+  </div>
+
+  <div class="newf">
+    <h4>✍️ Własne dania użytkownika</h4>
+    <p style="font-size:13px">Naturalne rozszerzenie „własnych produktów" (już masz) na poziom dania.</p>
+    <ul>
+      <li>Formularz: nazwa dania + lista składników wybranych z istniejących produktów + ilość na osobę.</li>
+      <li>Własne danie trafia do wyboru posiłku tak jak wbudowane 47.</li>
+      <li>Zapisuje się w profilu/szablonie, przenosi się między rejsami.</li>
+    </ul>
+  </div>
+
+  <div class="newf">
+    <h4>💰 Koszt dania w podglądzie wyboru</h4>
+    <p style="font-size:13px">Przy każdym daniu w oknie wyboru: „~14 zł/os." — liczone z cen składników × porcja.</p>
+    <ul>
+      <li>Niski koszt wdrożenia — dane (ceny + składniki) już istnieją, to tylko nowe wyliczenie i etykieta.</li>
+      <li>Pomaga planować budżet rejsu na etapie układania menu, zanim jeszcze wygenerujesz listę.</li>
+    </ul>
+  </div>
+
+  <div class="newf">
+    <h4>🏖️ „Restauracja" z licznikiem</h4>
+    <p style="font-size:13px">Zliczanie posiłków jedzonych na lądzie — bez wpływu na listę zakupów, ale przydatne do budżetu całego rejsu.</p>
+    <ul>
+      <li>Licznik „X posiłków w restauracji" widoczny w podsumowaniu Kosztów/Rozliczenia.</li>
+      <li>Opcjonalnie: pole na szacunkowy koszt/os. za posiłek na lądzie, osobno od zakupów.</li>
+    </ul>
+  </div>
+
+  <div class="newf">
+    <h4>⏱️ Porcje wg pory dnia</h4>
+    <p style="font-size:13px">Dziś apetyt skaluje wszystkie posiłki równo. Realistyczniej: śniadania/obiady lżejsze, kolacje większe.</p>
+    <ul>
+      <li>Wymaga decyzji o mnożnikach per pora dnia (np. śniadanie ×0,9, kolacja ×1,15).</li>
+      <li>Większa zmiana w silniku niż pozostałe — do przemyślenia, czy warto vs. prostota obecnego modelu.</li>
+    </ul>
+  </div>
+
+  <!-- 4. TESTOWANIE OFFLINE -->
+  <h2 id="test">4 · Testowanie bez wrzucania na hosting</h2>
+  <p class="note">Plik <code style="background:rgba(0,212,255,0.1);color:var(--cyan);padding:1px 6px;border-radius:4px">app.html</code> jest samodzielny — otwiera się prosto z dysku w przeglądarce, bez serwera.</p>
+
+  <div class="steps">
+    <ol>
+      <li><b>Pobierz plik</b> <code>app.html</code> z projektu (poproś mnie o link do pobrania albo skopiuj go z panelu).</li>
+      <li><b>Otwórz go dwuklikiem</b> — w Chrome/Safari/Firefoxie wyświetli się cała apka, tak jak na hostingu.</li>
+      <li><b>Testuj normalnie:</b> konfiguracja, generowanie listy, menu, zapasy, koszty — wszystko działa lokalnie (dane w <code>localStorage</code> Twojej przeglądarki).</li>
+      <li><b>Czego NIE przetestujesz lokalnie:</b> <b>Udostępnianie / współpraca załogi</b> — to wymaga połączenia z bazą Supabase w internecie. Reszta (menu, profile, szablony, analityka) działa w 100% offline.</li>
+      <li><b>Powtarzalność:</b> każde odświeżenie strony zachowuje Twoje dane (są w localStorage tej przeglądarki/profilu) — możesz zamknąć i wrócić.</li>
+      <li><b>Zaczynanie od zera:</b> w konsoli przeglądarki (F12) wpisz <code>localStorage.clear()</code> i odśwież — apka wróci do stanu początkowego.</li>
+    </ol>
+  </div>
+  <p class="note">Alternatywa: mogę dać Ci osobny link „podglądowy" (bez wgrywania na Twój hosting produkcyjny), żebyś testował na telefonie tak jak realny użytkownik PWA — powiedz, jeśli wolisz to.</p>
+
+  <div class="foot">Armator.PRO — dokumentacja wygenerowana po wdrożeniu korekt norm z przeglądu porównawczego. Zmiany w normach/cenach już są w <code>app.html</code>.</div>
+</div>
+</body>
+</html>

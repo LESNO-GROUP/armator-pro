@@ -1,0 +1,143 @@
+﻿ID;Nazwa;Kategoria;Jednostka;Norma;Na osob;Na dni;Opakowanie;Cena (zl);Dieta;Tylko-menu
+p01;Chleb;Pieczywo;szt;0.25;1;1;1;4;;
+p02;Bułki;Pieczywo;szt;0.4;1;1;1;0.8;;
+p03;Tortilla;Pieczywo;szt;0.2;1;1;6;2;gluten;
+p04;Sucharki;Pieczywo;opak;1;0;0;1;8;gluten;
+p05;Chleb bezglutenowy;Pieczywo;szt;0.25;1;1;1;6;zamiennik_gluten;
+p06;Wafle/chrupki ryżowe;Pieczywo;opak;1;0;0;1;9;zamiennik_gluten;
+p07;Masło;Lodówka;kostka;1;4;5;1;7;;
+p08;Ser żółty;Lodówka;g;30;1;1;150;75;laktoza;
+p09;Ser wegański;Lodówka;g;30;1;1;150;55;zamiennik_laktoza;
+p10;Wędlina;Lodówka;g;40;1;1;100;50;wege;
+p11;Jajka;Lodówka;szt;0.25;1;1;1;1.5;;
+p12;Mleko;Lodówka;l;0.35;2;3;1;4;laktoza;
+p13;Mleko roślinne;Lodówka;l;0.2;1;1;1;6;zamiennik_laktoza;
+p14;Ziemniaki;Warzywa;kg;0.3;1;5;1;3;;
+p15;Cebula;Warzywa;szt;0.3;1;3;1;2;;
+p16;Pomidory;Warzywa;szt;0.25;1;1;1;2;;
+p17;Ogórek;Warzywa;szt;0.2;1;2;1;2;;
+p18;Papryka;Warzywa;szt;0.2;1;2;1;3;;
+p19;Cukinia;Warzywa;szt;0.2;1;3;1;4;;
+p20;Jabłko / gruszka / inne;Owoce;szt;0.2;1;1;1;3;;
+p21;Cytrusy;Owoce;kg;0.1;1;2;1;8;;
+p22;Truskawki / arbuz / sezonowe;Owoce;kg;0.05;1;2;1;12;;
+p23;Makaron;Suche;g;50;1;2;500;12;gluten;
+p24;Makaron bezglutenowy;Suche;g;50;1;2;500;20;zamiennik_gluten;
+p25;Ryż;Suche;g;50;1;2;400;8;;
+p26;Kasza;Suche;g;40;1;2;400;8;;
+p27;Płatki;Suche;g;50;1;2;250;16;gluten;
+p28;Musli;Suche;g;50;1;2;300;20;gluten;
+p29;Konserwa mięsna;Trwałe;szt;0.3;1;2;1;8;wege;
+p30;Konserwa rybna;Trwałe;szt;0.2;1;3;1;7;;
+p31;Fasola/ciecierzyca;Trwałe;szt;0.25;1;2;1;5;zamiennik_wege;
+p32;Sos do makaronu;Trwałe;słoik;0.75;4;2;1;9;;
+p33;Zupa instant;Trwałe;szt;1;2;3;1;4;;
+p34;Hummus/pasta roślinna;Trwałe;opak;1;4;2;1;8;zamiennik_wege;
+p35;Batony;Przekąski;szt;1;2;3;1;3;;
+p36;Ciastka;Przekąski;opak;0.75;4;3;1;12;gluten;
+p37;Orzechy;Przekąski;g;7;1;1;150;60;;
+p38;Chipsy;Przekąski;opak;0.75;4;2;1;7;;
+p39;Kawa;Napoje;g;100;4;5;250;120;;
+p40;Herbata;Napoje;torebki;0.5;1;1;20;8;;
+p41;Cukier;Napoje;g;5;1;1;25;5;;
+p42;Woda pitna;Napoje;l;0;0;0;1;2;;TAK
+p43;Woda gazowana;Napoje;l;0;0;0;1;4;;TAK
+p44;Soki;Napoje;l;0;0;0;1;5;;TAK
+p45;Cola/napoje;Napoje;l;0;0;0;1;4;;TAK
+p46;Syrop do wody;Napoje;szt;0;0;0;1;8;;TAK
+p47;Sól;Dodatki;opak;1;0;0;1;4;;
+p48;Pieprz;Dodatki;opak;1;0;0;1;5;;
+p49;Olej/oliwa;Dodatki;l;0.2;4;7;1;40;;
+p50;Ketchup;Dodatki;szt;1;0;0;1;5;;
+p51;Musztarda;Dodatki;szt;1;0;0;1;5;;
+p52;Worki na śmieci małe;Chemia;opak;1;0;0;1;6;;
+p53;Worki na śmieci duże;Chemia;opak;1;0;0;1;7;;
+p54;Gąbki do naczyń;Chemia;szt;1;0;0;1;4;;
+p55;Płyn do naczyń;Chemia;szt;1;0;0;1;8;;
+p56;Ręczniki papierowe;Chemia;rolka;1;8;3;1;15;;
+p57;Krem z filtrem SPF;Higiena;szt;1;0;0;1;20;;
+p58;Środek na komary;Higiena;szt;1;0;0;1;15;;
+p59;Żel/mydło;Higiena;szt;1;4;5;1;8;;
+p60;Szampon;Higiena;szt;1;0;0;1;12;;
+p61;Pasta do zębów;Higiena;szt;1;0;0;1;7;;
+p62;Papier toaletowy;Higiena;rolka;1;2;4;1;15;;
+p63;Ibuprom/paracetamol;Apteczka;opak;1;0;0;1;15;;
+p64;Tabletki na morską;Apteczka;opak;1;0;0;1;12;;
+p65;Plastry + opatrunki;Apteczka;opak;1;0;0;1;10;;
+p66;Elektrolity;Apteczka;opak;1;0;0;1;8;;
+p67;Węgiel aktywny;Apteczka;opak;1;0;0;1;6;;
+p68;Krem na oparzenia;Apteczka;szt;1;0;0;1;8;;
+p69;Kiełbasa na ognisko;Grill;kg;0.3;1;3;0.5;25;wege;
+p70;Mięso na grilla;Grill;kg;0.3;1;3;0.5;35;wege;
+p71;Tofu/tempeh na grilla;Grill;kg;0.2;1;3;0.5;30;zamiennik_wege;
+p72;Pieczarki;Grill;g;50;1;3;250;20;;
+p73;Sos BBQ/czosnkowy;Grill;opak;1;0;0;1;8;;
+p74;Ser halloumi;Grill;g;150;2;3;200;60;;
+p75;Tacki aluminiowe;Grill;szt;1;4;3;5;5;;
+p76;Piwo;Alkohol;szt;1;1;2;1;4;;
+p77;Wino;Alkohol;but.;1;4;3;1;30;;
+p78;Wódka/rum;Alkohol;but.;1;5;2;1;60;;
+p79;Jogurt;Lodówka;szt;0.25;1;1;1;3;laktoza;
+p80;Parówki;Lodówka;opak;0;1;1;1;8;;TAK
+p81;Mieszanka naleśnikowa;Suche;opak;0;1;1;1;6;;TAK
+p82;Dżem;Dodatki;słoik;0;1;1;1;9;;TAK
+p83;Pasztet (puszka);Trwałe;szt;0;1;1;1;5;;TAK
+p84;Ogórek kiszony;Trwałe;słoik;0;1;1;1;9;;TAK
+p85;Cynamon;Dodatki;opak;0;1;1;1;6;;TAK
+p86;Ser topiony;Lodówka;opak;0;1;1;1;7;;TAK
+p87;Płatki kukurydziane;Suche;opak;0;1;1;1;8;;TAK
+p88;Sos bolognese (słoik);Trwałe;słoik;0;1;1;1;9;;TAK
+p89;Pulpety (słoik);Trwałe;słoik;0;1;1;1;13;;TAK
+p90;Sos pieczarkowy (słoik);Trwałe;słoik;0;1;1;1;9;;TAK
+p91;Grochówka (puszka);Trwałe;szt;0;1;1;1;8;;TAK
+p92;Gulasz (słoik);Trwałe;słoik;0;1;1;1;14;;TAK
+p93;Majonez;Dodatki;szt;0;1;1;1;9;;TAK
+p94;Kukurydza (puszka);Trwałe;szt;0;1;1;1;5;;TAK
+p95;Zupa pomidorowa;Trwałe;szt;0;1;1;1;7;;TAK
+p96;Fasolka po bretońsku (puszka);Trwałe;szt;0;1;1;1;8;;TAK
+p97;Pesto (słoik);Dodatki;słoik;0;1;1;1;13;;TAK
+p98;Suszone pomidory (słoik);Dodatki;słoik;0;1;1;1;15;;TAK
+p99;Żurek;Trwałe;szt;0;1;1;1;8;;TAK
+p100;Gołąbki (puszka);Trwałe;szt;0;1;1;1;12;;TAK
+p101;Flaki (puszka);Trwałe;szt;0;1;1;1;11;;TAK
+p102;Kapusta kiszona;Trwałe;opak;0;1;1;1;8;;TAK
+p103;Klopsy (słoik);Trwałe;słoik;0;1;1;1;13;;TAK
+p104;Puree instant;Suche;opak;0;1;1;1;7;;TAK
+p105;Kurczak curry (słoik);Trwałe;słoik;0;1;1;1;14;;TAK
+p106;Sos carbonara (słoik);Trwałe;słoik;0;1;1;1;10;;TAK
+p107;Zupa gulaszowa (puszka);Trwałe;szt;0;1;1;1;9;;TAK
+p108;Kiełbasa niemiecka (Bratwurst);Grill;kg;0;1;1;1;28;;TAK
+p109;Kapusta czerwona;Trwałe;słoik;0;1;1;1;6;;TAK
+p110;Precel;Pieczywo;szt;0;1;1;1;3;;TAK
+p111;Musztarda miodowa;Dodatki;słoik;0;1;1;1;9;;TAK
+p112;Klopsiki szwedzkie;Trwałe;słoik;0;1;1;1;14;;TAK
+p113;Sos śmietanowy do klopsików;Dodatki;słoik;0;1;1;1;8;;TAK
+p114;Chleb chrupki;Pieczywo;opak;0;1;1;1;7;;TAK
+p115;Konfitura z borówek;Dodatki;słoik;0;1;1;1;12;;TAK
+p116;Pršut (szynka dalmatyńska);Lodówka;g;0;1;1;1;90;;TAK
+p117;Paški sir (ser owczy);Lodówka;g;0;1;1;1;70;;TAK
+p118;Ćevapi (mięso mielone);Grill;kg;0;1;1;1;45;;TAK
+p119;Ajvar;Dodatki;słoik;0;1;1;1;10;;TAK
+p120;Prosciutto;Lodówka;g;0;1;1;1;85;;TAK
+p121;Mozzarella;Lodówka;g;0;1;1;1;45;;TAK
+p122;Oliwki;Trwałe;słoik;0;1;1;1;14;;TAK
+p123;Ryż arborio;Suche;g;0;1;1;1;8;;TAK
+p124;Croissanty;Pieczywo;szt;0;1;1;1;4;;TAK
+p125;Terrine (pasztet francuski);Trwałe;słoik;0;1;1;1;16;;TAK
+p126;Ser pleśniowy (brie/camembert);Lodówka;g;0;1;1;1;80;;TAK
+p127;Musztarda dijon;Dodatki;słoik;0;1;1;1;11;;TAK
+p128;Feta;Lodówka;g;0;1;1;1;40;;TAK
+p129;Oliwki kalamata;Trwałe;słoik;0;1;1;1;15;;TAK
+p130;Tzatziki;Dodatki;słoik;0;1;1;1;9;;TAK
+p131;Gyros (mięso);Grill;kg;0;1;1;1;40;;TAK
+p132;Fasola czarna (puszka);Trwałe;szt;0;1;1;1;5;;TAK
+p133;Przyprawa jerk;Dodatki;opak;0;1;1;1;8;;TAK
+p134;Mleczko kokosowe;Trwałe;szt;0;1;1;1;6;;TAK
+p135;Banan (plantain);Owoce;kg;0;1;1;1;6;;TAK
+p136;Pasta curry (czerwone/zielone);Dodatki;słoik;0;1;1;1;13;;TAK
+p137;Sos rybny;Dodatki;but.;0;1;1;1;12;;TAK
+p138;Makaron ryżowy;Suche;g;0;1;1;1;7;;TAK
+p139;Chorizo;Lodówka;kg;0;1;1;1;38;;TAK
+p140;Ryż paella;Suche;g;0;1;1;1;9;;TAK
+p141;Szafran;Dodatki;opak;0;1;1;1;25;;TAK
+p142;Papryka wędzona (pimentón);Dodatki;opak;0;1;1;1;6;;TAK

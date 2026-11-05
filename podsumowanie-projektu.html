@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armator.PRO — Podsumowanie projektu</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a1628;--card:#0f2038;--border:#1e3a5f;--cyan:#00d4ff;--cyan-dim:#0099bb;--white:#eaf2ff;--muted:#7a93b5;--amber:#f0a500;--green:#00c896;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;line-height:1.6;padding:44px 20px;}
+  .wrap{max-width:880px;margin:0 auto;}
+  .kicker{font-family:'Syne',sans-serif;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan);}
+  h1{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;margin-top:8px;}
+  .sub{color:var(--muted);font-size:15px;margin-top:10px;max-width:640px;}
+  h2{font-family:'Syne',sans-serif;font-size:19px;font-weight:700;margin:40px 0 12px;border-left:3px solid var(--cyan);padding-left:12px;}
+  p{font-size:14px;color:var(--white);margin-bottom:10px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+  @media(max-width:680px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+  .card b{font-family:'Syne',sans-serif;color:var(--cyan);font-size:14px;display:block;margin-bottom:5px;}
+  .card span{font-size:13px;color:var(--muted);}
+  ul{padding-left:18px;margin-top:6px;}
+  li{font-size:13.5px;margin-bottom:7px;}
+  li b{color:var(--white);}
+  .stat-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 16px;min-width:110px;}
+  .stat b{display:block;font-family:'Syne',sans-serif;font-size:22px;color:var(--cyan);}
+  .stat span{font-size:11px;color:var(--muted);}
+  .pill{display:inline-block;font-size:10.5px;font-family:'Syne',sans-serif;font-weight:700;padding:2px 9px;border-radius:12px;margin-left:6px;}
+  .pill.status{background:rgba(0,200,150,0.15);color:var(--green);}
+  .quote{border-left:3px solid var(--amber);padding-left:14px;font-style:italic;color:var(--muted);font-size:13.5px;margin:14px 0;}
+  .foot{margin-top:48px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">⚓ Podsumowanie projektu</div>
+  <h1>Armator.PRO</h1>
+  <div class="sub">Planer zapasów na rejs żeglarski — aplikacja webowa (PWA), która w kilka minut generuje dokładną listę zakupów dla całej załogi, na cały rejs.</div>
+
+  <h2>Problem</h2>
+  <p>Zaopatrzenie łodzi przed rejsem robi się „na oko" — skipper albo przepłaca (kupuje za dużo, bo nie wie ile naprawdę potrzeba), albo czegoś zabraknie w połowie trasy. Nie ma dziś dobrego narzędzia, które policzyłoby to raz porządnie i dało się odtworzyć na kolejny rejs.</p>
+
+  <h2>Rozwiązanie</h2>
+  <p>Armator.PRO pyta o parametry rejsu (załoga, dni, rejon, styl gotowania, diety, dostęp do sklepów) i generuje precyzyjną listę zakupów z silnika liczącego ~140 produktów wg sprawdzonych norm. Dodatkowo: plan posiłków przelicza listę na dokładne składniki wybranych dań, a nie ogólne szacunki.</p>
+
+  <div class="stat-row">
+    <div class="stat"><b>140+</b><span>produktów w bazie</span></div>
+    <div class="stat"><b>102</b><span>gotowe dania w planerze posiłków</span></div>
+    <div class="stat"><b>9</b><span>kuchni świata</span></div>
+    <div class="stat"><b>PWA</b><span>instalowalna, działa offline</span></div>
+  </div>
+
+  <h2>Odbiorca</h2>
+  <p>Skipperzy i kapitanowie prywatnych łodzi, załoganci czarterujący jachty, rynek międzynarodowy (apka dwujęzyczna PL/EN).</p>
+
+  <h2>Funkcje — rdzeń</h2>
+  <div class="grid">
+    <div class="card"><b>Silnik zaopatrzenia</b><span>Konfiguracja rejsu → precyzyjna lista zakupów z normami skalowanymi załogą, dniami i apetytem.</span></div>
+    <div class="card"><b>Zapasy na pokładzie</b><span>Kontrola dzień-po-dniu — co zostało, co się kończy.</span></div>
+    <div class="card"><b>Koszty i rozliczenia</b><span>Szacowany budżet rejsu + podział wydatków między załogę.</span></div>
+    <div class="card"><b>Współdzielenie na żywo</b><span>Link do wspólnej listy — cała załoga widzi te same odhaczenia w czasie rzeczywistym.</span></div>
+  </div>
+
+  <h2>Funkcje PRO (nowość)</h2>
+  <div class="grid">
+    <div class="card"><b>🍽️ Plan posiłków → auto-lista</b><span>Wybierasz konkretne dania na każdy dzień — lista liczy się z realnych składników, nie z szacunków. 102 dania, w tym 9 kuchni świata.</span></div>
+    <div class="card"><b>⚓ Profile łodzi i szablony</b><span>Zapisana konfiguracja załogi + gotowe zestawy zakupów do odtworzenia jednym kliknięciem na kolejny rejs.</span></div>
+    <div class="card"><b>👥 Współpraca załogi</b><span>Imię, awatar, obecność online i ślad „kto co odhaczył" na wspólnej liście.</span></div>
+    <div class="card"><b>🧠 Analityka między rejsami</b><span>Apka uczy się z historii (co zostawało, czego brakowało) i proponuje korekty norm — bez ręcznego wpisywania.</span></div>
+  </div>
+
+  <h2>Model biznesowy</h2>
+  <p>Freemium: podstawowy planer i współdzielenie zostają darmowe (lejek). Płatny plan PRO obejmuje plan posiłków, profile/szablony, pełną współpracę załogi i analitykę — funkcje dla osób wracających do apki sezon po sezonie, nie jednorazowych użytkowników.</p>
+
+  <h2>Mocne strony i przewagi</h2>
+  <ul>
+    <li><b>Realny, bolesny problem, nie „nice to have".</b> Zaopatrzenie na rejs robi się dziś ręcznie w głowie albo na kartce — pierwsze narzędzie, które liczy to porządnie i wielokrotnego użytku.</li>
+    <li><b>Silnik oparty o normy, nie zgadywanie.</b> ~140 produktów z osobnymi normami skalowanymi załogą/dniami/apetytem/dietami — nie prosty mnożnik „X zł na osobę dziennie" jak konkurencyjne kalkulatory.</li>
+    <li><b>Plan posiłków to realny wyróżnik.</b> 102 gotowe dania (w tym 9 kuchni świata) zamieniają listę z „szacunku" w dokładne zapotrzebowanie na składniki — tego nie robi żadna prosta apka-kalkulator.</li>
+    <li><b>Działa offline, tam gdzie to liczy się najbardziej.</b> PWA zaprojektowana pod realia morza — brak zasięgu nie wywala aplikacji, dane zostają na urządzeniu.</li>
+    <li><b>Współdzielenie na żywo bez zakładania kont.</b> Cała załoga widzi tę samą listę przez sam link — zero tarcia przy onboardingu gości/czarterowców.</li>
+    <li><b>Analityka, która się uczy.</b> Apka koryguje normy na podstawie Twojej historii rejsów, więc z każdym kolejnym wyjazdem lista jest dokładniejsza — buduje to nawyk powrotu, nie jednorazowe użycie.</li>
+    <li><b>Darmowy rdzeń jako lejek, płatne funkcje jako realna wartość.</b> Freemium nie ogranicza podstawówki sztucznie — PRO to funkcje dla kogoś, kto wraca sezon po sezonie, więc konwersja jest naturalna, nie wymuszona.</li>
+    <li><b>Dwujęzyczność od startu.</b> PL/EN gotowe pod rynek międzynarodowy, nie tylko lokalny.</li>
+    <li><b>Niski koszt utrzymania.</b> Cała logika po stronie klienta + Supabase/Vercel na darmowych/tanich planach — skalowalne bez dużych kosztów infrastruktury na starcie.</li>
+  </ul>
+
+  <h2>Status</h2>
+  <p>Wdrożone i dostępne online<span class="pill status">na żywo</span>. Aktualnie w fazie testów przed rozpoczęciem promocji — zbieramy pierwsze realne dane z rejsów, kalibrujemy normy produktów.</p>
+
+  <h2>Technologia</h2>
+  <p>Progressive Web App (instalowalna, działa offline na morzu) · Supabase (baza + synchronizacja na żywo) · Stripe (płatności/licencje) · Vercel (hosting + zadania w tle).</p>
+
+  <div class="foot">Armator.PRO — planer zapasów dla żeglarzy. Dokument przygotowany do wykorzystania w materiałach marketingowych / rozmowach z zespołem.</div>
+</div>
+</body>
+</html>

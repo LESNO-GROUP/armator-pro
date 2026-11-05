@@ -1,0 +1,276 @@
+﻿ID dania;Posilek;Danie;Wege;Skladnik ID;Skladnik;Ilosc na osobe;Jednostka
+rb1;Sniadanie;Kanapki;;p01;Chleb;0,2;szt
+rb1;Sniadanie;Kanapki;;p08;Ser żółty;50;g
+rb1;Sniadanie;Kanapki;;p10;Wędlina;50;g
+rb1;Sniadanie;Kanapki;;p16;Pomidory;0,25;szt
+rb1;Sniadanie;Kanapki;;p17;Ogórek;0,15;szt
+rb2;Sniadanie;Jajecznica;TAK;p11;Jajka;2;szt
+rb2;Sniadanie;Jajecznica;TAK;p01;Chleb;0,25;szt
+rb2;Sniadanie;Jajecznica;TAK;p15;Cebula;0,15;szt
+rb3;Sniadanie;Owsianka;TAK;p27;Płatki;60;g
+rb3;Sniadanie;Owsianka;TAK;p12;Mleko;0,25;l
+rb3;Sniadanie;Owsianka;TAK;p20;Jabłko / gruszka / inne;0,5;szt
+rb4;Sniadanie;Musli z mlekiem;TAK;p28;Musli;60;g
+rb4;Sniadanie;Musli z mlekiem;TAK;p12;Mleko;0,25;l
+rb5;Sniadanie;Jogurt z dodatkami;TAK;p79;Jogurt;1;szt
+rb5;Sniadanie;Jogurt z dodatkami;TAK;p20;Jabłko / gruszka / inne;0,5;szt
+rb5;Sniadanie;Jogurt z dodatkami;TAK;p28;Musli;40;g
+rl1;Obiad;Restauracja;;;(brak zakupow);;
+rl2;Obiad;Gotowa zupka;;p33;Zupa instant;1;szt
+rl3;Obiad;Tortille z hummusem i kurczakiem;;p03;Tortilla;2;szt
+rl3;Obiad;Tortille z hummusem i kurczakiem;;p34;Hummus/pasta roślinna;0,25;opak
+rl3;Obiad;Tortille z hummusem i kurczakiem;;p18;Papryka;0,25;szt
+rl3;Obiad;Tortille z hummusem i kurczakiem;;p17;Ogórek;0,15;szt
+rl3;Obiad;Tortille z hummusem i kurczakiem;;p70;Mięso na grilla;0,15;kg
+rl4;Obiad;Sałatka z tuńczykiem;;p30;Konserwa rybna;0,4;szt
+rl4;Obiad;Sałatka z tuńczykiem;;p16;Pomidory;0,4;szt
+rl4;Obiad;Sałatka z tuńczykiem;;p17;Ogórek;0,2;szt
+rl4;Obiad;Sałatka z tuńczykiem;;p02;Bułki;1;szt
+rl5;Obiad;Fasolka na grzance;TAK;p31;Fasola/ciecierzyca;0,45;szt
+rl5;Obiad;Fasolka na grzance;TAK;p02;Bułki;1;szt
+rl5;Obiad;Fasolka na grzance;TAK;p15;Cebula;0,15;szt
+rd1;Kolacja;Makaron z sosem;TAK;p23;Makaron;90;g
+rd1;Kolacja;Makaron z sosem;TAK;p32;Sos do makaronu;0,35;słoik
+rd1;Kolacja;Makaron z sosem;TAK;p08;Ser żółty;25;g
+rd2;Kolacja;Ryż z warzywami;TAK;p25;Ryż;80;g
+rd2;Kolacja;Ryż z warzywami;TAK;p19;Cukinia;0,3;szt
+rd2;Kolacja;Ryż z warzywami;TAK;p18;Papryka;0,3;szt
+rd2;Kolacja;Ryż z warzywami;TAK;p15;Cebula;0,2;szt
+rd3;Kolacja;Kasza z gulaszem;;p26;Kasza;70;g
+rd3;Kolacja;Kasza z gulaszem;;p29;Konserwa mięsna;0,5;szt
+rd3;Kolacja;Kasza z gulaszem;;p15;Cebula;0,2;szt
+rd4;Kolacja;Ziemniaki z rybą;;p14;Ziemniaki;0,3;kg
+rd4;Kolacja;Ziemniaki z rybą;;p30;Konserwa rybna;0,5;szt
+rd4;Kolacja;Ziemniaki z rybą;;p15;Cebula;0,15;szt
+rd5;Kolacja;Curry warzywne;TAK;p25;Ryż;80;g
+rd5;Kolacja;Curry warzywne;TAK;p31;Fasola/ciecierzyca;0,3;szt
+rd5;Kolacja;Curry warzywne;TAK;p19;Cukinia;0,3;szt
+rd5;Kolacja;Curry warzywne;TAK;p16;Pomidory;0,5;szt
+rd6;Kolacja;Grill;;p70;Mięso na grilla;0,2;kg
+rd6;Kolacja;Grill;;p69;Kiełbasa na ognisko;0,2;kg
+rd6;Kolacja;Grill;;p72;Pieczarki;0,15;g
+rd6;Kolacja;Grill;;p73;Sos BBQ/czosnkowy;0,2;opak
+rd6;Kolacja;Grill;;p75;Tacki aluminiowe;0,35;szt
+rd6;Kolacja;Grill;;p01;Chleb;0,25;szt
+rd7;Kolacja;Restauracja;;;(brak zakupow);;
+rb6;Sniadanie;Owsianka błyskawiczna;TAK;p27;Płatki;60;g
+rb6;Sniadanie;Owsianka błyskawiczna;TAK;p12;Mleko;0,25;l
+rb7;Sniadanie;Jajecznica z boczkiem/szynką;;p11;Jajka;2;szt
+rb7;Sniadanie;Jajecznica z boczkiem/szynką;;p10;Wędlina;30;g
+rb8;Sniadanie;Tosty z serem i szynką;;p01;Chleb;0,25;szt
+rb8;Sniadanie;Tosty z serem i szynką;;p08;Ser żółty;50;g
+rb8;Sniadanie;Tosty z serem i szynką;;p10;Wędlina;25;g
+rb9;Sniadanie;Musli z jogurtem;TAK;p28;Musli;50;g
+rb9;Sniadanie;Musli z jogurtem;TAK;p79;Jogurt;1;szt
+rb10;Sniadanie;Naleśniki;TAK;p81;Mieszanka naleśnikowa;0,25;opak
+rb10;Sniadanie;Naleśniki;TAK;p11;Jajka;1;szt
+rb10;Sniadanie;Naleśniki;TAK;p12;Mleko;0,1;l
+rb10;Sniadanie;Naleśniki;TAK;p82;Dżem;0,1;słoik
+rb11;Sniadanie;Kanapki z pasztetem;;p01;Chleb;0,3;szt
+rb11;Sniadanie;Kanapki z pasztetem;;p83;Pasztet (puszka);0,4;szt
+rb11;Sniadanie;Kanapki z pasztetem;;p84;Ogórek kiszony;0,15;słoik
+rb12;Sniadanie;Ryż na mleku;TAK;p25;Ryż;60;g
+rb12;Sniadanie;Ryż na mleku;TAK;p12;Mleko;0,25;l
+rb12;Sniadanie;Ryż na mleku;TAK;p85;Cynamon;0,05;opak
+rb13;Sniadanie;Tortilla z jajkiem i serem;;p03;Tortilla;1;szt
+rb13;Sniadanie;Tortilla z jajkiem i serem;;p11;Jajka;2;szt
+rb13;Sniadanie;Tortilla z jajkiem i serem;;p86;Ser topiony;0,3;opak
+rb14;Sniadanie;Bułki z hummusem;TAK;p02;Bułki;1,5;szt
+rb14;Sniadanie;Bułki z hummusem;TAK;p34;Hummus/pasta roślinna;0,25;opak
+rb14;Sniadanie;Bułki z hummusem;TAK;p16;Pomidory;0,2;szt
+rb15;Sniadanie;Płatki kukurydziane z mlekiem;TAK;p87;Płatki kukurydziane;0,15;opak
+rb15;Sniadanie;Płatki kukurydziane z mlekiem;TAK;p12;Mleko;0,25;l
+rl6;Obiad;Spaghetti bolognese;;p23;Makaron;90;g
+rl6;Obiad;Spaghetti bolognese;;p88;Sos bolognese (słoik);0,4;słoik
+rl7;Obiad;Pulpety ze słoika z ryżem;;p89;Pulpety (słoik);0,5;słoik
+rl7;Obiad;Pulpety ze słoika z ryżem;;p25;Ryż;80;g
+rl9;Obiad;Grochówka z kiełbasą;;p91;Grochówka (puszka);0,5;szt
+rl9;Obiad;Grochówka z kiełbasą;;p69;Kiełbasa na ognisko;0,15;kg
+rl10;Obiad;Ryż z gulaszem;;p92;Gulasz (słoik);0,5;słoik
+rl10;Obiad;Ryż z gulaszem;;p25;Ryż;80;g
+rl11;Obiad;Wrap z tuńczykiem;;p03;Tortilla;1;szt
+rl11;Obiad;Wrap z tuńczykiem;;p30;Konserwa rybna;0,35;szt
+rl11;Obiad;Wrap z tuńczykiem;;p93;Majonez;0,1;szt
+rl11;Obiad;Wrap z tuńczykiem;;p94;Kukurydza (puszka);0,3;szt
+rl12;Obiad;Zupa pomidorowa z makaronem;TAK;p95;Zupa pomidorowa;0,5;szt
+rl12;Obiad;Zupa pomidorowa z makaronem;TAK;p23;Makaron;35;g
+rl13;Obiad;Fasolka po bretońsku z chlebem;;p96;Fasolka po bretońsku (puszka);0,5;szt
+rl13;Obiad;Fasolka po bretońsku z chlebem;;p01;Chleb;0,25;szt
+rl14;Obiad;Makaron z pesto;TAK;p23;Makaron;90;g
+rl14;Obiad;Makaron z pesto;TAK;p97;Pesto (słoik);0,2;słoik
+rl14;Obiad;Makaron z pesto;TAK;p98;Suszone pomidory (słoik);0,15;słoik
+rl15;Obiad;Żurek z kiełbasą;;p99;Żurek;0,5;szt
+rl15;Obiad;Żurek z kiełbasą;;p69;Kiełbasa na ognisko;0,15;kg
+rl15;Obiad;Żurek z kiełbasą;;p11;Jajka;1;szt
+rd8;Kolacja;Konserwa mięsna z chlebem;;p29;Konserwa mięsna;0,5;szt
+rd8;Kolacja;Konserwa mięsna z chlebem;;p01;Chleb;0,3;szt
+rd9;Kolacja;Gołąbki z chlebem;;p100;Gołąbki (puszka);0,5;szt
+rd9;Kolacja;Gołąbki z chlebem;;p01;Chleb;0,3;szt
+rd10;Kolacja;Flaki z puszki;;p101;Flaki (puszka);0,5;szt
+rd10;Kolacja;Flaki z puszki;;p01;Chleb;0,3;szt
+rd11;Kolacja;Kiełbasa z kapustą kiszoną;;p69;Kiełbasa na ognisko;0,25;kg
+rd11;Kolacja;Kiełbasa z kapustą kiszoną;;p102;Kapusta kiszona;0,25;opak
+rd12;Kolacja;Klopsy z puree instant;;p103;Klopsy (słoik);0,5;słoik
+rd12;Kolacja;Klopsy z puree instant;;p104;Puree instant;0,3;opak
+rd13;Kolacja;Curry z kurczakiem i ryżem;;p105;Kurczak curry (słoik);0,5;słoik
+rd13;Kolacja;Curry z kurczakiem i ryżem;;p25;Ryż;80;g
+rd14;Kolacja;Makaron carbonara;;p23;Makaron;90;g
+rd14;Kolacja;Makaron carbonara;;p106;Sos carbonara (słoik);0,4;słoik
+rd15;Kolacja;Zapiekanka z pieczarkami;TAK;p01;Chleb;0,35;szt
+rd15;Kolacja;Zapiekanka z pieczarkami;TAK;p90;Sos pieczarkowy (słoik);0,25;słoik
+rd15;Kolacja;Zapiekanka z pieczarkami;TAK;p08;Ser żółty;30;g
+rd16;Kolacja;Zupa gulaszowa z chlebem;;p107;Zupa gulaszowa (puszka);0,5;szt
+rd16;Kolacja;Zupa gulaszowa z chlebem;;p01;Chleb;0,3;szt
+rd17;Kolacja;Sałatka z tuńczykiem;;p30;Konserwa rybna;0,5;szt
+rd17;Kolacja;Sałatka z tuńczykiem;;p94;Kukurydza (puszka);0,3;szt
+rd17;Kolacja;Sałatka z tuńczykiem;;p31;Fasola/ciecierzyca;0,3;szt
+rd17;Kolacja;Sałatka z tuńczykiem;;p93;Majonez;0,1;szt
+rb17;Sniadanie;Bułka z szynką i musztardą miodową;;p02;Bułki;1;szt
+rb17;Sniadanie;Bułka z szynką i musztardą miodową;;p10;Wędlina;25;g
+rb17;Sniadanie;Bułka z szynką i musztardą miodową;;p111;Musztarda miodowa;0,1;słoik
+rb18;Sniadanie;Jajka z chlebem po niemiecku;TAK;p11;Jajka;2;szt
+rb18;Sniadanie;Jajka z chlebem po niemiecku;TAK;p01;Chleb;0,3;szt
+rl17;Obiad;Sznycel z ziemniakami;;p70;Mięso na grilla;0,2;kg
+rl17;Obiad;Sznycel z ziemniakami;;p14;Ziemniaki;0,25;kg
+rd18;Kolacja;Bratwurst z kapustą czerwoną;;p108;Kiełbasa niemiecka (Bratwurst);0,2;kg
+rd18;Kolacja;Bratwurst z kapustą czerwoną;;p109;Kapusta czerwona;0,25;słoik
+rd18;Kolacja;Bratwurst z kapustą czerwoną;;p01;Chleb;0,3;szt
+rd20;Kolacja;Gulasz wołowy z kluskami;;p92;Gulasz (słoik);0,5;słoik
+rd20;Kolacja;Gulasz wołowy z kluskami;;p23;Makaron;80;g
+rd21;Kolacja;Kapusta czerwona z ziemniakami i kiełbasą;;p109;Kapusta czerwona;0,3;słoik
+rd21;Kolacja;Kapusta czerwona z ziemniakami i kiełbasą;;p14;Ziemniaki;0,2;kg
+rd21;Kolacja;Kapusta czerwona z ziemniakami i kiełbasą;;p108;Kiełbasa niemiecka (Bratwurst);0,15;kg
+rb20;Sniadanie;Naleśniki z konfiturą z borówek;TAK;p81;Mieszanka naleśnikowa;0,25;opak
+rb20;Sniadanie;Naleśniki z konfiturą z borówek;TAK;p11;Jajka;1;szt
+rb20;Sniadanie;Naleśniki z konfiturą z borówek;TAK;p115;Konfitura z borówek;0,15;słoik
+rb21;Sniadanie;Jogurt z borówkami;TAK;p79;Jogurt;1;szt
+rb21;Sniadanie;Jogurt z borówkami;TAK;p115;Konfitura z borówek;0,1;słoik
+rl19;Obiad;Klopsiki szwedzkie z ziemniakami;;p112;Klopsiki szwedzkie;0,5;słoik
+rl19;Obiad;Klopsiki szwedzkie z ziemniakami;;p113;Sos śmietanowy do klopsików;0,2;słoik
+rl19;Obiad;Klopsiki szwedzkie z ziemniakami;;p14;Ziemniaki;0,2;kg
+rd22;Kolacja;Klopsiki w sosie śmietanowym z ryżem;;p112;Klopsiki szwedzkie;0,5;słoik
+rd22;Kolacja;Klopsiki w sosie śmietanowym z ryżem;;p113;Sos śmietanowy do klopsików;0,2;słoik
+rd22;Kolacja;Klopsiki w sosie śmietanowym z ryżem;;p25;Ryż;80;g
+rd25;Kolacja;Zapiekanka ziemniaczana z klopsikami;;p14;Ziemniaki;0,25;kg
+rd25;Kolacja;Zapiekanka ziemniaczana z klopsikami;;p112;Klopsiki szwedzkie;0,4;słoik
+rd25;Kolacja;Zapiekanka ziemniaczana z klopsikami;;p08;Ser żółty;20;g
+rb22;Sniadanie;Pršut z serem owczym;;p116;Pršut (szynka dalmatyńska);120;g
+rb22;Sniadanie;Pršut z serem owczym;;p117;Paški sir (ser owczy);150;g
+rb23;Sniadanie;Bułki z ajvarem i serem;TAK;p02;Bułki;1;szt
+rb23;Sniadanie;Bułki z ajvarem i serem;TAK;p119;Ajvar;0,1;słoik
+rb23;Sniadanie;Bułki z ajvarem i serem;TAK;p08;Ser żółty;20;g
+rb24;Sniadanie;Jajka z pršutem;;p11;Jajka;2;szt
+rb24;Sniadanie;Jajka z pršutem;;p116;Pršut (szynka dalmatyńska);60;g
+rl23;Obiad;Sałatka z serem owczym i pomidorem;TAK;p117;Paški sir (ser owczy);150;g
+rl23;Obiad;Sałatka z serem owczym i pomidorem;TAK;p16;Pomidory;0,5;szt
+rl23;Obiad;Sałatka z serem owczym i pomidorem;TAK;p17;Ogórek;0,25;szt
+rl24;Obiad;Makaron z ajvarem;TAK;p23;Makaron;90;g
+rl24;Obiad;Makaron z ajvarem;TAK;p119;Ajvar;0,2;słoik
+rd28;Kolacja;Ryż z ajvarem i serem owczym;TAK;p25;Ryż;80;g
+rd28;Kolacja;Ryż z ajvarem i serem owczym;TAK;p119;Ajvar;0,2;słoik
+rd28;Kolacja;Ryż z ajvarem i serem owczym;TAK;p117;Paški sir (ser owczy);100;g
+rb25;Sniadanie;Bułki z prosciutto i mozzarellą;;p02;Bułki;1;szt
+rb25;Sniadanie;Bułki z prosciutto i mozzarellą;;p120;Prosciutto;100;g
+rb25;Sniadanie;Bułki z prosciutto i mozzarellą;;p121;Mozzarella;150;g
+rb26;Sniadanie;Tosty caprese;TAK;p01;Chleb;0,3;szt
+rb26;Sniadanie;Tosty caprese;TAK;p121;Mozzarella;100;g
+rb26;Sniadanie;Tosty caprese;TAK;p16;Pomidory;0,3;szt
+rl25;Obiad;Sałatka caprese z oliwkami;TAK;p121;Mozzarella;150;g
+rl25;Obiad;Sałatka caprese z oliwkami;TAK;p16;Pomidory;0,4;szt
+rl25;Obiad;Sałatka caprese z oliwkami;TAK;p122;Oliwki;0,15;słoik
+rl26;Obiad;Panini z prosciutto;;p02;Bułki;1,5;szt
+rl26;Obiad;Panini z prosciutto;;p120;Prosciutto;120;g
+rl26;Obiad;Panini z prosciutto;;p121;Mozzarella;100;g
+rl27;Obiad;Makaron z oliwkami i pomidorem;TAK;p23;Makaron;90;g
+rl27;Obiad;Makaron z oliwkami i pomidorem;TAK;p122;Oliwki;0,15;słoik
+rl27;Obiad;Makaron z oliwkami i pomidorem;TAK;p16;Pomidory;0,35;szt
+rd30;Kolacja;Risotto z pieczarkami;TAK;p123;Ryż arborio;80;g
+rd30;Kolacja;Risotto z pieczarkami;TAK;p72;Pieczarki;200;g
+rd31;Kolacja;Makaron z mozzarellą i pomidorem;TAK;p23;Makaron;90;g
+rd31;Kolacja;Makaron z mozzarellą i pomidorem;TAK;p121;Mozzarella;100;g
+rd31;Kolacja;Makaron z mozzarellą i pomidorem;TAK;p16;Pomidory;0,35;szt
+rd32;Kolacja;Zapiekanka z prosciutto i mozzarellą;;p01;Chleb;0,3;szt
+rd32;Kolacja;Zapiekanka z prosciutto i mozzarellą;;p120;Prosciutto;100;g
+rd32;Kolacja;Zapiekanka z prosciutto i mozzarellą;;p121;Mozzarella;150;g
+rd33;Kolacja;Risotto z oliwkami;TAK;p123;Ryż arborio;80;g
+rd33;Kolacja;Risotto z oliwkami;TAK;p122;Oliwki;0,1;słoik
+rb28;Sniadanie;Croissanty z masłem;TAK;p124;Croissanty;1,5;szt
+rb28;Sniadanie;Croissanty z masłem;TAK;p07;Masło;0,1;kostka
+rb30;Sniadanie;Tosty francuskie;TAK;p01;Chleb;0,3;szt
+rb30;Sniadanie;Tosty francuskie;TAK;p11;Jajka;1;szt
+rb30;Sniadanie;Tosty francuskie;TAK;p12;Mleko;0,15;l
+rb30;Sniadanie;Tosty francuskie;TAK;p85;Cynamon;0,02;opak
+rl29;Obiad;Sałatka z serem pleśniowym;TAK;p126;Ser pleśniowy (brie/camembert);80;g
+rl29;Obiad;Sałatka z serem pleśniowym;TAK;p16;Pomidory;0,35;szt
+rl29;Obiad;Sałatka z serem pleśniowym;TAK;p17;Ogórek;0,25;szt
+rl30;Obiad;Zupa cebulowa z chlebem;TAK;p15;Cebula;0,3;szt
+rl30;Obiad;Zupa cebulowa z chlebem;TAK;p01;Chleb;0,3;szt
+rl30;Obiad;Zupa cebulowa z chlebem;TAK;p08;Ser żółty;20;g
+rd34;Kolacja;Kurczak w musztardzie dijon z ziemniakami;;p70;Mięso na grilla;0,2;kg
+rd34;Kolacja;Kurczak w musztardzie dijon z ziemniakami;;p127;Musztarda dijon;0,1;słoik
+rd34;Kolacja;Kurczak w musztardzie dijon z ziemniakami;;p14;Ziemniaki;0,25;kg
+rb31;Sniadanie;Jogurt z fetą i oliwkami;TAK;p79;Jogurt;1;szt
+rb31;Sniadanie;Jogurt z fetą i oliwkami;TAK;p128;Feta;80;g
+rb31;Sniadanie;Jogurt z fetą i oliwkami;TAK;p129;Oliwki kalamata;0,1;słoik
+rb32;Sniadanie;Bułki z fetą i pomidorem;TAK;p02;Bułki;1;szt
+rb32;Sniadanie;Bułki z fetą i pomidorem;TAK;p128;Feta;100;g
+rb32;Sniadanie;Bułki z fetą i pomidorem;TAK;p16;Pomidory;0,3;szt
+rl31;Obiad;Sałatka grecka;TAK;p128;Feta;120;g
+rl31;Obiad;Sałatka grecka;TAK;p129;Oliwki kalamata;0,1;słoik
+rl31;Obiad;Sałatka grecka;TAK;p16;Pomidory;0,3;szt
+rl31;Obiad;Sałatka grecka;TAK;p17;Ogórek;0,2;szt
+rl32;Obiad;Gyros w tortilli z tzatziki;;p131;Gyros (mięso);0,25;kg
+rl32;Obiad;Gyros w tortilli z tzatziki;;p03;Tortilla;1;szt
+rl32;Obiad;Gyros w tortilli z tzatziki;;p130;Tzatziki;0,15;słoik
+rl33;Obiad;Makaron z fetą i oliwkami;TAK;p23;Makaron;90;g
+rl33;Obiad;Makaron z fetą i oliwkami;TAK;p128;Feta;100;g
+rl33;Obiad;Makaron z fetą i oliwkami;TAK;p129;Oliwki kalamata;0,15;słoik
+rd39;Kolacja;Grillowany gyros z pieczarkami;;p131;Gyros (mięso);0,3;kg
+rd39;Kolacja;Grillowany gyros z pieczarkami;;p72;Pieczarki;200;g
+rb34;Sniadanie;Owsianka kokosowa;TAK;p27;Płatki;60;g
+rb34;Sniadanie;Owsianka kokosowa;TAK;p134;Mleczko kokosowe;0,2;szt
+rb35;Sniadanie;Smażony banan z chlebem;TAK;p135;Banan (plantain);0,3;kg
+rb35;Sniadanie;Smażony banan z chlebem;TAK;p01;Chleb;0,3;szt
+rb36;Sniadanie;Jajka z fasolą czarną;TAK;p11;Jajka;2;szt
+rb36;Sniadanie;Jajka z fasolą czarną;TAK;p132;Fasola czarna (puszka);0,25;szt
+rl34;Obiad;Ryż z fasolą czarną;TAK;p25;Ryż;80;g
+rl34;Obiad;Ryż z fasolą czarną;TAK;p132;Fasola czarna (puszka);0,3;szt
+rl35;Obiad;Kurczak jerk z ryżem;;p70;Mięso na grilla;0,25;kg
+rl35;Obiad;Kurczak jerk z ryżem;;p133;Przyprawa jerk;0,05;opak
+rl35;Obiad;Kurczak jerk z ryżem;;p25;Ryż;80;g
+rd43;Kolacja;Ryba w mleczku kokosowym z ryżem;;p30;Konserwa rybna;0,35;szt
+rd43;Kolacja;Ryba w mleczku kokosowym z ryżem;;p134;Mleczko kokosowe;0,25;szt
+rd43;Kolacja;Ryba w mleczku kokosowym z ryżem;;p25;Ryż;80;g
+rd44;Kolacja;Fasola czarna z ryżem i cebulą;TAK;p132;Fasola czarna (puszka);0,3;szt
+rd44;Kolacja;Fasola czarna z ryżem i cebulą;TAK;p25;Ryż;80;g
+rd44;Kolacja;Fasola czarna z ryżem i cebulą;TAK;p15;Cebula;0,2;szt
+rd45;Kolacja;Curry karaibskie z kurczakiem;;p70;Mięso na grilla;0,25;kg
+rd45;Kolacja;Curry karaibskie z kurczakiem;;p134;Mleczko kokosowe;0,25;szt
+rd45;Kolacja;Curry karaibskie z kurczakiem;;p133;Przyprawa jerk;0,05;opak
+rb38;Sniadanie;Makaron ryżowy z jajkiem;TAK;p138;Makaron ryżowy;80;g
+rb38;Sniadanie;Makaron ryżowy z jajkiem;TAK;p11;Jajka;1;szt
+rl37;Obiad;Kurczak w curry tajskim z ryżem;;p70;Mięso na grilla;0,25;kg
+rl37;Obiad;Kurczak w curry tajskim z ryżem;;p136;Pasta curry (czerwone/zielone);0,3;słoik
+rl37;Obiad;Kurczak w curry tajskim z ryżem;;p25;Ryż;80;g
+rl38;Obiad;Makaron ryżowy z warzywami;TAK;p138;Makaron ryżowy;80;g
+rl38;Obiad;Makaron ryżowy z warzywami;TAK;p19;Cukinia;0,3;szt
+rl39;Obiad;Zupa tajska z mleczkiem kokosowym;TAK;p134;Mleczko kokosowe;0,3;szt
+rl39;Obiad;Zupa tajska z mleczkiem kokosowym;TAK;p138;Makaron ryżowy;50;g
+rd46;Kolacja;Curry zielone z kurczakiem i ryżem;;p70;Mięso na grilla;0,25;kg
+rd46;Kolacja;Curry zielone z kurczakiem i ryżem;;p136;Pasta curry (czerwone/zielone);0,3;słoik
+rd46;Kolacja;Curry zielone z kurczakiem i ryżem;;p25;Ryż;80;g
+rd48;Kolacja;Makaron ryżowy z tuńczykiem;;p138;Makaron ryżowy;80;g
+rd48;Kolacja;Makaron ryżowy z tuńczykiem;;p30;Konserwa rybna;0,35;szt
+rb41;Sniadanie;Jajka z chorizo;;p11;Jajka;2;szt
+rb41;Sniadanie;Jajka z chorizo;;p139;Chorizo;0,15;kg
+rl42;Obiad;Zupa z fasolą i chorizo;;p31;Fasola/ciecierzyca;0,5;szt
+rl42;Obiad;Zupa z fasolą i chorizo;;p139;Chorizo;0,15;kg
+rd50;Kolacja;Paella z szafranem;TAK;p140;Ryż paella;90;g
+rd50;Kolacja;Paella z szafranem;TAK;p141;Szafran;0,02;opak
+rd50;Kolacja;Paella z szafranem;TAK;p16;Pomidory;0,3;szt
+rd51;Kolacja;Paella z chorizo i papryką;;p140;Ryż paella;90;g
+rd51;Kolacja;Paella z chorizo i papryką;;p139;Chorizo;0,2;kg
+rd51;Kolacja;Paella z chorizo i papryką;;p142;Papryka wędzona (pimentón);0,02;opak
+rd53;Kolacja;Ryż z papryką wędzoną i cebulą;TAK;p140;Ryż paella;80;g
+rd53;Kolacja;Ryż z papryką wędzoną i cebulą;TAK;p142;Papryka wędzona (pimentón);0,03;opak
+rd53;Kolacja;Ryż z papryką wędzoną i cebulą;TAK;p15;Cebula;0,2;szt
